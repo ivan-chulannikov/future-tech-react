@@ -9,11 +9,6 @@ const TabButton = (props) => {
         tabId,
         panelId,
         onKeyDown,
-
-       
-
-
-
     } = props
     
     return (

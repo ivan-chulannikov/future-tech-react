@@ -1,4 +1,4 @@
-import { Category } from "@/entities/categories/model/types";
+import { Category } from "@/entities/categories";
 
 export type ArticleType = "news" | "blog";
 export type Author = {
@@ -17,7 +17,7 @@ export interface Post {
     title: string;
     description: string;
     author: Author;
-    category: Category;
+    categoryId: string;
     date: string;
     readingTime: string;
     stats: Stats;

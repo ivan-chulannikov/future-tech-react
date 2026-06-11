@@ -4,7 +4,7 @@ import PostActions from "../PostActions";
 const PostCard = ({ post }) => {
   const {
     author,
-    category,
+   
     date,
     title,
     description,
@@ -25,7 +25,7 @@ const PostCard = ({ post }) => {
 
           <div className="person-card__body">
             <p className="person-card__name">{author.name}</p>
-            <p className="person-card__topic">{category.label}</p>
+            
           </div>
         </div>
 

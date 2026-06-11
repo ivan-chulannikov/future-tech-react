@@ -1,6 +1,6 @@
-import { Category } from "@/entities/categories/model/types";
-import {  Post } from "@/entities/post/model/types";
-import { SectionHeaderProps } from "@/shared/ui/SectionHeader/types/SectionHeaderTypes";
+import { Category } from "@/entities/categories";
+import {  Post } from "@/entities/post";
+import { SectionHeaderProps } from "@/shared/ui/SectionHeader";
 
 export interface PostSectionProps {
     posts: Post[];

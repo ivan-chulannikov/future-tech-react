@@ -1,1 +1,0 @@
-export { PostsSection } from "./ui";

@@ -8,9 +8,9 @@ import { ResourcesSection } from '@/widgets/ResourcesSection';
 import { ReviewsSection } from '@/widgets/ReviewsSection';
 import { AboutSection } from '@/widgets/AboutSection';
 
-import { fetchPosts } from '@/entities/post/api/postApi';
-import type { Category, Post } from '@/entities/post/model/types';
-
+import { fetchPosts } from '@/entities/post';
+import type { Post } from '@/entities/post';
+import type { Category } from '@/entities/categories';
 import { homePostsSection } from '../model/postSection';
 
 const Home = () => {
