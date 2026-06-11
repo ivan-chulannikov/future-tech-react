@@ -1,0 +1,180 @@
+{
+  "posts": [
+    {
+      "id": "quantum-leap",
+      "type": "blog",
+      "title": "The Quantum Leap in Computing",
+      "description": "Explore the revolution in quantum computing, its applications, and its potential impact on various industries.",
+      "author": {
+        "name": "John Techson",
+        "image": "/images/authors/john-techson.png"
+      },
+      "category": {
+        "label": "Quantum Computing",
+        "value": "quantum-computing"
+      },
+      "date": "2023-10-15",
+      "readingTime": "10 Min",
+      "stats": {
+        "likes": "32k",
+        "views": "50k",
+        "shares": 20
+      },
+      "image": "/images/blog/1.png"
+    },
+    {
+      "id": "ai-healthcare",
+      "type": "news",
+      "title": "The Rise of Artificial Intelligence in Healthcare",
+      "description": "Artificial Intelligence is reshaping patient care, diagnostics, research, and disease prevention across the healthcare industry.",
+      "author": {
+        "name": "Dr. Emily Walker",
+        "image": "/images/authors/emily-walker.png"
+      },
+      "category": {
+        "label": "Healthcare",
+        "value": "healthcare"
+      },
+      "date": "2023-12-20",
+      "readingTime": "10 Min",
+      "stats": {
+        "likes": "24.5k",
+        "views": "50k",
+        "shares": 206
+      },
+      "image": "/images/blog/2.png"
+    },
+    {
+      "id": "robotics-manufacturing",
+      "type": "blog",
+      "title": "The Future of Robotics in Manufacturing",
+      "description": "Discover how robotics is changing modern manufacturing through automation, precision, and intelligent production systems.",
+      "author": {
+        "name": "Michael Stone",
+        "image": "/images/authors/michael-stone.png"
+      },
+      "category": {
+        "label": "Robotics",
+        "value": "robotics"
+      },
+      "date": "2023-11-08",
+      "readingTime": "8 Min",
+      "stats": {
+        "likes": "18k",
+        "views": "37k",
+        "shares": 85
+      },
+      "image": "/images/blog/3.png"
+    },
+    {
+      "id": "cybersecurity-trends",
+      "type": "news",
+      "title": "Cybersecurity Trends Businesses Should Watch",
+      "description": "A look at emerging cybersecurity challenges and the strategies companies are using to protect digital infrastructure.",
+      "author": {
+        "name": "Sophia Carter",
+        "image": "/images/authors/sophia-carter.png"
+      },
+      "category": {
+        "label": "Cybersecurity",
+        "value": "cybersecurity"
+      },
+      "date": "2024-01-12",
+      "readingTime": "7 Min",
+      "stats": {
+        "likes": "12.8k",
+        "views": "29k",
+        "shares": 64
+      },
+      "image": "/images/blog/4.png"
+    },
+    {
+      "id": "ai-education",
+      "type": "blog",
+      "title": "How AI Is Changing Modern Education",
+      "description": "AI tools are helping students learn faster, giving teachers better insights, and creating more personalized learning experiences.",
+      "author": {
+        "name": "Olivia Bennett",
+        "image": "/images/authors/olivia-bennett.png"
+      },
+      "category": {
+        "label": "Education",
+        "value": "education"
+      },
+      "date": "2024-02-03",
+      "readingTime": "6 Min",
+      "stats": {
+        "likes": "9.7k",
+        "views": "21k",
+        "shares": 43
+      },
+      "image": "/images/blog/5.png"
+    },
+    {
+      "id": "future-of-cloud",
+      "type": "news",
+      "title": "The Future of Cloud Infrastructure",
+      "description": "Cloud platforms are evolving toward more scalable, automated, and secure infrastructure for modern digital products.",
+      "author": {
+        "name": "Daniel Brooks",
+        "image": "/images/authors/daniel-brooks.png"
+      },
+      "category": {
+        "label": "Cloud Computing",
+        "value": "cloud-computing"
+      },
+      "date": "2024-02-18",
+      "readingTime": "9 Min",
+      "stats": {
+        "likes": "15.2k",
+        "views": "34k",
+        "shares": 72
+      },
+      "image": "/images/blog/6.png"
+    },
+    {
+      "id": "machine-learning-business",
+      "type": "blog",
+      "title": "Machine Learning for Business Growth",
+      "description": "Companies use machine learning to improve decision-making, personalize customer experiences, and automate repetitive workflows.",
+      "author": {
+        "name": "Emma Richardson",
+        "image": "/images/authors/emma-richardson.png"
+      },
+      "category": {
+        "label": "Machine Learning",
+        "value": "machine-learning"
+      },
+      "date": "2024-03-01",
+      "readingTime": "8 Min",
+      "stats": {
+        "likes": "21k",
+        "views": "42k",
+        "shares": 118
+      },
+      "image": "/images/blog/7.png"
+    },
+    {
+      "id": "web3-digital-ownership",
+      "type": "news",
+      "title": "Web3 and the Future of Digital Ownership",
+      "description": "Web3 technologies are introducing new ways to think about identity, ownership, and decentralized digital platforms.",
+      "author": {
+        "name": "Noah Stevens",
+        "image": "/images/authors/noah-stevens.png"
+      },
+      "category": {
+        "label": "Web3",
+        "value": "web3"
+      },
+      "date": "2024-03-16",
+      "readingTime": "7 Min",
+      "stats": {
+        "likes": "11.4k",
+        "views": "26k",
+        "shares": 57
+      },
+      "image": "/images/blog/8.png"
+    }
+  ]
+}

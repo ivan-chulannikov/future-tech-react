@@ -1,42 +1,39 @@
-import { Footer, Header } from "@/widgets/layout";
+import { useEffect, useState } from 'react';
 
-import { HeroSection } from "@/widgets/HeroSection";
-import { FeaturesSection } from "@/widgets/FeaturesSection";
-import { PostsSection } from "@/widgets/PostsSection";
-import { ResourcesSection } from "@/widgets/ResourcesSection";
-import { ReviewsSection } from "@/widgets/ReviewsSection";
-import { AboutSection } from "@/widgets/AboutSection";
-import { homePostsSection } from "../model/postSection";
-<<<<<<< Updated upstream:src/pages/Home/ui/Home.jsx
-import { posts } from "@/entities/post";
+import { Footer, Header } from '@/widgets/layout';
+import { HeroSection } from '@/widgets/HeroSection';
+import { FeaturesSection } from '@/widgets/FeaturesSection';
+import { PostsSection } from '@/widgets/PostsSection';
+import { ResourcesSection } from '@/widgets/ResourcesSection';
+import { ReviewsSection } from '@/widgets/ReviewsSection';
+import { AboutSection } from '@/widgets/AboutSection';
+
+import { fetchPosts } from '@/entities/post/api/postApi';
+import type { Post } from '@/entities/post/model/types';
+
+import { homePostsSection } from '../model/postSection';
 
 const Home = () => {
-  const homePosts = posts.filter((post) => post.showOnHome);
-=======
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [error, setError] = useState(false);
 
-import { fetchPosts } from "@/entities/post/api/postApi";
-import { useEffect, useState } from "react";
-import type { Post } from "../../../entities/post/model/types";
-const Home = () => {
-  const [posts,setPosts] = useState<Post[]>([])
-  const [error,setError] = useState(false)
-  
   const loadPosts = async () => {
     try {
-      setError(false)
-      const data = await fetchPosts()
+      setError(false);
 
-      setPosts(data)
-    } catch(error) {
-      console.error(error)
-      setError(true)
+      const data = await fetchPosts();
 
-    } 
-  }
-  useEffect(() =>{
-    loadPosts()
-  },[])
->>>>>>> Stashed changes:src/pages/Home/ui/Home.tsx
+      setPosts(data);
+    } catch (error) {
+      console.error(error);
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
+    loadPosts();
+  }, []);
+
   return (
     <>
       <Header />
@@ -46,8 +43,9 @@ const Home = () => {
 
         <PostsSection
           sectionHeader={homePostsSection.header}
-          posts={homePosts}
+          posts={posts}
           tabs={homePostsSection.tabs}
+          error={error}
         />
 
         <ResourcesSection />
