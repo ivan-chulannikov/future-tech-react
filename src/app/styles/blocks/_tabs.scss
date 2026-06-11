@@ -9,7 +9,7 @@
     &__buttons{
         display: grid;
         grid-template-columns: repeat(6,1fr);
-        column-gap: rem(20);
+        gap: rem(20);
         padding-block: rem(50);
        
       
