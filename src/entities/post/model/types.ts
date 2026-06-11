@@ -1,12 +1,11 @@
+import { Category } from "@/entities/categories/model/types";
+
 export type ArticleType = "news" | "blog";
 export type Author = {
     name: string;
     image: string;
 }
-export type Category = {
-    label: string;
-    value: string;
-}
+
 export type Stats = {
   likes: string;
   views: string;

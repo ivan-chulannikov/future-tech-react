@@ -15,21 +15,5 @@ export const homePostsSection = {
     { id: "renewable-energy", label: "Renewable Energy", value: "renewable-energy" },
   ],
 
-  posts: [
-    {
-      id: "quantum-leap",
-      author: "John Techson",
-      authorImage: "/images/blog/1.png",
-      category: "Quantum Computing",
-      value: "quantum-computing",
-      date: "2023-10-15",
-      title: "The Quantum Leap in Computing",
-      description:
-        "Explore the revolution in quantum computing, its applications, and its potential impact on various industries.",
-      likes: "32k",
-      comments: 50,
-      shares: 20,
-      href: "#",
-    },
-  ],
+ 
 };

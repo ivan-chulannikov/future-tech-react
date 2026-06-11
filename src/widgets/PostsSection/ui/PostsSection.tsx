@@ -3,9 +3,10 @@ import { SectionHeader } from "@/shared/ui/SectionHeader";
 import { TabPanel } from "@/shared/ui/TabPanel";
 import { TabsList } from "@/shared/ui/TabsList";
 import { PostList, getFilteredPosts } from "@/entities/post";
+import { PostSectionProps } from "../types/postSectionProps";
 
 
-const PostsSection = ({ posts, tabs, sectionHeader, error }) => {
+const PostsSection = ({ posts, tabs, sectionHeader}: PostSectionProps) => {
   const [activeTab, setActiveTab] = useState("all");
 
   const filteredPosts = getFilteredPosts(activeTab, posts);
@@ -27,7 +28,7 @@ const PostsSection = ({ posts, tabs, sectionHeader, error }) => {
             id={`tabpanel-${activeTab}`}
             labelledBy={`tab-${activeTab}`}
           >
-            <PostList posts={filteredPosts} error = {error} />
+            <PostList posts={filteredPosts}/>
           </TabPanel>
         </div>
       </div>

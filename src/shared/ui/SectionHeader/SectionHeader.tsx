@@ -1,14 +1,6 @@
 import { Button } from "../Button"
-
-const SectionHeader = (props) => {
-    const {
-        subTitle,
-        title,
-        buttonText,
-        buttonHref,
-
-
-    } = props
+import type { SectionHeaderProps } from "./types/SectionHeaderTypes"
+const SectionHeader = ({ subTitle,title,buttonText,buttonHref}: SectionHeaderProps) => {
     return (
         <header className="section__header">
         <div className="section__header-inner container">

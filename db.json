@@ -1,4 +1,46 @@
 {
+  "categories": [
+    {
+      "id": "quantum-computing",
+      "label": "Quantum Computing",
+      "value": "quantum-computing"
+    },
+    {
+      "id": "healthcare",
+      "label": "Healthcare",
+      "value": "healthcare"
+    },
+    {
+      "id": "robotics",
+      "label": "Robotics",
+      "value": "robotics"
+    },
+    {
+      "id": "cybersecurity",
+      "label": "Cybersecurity",
+      "value": "cybersecurity"
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "value": "education"
+    },
+    {
+      "id": "cloud-computing",
+      "label": "Cloud Computing",
+      "value": "cloud-computing"
+    },
+    {
+      "id": "machine-learning",
+      "label": "Machine Learning",
+      "value": "machine-learning"
+    },
+    {
+      "id": "web3",
+      "label": "Web3",
+      "value": "web3"
+    }
+  ],
   "posts": [
     {
       "id": "quantum-leap",
@@ -9,10 +51,7 @@
         "name": "John Techson",
         "image": "/images/authors/john-techson.png"
       },
-      "category": {
-        "label": "Quantum Computing",
-        "value": "quantum-computing"
-      },
+      "categoryId": "quantum-computing",
       "date": "2023-10-15",
       "readingTime": "10 Min",
       "stats": {
@@ -31,10 +70,7 @@
         "name": "Dr. Emily Walker",
         "image": "/images/authors/emily-walker.png"
       },
-      "category": {
-        "label": "Healthcare",
-        "value": "healthcare"
-      },
+      "categoryId": "healthcare",
       "date": "2023-12-20",
       "readingTime": "10 Min",
       "stats": {
@@ -53,10 +89,7 @@
         "name": "Michael Stone",
         "image": "/images/authors/michael-stone.png"
       },
-      "category": {
-        "label": "Robotics",
-        "value": "robotics"
-      },
+      "categoryId": "robotics",
       "date": "2023-11-08",
       "readingTime": "8 Min",
       "stats": {
@@ -75,10 +108,7 @@
         "name": "Sophia Carter",
         "image": "/images/authors/sophia-carter.png"
       },
-      "category": {
-        "label": "Cybersecurity",
-        "value": "cybersecurity"
-      },
+      "categoryId": "cybersecurity",
       "date": "2024-01-12",
       "readingTime": "7 Min",
       "stats": {
@@ -97,10 +127,7 @@
         "name": "Olivia Bennett",
         "image": "/images/authors/olivia-bennett.png"
       },
-      "category": {
-        "label": "Education",
-        "value": "education"
-      },
+      "categoryId": "education",
       "date": "2024-02-03",
       "readingTime": "6 Min",
       "stats": {
@@ -119,10 +146,7 @@
         "name": "Daniel Brooks",
         "image": "/images/authors/daniel-brooks.png"
       },
-      "category": {
-        "label": "Cloud Computing",
-        "value": "cloud-computing"
-      },
+      "categoryId": "cloud-computing",
       "date": "2024-02-18",
       "readingTime": "9 Min",
       "stats": {
@@ -141,10 +165,7 @@
         "name": "Emma Richardson",
         "image": "/images/authors/emma-richardson.png"
       },
-      "category": {
-        "label": "Machine Learning",
-        "value": "machine-learning"
-      },
+      "categoryId": "machine-learning",
       "date": "2024-03-01",
       "readingTime": "8 Min",
       "stats": {
@@ -163,10 +184,7 @@
         "name": "Noah Stevens",
         "image": "/images/authors/noah-stevens.png"
       },
-      "category": {
-        "label": "Web3",
-        "value": "web3"
-      },
+      "categoryId": "web3",
       "date": "2024-03-16",
       "readingTime": "7 Min",
       "stats": {

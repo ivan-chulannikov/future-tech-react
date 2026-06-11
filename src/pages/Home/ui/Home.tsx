@@ -9,13 +9,14 @@ import { ReviewsSection } from '@/widgets/ReviewsSection';
 import { AboutSection } from '@/widgets/AboutSection';
 
 import { fetchPosts } from '@/entities/post/api/postApi';
-import type { Post } from '@/entities/post/model/types';
+import type { Category, Post } from '@/entities/post/model/types';
 
 import { homePostsSection } from '../model/postSection';
 
 const Home = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [error, setError] = useState(false);
+  const [tabs, setTabs] = useState<Category[]>([])
 
   const loadPosts = async () => {
     try {
@@ -45,7 +46,7 @@ const Home = () => {
           sectionHeader={homePostsSection.header}
           posts={posts}
           tabs={homePostsSection.tabs}
-          error={error}
+          
         />
 
         <ResourcesSection />
