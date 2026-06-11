@@ -7,10 +7,28 @@ import { ResourcesSection } from "@/widgets/ResourcesSection";
 import { ReviewsSection } from "@/widgets/ReviewsSection";
 import { AboutSection } from "@/widgets/AboutSection";
 import { homePostsSection } from "../model/postSection";
-import { posts } from "@/entities/post";
+
+import { fetchPosts } from "@/entities/post/api/postApi";
+import { useEffect, useState } from "react";
 
 const Home = () => {
-  const homePosts = posts.filter((post) => post.showOnHome);
+  const [posts,setPosts] = useState([])
+  const [error,setError] = useState (false)
+  const loadPosts = async () => {
+    try {
+      setError(false)
+      const data = await fetchPosts()
+
+      setPosts(data)
+    } catch(error) {
+      console.error(error)
+      setError(true)
+
+    } 
+  }
+  useEffect(() =>{
+    loadPosts()
+  },[])
   return (
     <>
       <Header />
@@ -20,8 +38,9 @@ const Home = () => {
 
         <PostsSection
           sectionHeader={homePostsSection.header}
-          posts={homePosts}
+          posts={posts}
           tabs={homePostsSection.tabs}
+          error = {error}
         />
 
         <ResourcesSection />

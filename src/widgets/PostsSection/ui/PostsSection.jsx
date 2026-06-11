@@ -5,7 +5,7 @@ import { TabsList } from "@/shared/ui/TabsList";
 import { PostList, getFilteredPosts } from "@/entities/post";
 
 
-const PostsSection = ({ posts, tabs, sectionHeader }) => {
+const PostsSection = ({ posts, tabs, sectionHeader, error }) => {
   const [activeTab, setActiveTab] = useState("all");
 
   const filteredPosts = getFilteredPosts(activeTab, posts);
@@ -27,7 +27,7 @@ const PostsSection = ({ posts, tabs, sectionHeader }) => {
             id={`tabpanel-${activeTab}`}
             labelledBy={`tab-${activeTab}`}
           >
-            <PostList posts={filteredPosts} />
+            <PostList posts={filteredPosts} error = {error} />
           </TabPanel>
         </div>
       </div>
