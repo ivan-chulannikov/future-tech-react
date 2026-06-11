@@ -12,28 +12,46 @@ import { fetchPosts } from '@/entities/post';
 import type { Post } from '@/entities/post';
 import type { Category } from '@/entities/categories';
 import { homePostsSection } from '../model/postSection';
+import { fetchCategories } from '@/entities/categories/api/categoriesApi';
 
 const Home = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [error, setError] = useState(false);
   const [tabs, setTabs] = useState<Category[]>([])
+  const [activeCategoryId, setActiveCategoryId] = useState("all");
+  const loadTabs = async () => {
+  try {
+    setError(false);
 
-  const loadPosts = async () => {
-    try {
-      setError(false);
+    const data = await fetchCategories();
 
-      const data = await fetchPosts();
+    setTabs(data);
+  } catch (error) {
+    setError(true);
+    console.error(error);
+  }
+};
 
-      setPosts(data);
-    } catch (error) {
-      console.error(error);
-      setError(true);
-    }
-  };
+const loadPosts = async (categoryId: string) => {
+  try {
+    setError(false);
 
-  useEffect(() => {
-    loadPosts();
-  }, []);
+    const data = await fetchPosts(categoryId);
+
+    setPosts(data);
+  } catch (error) {
+    setError(true);
+    console.error(error);
+  }
+};
+
+useEffect(() => {
+  loadTabs();
+}, []);
+
+useEffect(() => {
+  loadPosts(activeCategoryId);
+}, [activeCategoryId]);
 
   return (
     <>
@@ -45,10 +63,10 @@ const Home = () => {
         <PostsSection
           sectionHeader={homePostsSection.header}
           posts={posts}
-          tabs={homePostsSection.tabs}
-          
+          tabs={tabs}
+          activeCategoryId = {activeCategoryId}
+          onCategoryChange = {setActiveCategoryId}
         />
-
         <ResourcesSection />
         <ReviewsSection />
         <AboutSection />

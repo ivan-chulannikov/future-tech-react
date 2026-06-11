@@ -6,5 +6,6 @@ export interface PostSectionProps {
     posts: Post[];
     tabs: Category[];
     sectionHeader: SectionHeaderProps;
-    
+    activeCategoryId: string;
+    onCategoryChange: (activeCategoryId: string) => void;
 }

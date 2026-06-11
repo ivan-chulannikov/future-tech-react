@@ -1,16 +1,15 @@
-import { useState } from "react";
+
 import { SectionHeader } from "@/shared/ui/SectionHeader";
 import { TabPanel } from "@/shared/ui/TabPanel";
 import { TabsList } from "@/shared/ui/TabsList";
-import { PostList, getFilteredPosts } from "@/entities/post";
+import { PostList} from "@/entities/post";
 import { PostSectionProps } from "../types/postSectionProps";
 
 
-const PostsSection = ({ posts, tabs, sectionHeader}: PostSectionProps) => {
-  const [activeTab, setActiveTab] = useState("all");
+const PostsSection = ({ posts, tabs, sectionHeader, activeCategoryId,onCategoryChange}: PostSectionProps) => {
+ 
 
-  const filteredPosts = getFilteredPosts(activeTab, posts);
-
+  
   return (
     <section className="section">
       <SectionHeader {...sectionHeader} />
@@ -18,17 +17,17 @@ const PostsSection = ({ posts, tabs, sectionHeader}: PostSectionProps) => {
       <div className="section__body tabs">
         <TabsList
           tabs={tabs}
-          activeTab={activeTab}
-          onTabChangeHandler={setActiveTab}
+          activeTab={activeCategoryId}
+          onTabChangeHandler={onCategoryChange}
         />
 
         <div className="tabs__body">
           <TabPanel
             isActive={true}
-            id={`tabpanel-${activeTab}`}
-            labelledBy={`tab-${activeTab}`}
+            id={`tabpanel-${activeCategoryId}`}
+            labelledBy={`tab-${activeCategoryId}`}
           >
-            <PostList posts={filteredPosts}/>
+            <PostList posts={posts}/>
           </TabPanel>
         </div>
       </div>
