@@ -1,4 +1,4 @@
-import { Category } from "@/entities/categories";
+
 
 export type ArticleType = "news" | "blog";
 export type Author = {

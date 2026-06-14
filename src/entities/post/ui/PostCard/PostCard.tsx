@@ -1,14 +1,14 @@
 import { Button } from "@/shared/ui/Button";
 import PostActions from "../PostActions";
-
-const PostCard = ({ post }) => {
+import type {PostCardProps} from "./types"
+const PostCard = ({ post }: PostCardProps) => {
   const {
     author,
    
     date,
     title,
     description,
-    href,
+   
     stats,
   } = post;
 
@@ -47,7 +47,7 @@ const PostCard = ({ post }) => {
           />
         </div>
 
-        <Button href={href} className="blog-card__link" icon="arrow-yellow">
+        <Button type="button" className="blog-card__link" icon="arrow-yellow">
           View Blog
         </Button>
       </article>
