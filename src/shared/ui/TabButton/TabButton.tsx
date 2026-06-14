@@ -1,18 +1,11 @@
 import { Button } from "../Button"
+import type { TabButtonProps } from "./types/TabButtonProps"
 
-const TabButton = (props) => {
-    const {
-        className = '',
-        children,
-        onClick,
-        isActive,
-        tabId,
-        panelId,
-        onKeyDown,
-    } = props
+const TabButton = ({ className = '',children,onClick,isActive,tabId,panelId,onKeyDown}: TabButtonProps) => {
     
     return (
         <Button 
+        type="button"
         onClick = {onClick} 
         onKeyDown = {onKeyDown}
         className = {isActive ?`${className} is-active`: `${className}`} 

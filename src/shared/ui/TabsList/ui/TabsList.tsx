@@ -2,17 +2,12 @@
 
 import { TabButton } from "../../TabButton"
 import { getNextTabIndex, getPrevTabIndex } from "../model/getTabIndex"
-
-const TabsList = (props) => {
-    const {
-        activeTab,
-        onTabChangeHandler,
-        tabs,
-        
-    } = props
+import type {TabListProps} from "./types/TabList"
+const TabsList = ({activeTab, onTabChangeHandler, tabs,}: TabListProps) => {
+  
     
    
-    const onKeyDownHandler = (event) => {
+    const onKeyDownHandler = (event: React.KeyboardEvent): void => {
         const currentIndex = tabs.findIndex((tab) =>  tab.id === activeTab);
         if(event.key === 'ArrowRight') {
             event.preventDefault()

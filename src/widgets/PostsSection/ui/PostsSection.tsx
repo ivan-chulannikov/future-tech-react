@@ -6,7 +6,7 @@ import { PostList} from "@/entities/post";
 import { PostSectionProps } from "../types/postSectionProps";
 
 
-const PostsSection = ({ posts, tabs, sectionHeader, activeCategoryId,onCategoryChange}: PostSectionProps) => {
+const PostsSection = ({ posts, tabs, sectionHeader, activeCategoryId, onCategoryChange}: PostSectionProps) => {
  
 
   
