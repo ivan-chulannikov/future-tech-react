@@ -1,3 +1,4 @@
+import { Link, NavLink} from "react-router-dom"
 const Header  = () => {
     return (
     <header className="header" data-js-header>
@@ -11,23 +12,27 @@ const Header  = () => {
         </div>
         <div className="header__body">
             <div className="header__body-inner container">
-                <a href="/" className="header__logo logo">
-                    <img src="/images/logo.svg" alt="" className="logo__image"
-                    aria-label="Logo"
-                    title="Logo"
-                    width="179"
-                    height="50"
+                <Link to="/" className="header__logo logo" aria-label="Go to home page">
+                    <img
+                        src="/images/logo.svg"
+                        alt=""
+                        className="logo__image"
+                        title="Logo"
+                        width="179"
+                        height="50"
                     />
-                </a>
+                </Link>
                 <div className="header__overlay" data-js-header-overlay>
                     <nav className="header__menu">
                         <ul className="header__menu-list">
                             <li className="header__menu-item">
-                                <a href="./index.html" className="header__menu-link is-active">Home</a>
+                                <NavLink to="/" end  className={({isActive}) =>  isActive ? "header__menu-link is-active" : "header__menu-link"}>
+                                    Home
+                                </NavLink>
                             </li>
-                            <li className="header__menu-item"><a href="./news.html" className="header__menu-link">News</a></li>
-                            <li className="header__menu-item"><a href="./podcast.html" className="header__menu-link">Podcasts</a></li>
-                            <li className="header__menu-item"><a href="./resources.html" className="header__menu-link">Resources</a></li>
+                            <li className="header__menu-item"><Link to="./news.html" className="header__menu-link">News</Link></li>
+                            <li className="header__menu-item"><Link to="./podcast.html" className="header__menu-link">Podcasts</Link></li>
+                            <li className="header__menu-item"><Link to="./resources.html" className="header__menu-link">Resources</Link></li>
                         </ul>
                         
                     </nav>

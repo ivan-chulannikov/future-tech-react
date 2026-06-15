@@ -1,4 +1,5 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react';
+import type { LinkProps } from 'react-router-dom';
 
 type CommonButtonProps = {
   className?: string;
@@ -8,12 +9,23 @@ type CommonButtonProps = {
 
 type ButtonAsButtonProps = CommonButtonProps &
   Omit<ComponentPropsWithoutRef<'button'>, keyof CommonButtonProps> & {
-    href?: undefined;
+    to?: never;
+    href?: never;
   };
 
-type ButtonAsLinkProps = CommonButtonProps &
-  Omit<ComponentPropsWithoutRef<'a'>, keyof CommonButtonProps | 'type' | 'href'> & {
+type ButtonAsExternalLinkProps = CommonButtonProps &
+  Omit<ComponentPropsWithoutRef<'a'>, keyof CommonButtonProps | 'href' | 'type'> & {
     href: string;
+    to?: never;
   };
 
-export type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
+type ButtonAsRouterLinkProps = CommonButtonProps &
+  Omit<LinkProps, keyof CommonButtonProps | 'to'> & {
+    to: LinkProps['to'];
+    href?: never;
+  };
+
+export type ButtonProps =
+  | ButtonAsButtonProps
+  | ButtonAsExternalLinkProps
+  | ButtonAsRouterLinkProps;
