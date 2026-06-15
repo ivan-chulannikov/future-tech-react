@@ -1,6 +1,6 @@
-import { Post } from "../../model/types"
+import type { PostPreview } from "../../model/types";
 
 export type PostCardProps = {
-    post: Post;
+    post: PostPreview;
 
 }

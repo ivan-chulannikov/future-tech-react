@@ -1,16 +1,31 @@
-import type { Post } from './types';
+import type { PostBase, PostPreview, PostDetails } from './types';
 
 const isObject = (value: unknown): value is Record<string, unknown> => {
   return typeof value === 'object' && value !== null;
 };
 
-const isAuthor = (value: unknown): value is Post['author'] => {
-  if (!isObject(value)) return false;
-
-  return typeof value.name === 'string' && typeof value.image === 'string';
+const isStringArray = (value: unknown): value is string[] => {
+  return Array.isArray(value) && value.every((item) => typeof item === 'string');
 };
 
-const isStats = (value: unknown): value is Post['stats'] => {
+const isAvatar = (value: unknown): value is PostBase['author']['avatar'] => {
+  if (!isObject(value)) return false;
+
+  return (
+    typeof value.src === 'string' &&
+    typeof value.alt === 'string' &&
+    typeof value.width === 'number' &&
+    typeof value.height === 'number'
+  );
+};
+
+const isAuthor = (value: unknown): value is PostBase['author'] => {
+  if (!isObject(value)) return false;
+
+  return typeof value.name === 'string' && isAvatar(value.avatar);
+};
+
+const isStats = (value: unknown): value is PostBase['stats'] => {
   if (!isObject(value)) return false;
 
   return (
@@ -20,7 +35,7 @@ const isStats = (value: unknown): value is Post['stats'] => {
   );
 };
 
-export const isPost = (value: unknown): value is Post => {
+const isPostBase = (value: unknown): value is PostBase => {
   if (!isObject(value)) return false;
 
   return (
@@ -32,11 +47,55 @@ export const isPost = (value: unknown): value is Post => {
     typeof value.categoryId === 'string' &&
     typeof value.date === 'string' &&
     typeof value.readingTime === 'string' &&
-    isStats(value.stats) &&
-    typeof value.image === 'string'
+    isStats(value.stats)
   );
 };
 
-export const isPostArray = (value: unknown): value is Post[] => {
-  return Array.isArray(value) && value.every(isPost);
+export const isPostPreview = (value: unknown): value is PostPreview => {
+  return isPostBase(value);
+};
+
+const isBannerImage = (value: unknown): value is PostDetails['bannerImage'] => {
+  if (!isObject(value)) return false;
+
+  return (
+    typeof value.src === 'string' &&
+    typeof value.alt === 'string' &&
+    typeof value.width === 'number' &&
+    typeof value.height === 'number'
+  );
+};
+
+const isPostContentSection = (
+  value: unknown,
+): value is PostDetails['content']['sections'][number] => {
+  if (!isObject(value)) return false;
+
+  return typeof value.title === 'string' && isStringArray(value.paragraphs);
+};
+
+const isPostContent = (value: unknown): value is PostDetails['content'] => {
+  if (!isObject(value)) return false;
+
+  return (
+    typeof value.introduction === 'string' &&
+    Array.isArray(value.sections) &&
+    value.sections.every(isPostContentSection)
+  );
+};
+
+export const isPostDetails = (value: unknown): value is PostDetails => {
+  if (!isObject(value)) return false;
+
+  const { bannerImage, content } = value;
+
+  return isPostBase(value) && isBannerImage(bannerImage) && isPostContent(content);
+};
+
+export const isPostPreviewArray = (value: unknown): value is PostPreview[] => {
+  return Array.isArray(value) && value.every(isPostPreview);
+};
+
+export const isPostDetailsArray = (value: unknown): value is PostDetails[] => {
+  return Array.isArray(value) && value.every(isPostDetails);
 };

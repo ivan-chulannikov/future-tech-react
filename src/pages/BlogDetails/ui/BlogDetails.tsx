@@ -1,58 +1,66 @@
-import { useState, useEffect } from "react";
-import AboutSection from "@/widgets/AboutSection";
-import BlogDetailSection from "@/widgets/BlogDetailSection";
-import { Footer, Header } from "@/widgets/layout";
-import {Post } from "@/entities/post";
-import { useParams } from "react-router-dom";
-import { fetchPostById } from "@/entities/post";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import AboutSection from '@/widgets/AboutSection';
+import BlogDetailSection from '@/widgets/BlogDetailSection';
+import { NotFound } from '@/pages/NotFound';
+
+import { fetchPostById } from '@/entities/post';
+import type { PostDetails } from '@/entities/post/model/types';
 
 const BlogDetails = () => {
-  const [post, setPost] = useState<Post|null>(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState(false)
-  const { id } = useParams()
+  const [post, setPost] = useState<PostDetails | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const { id } = useParams<{ id: string }>();
+
   const loadPost = async (postId: string) => {
     try {
-      setIsError(false)
-      setIsLoading(true)
-      const post = await fetchPostById(postId)
-      setPost(post)
-    } catch(error) {
-      console.error(error)
-      setIsError(true)
+      setIsLoading(true);
+      setIsError(false);
+      setPost(null);
 
+      const post = await fetchPostById(postId);
+
+      setPost(post);
+    } catch (error) {
+      console.error(error);
+      setIsError(true);
+      setPost(null);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
+
   useEffect(() => {
-    if(!id) return 
-    loadPost(id)
-  },[id])
-  
-  if (!post) {
+    if (!id) {
+      setIsError(true);
+      setIsLoading(false);
+      return;
+    }
+
+    loadPost(id);
+  }, [id]);
+
+  if (isLoading) {
     return (
-      <>
-        <Header />
-        <main className="main">
-          <section className="section container">
-            <h1>Post not found</h1>
-          </section>
-        </main>
-        <Footer />
-      </>
+      <section className="section container">
+        <h1>Loading...</h1>
+      </section>
     );
+  }
+
+  if (isError || !post) {
+    return <NotFound />;
   }
 
   return (
     <>
-      <Header />
-      <main className="main">
-        <BlogDetailSection post={post} />
-        <AboutSection />
-      </main>
-      <Footer />
+      <BlogDetailSection post={post} />
+      <AboutSection />
     </>
   );
 };
+
 export default BlogDetails;

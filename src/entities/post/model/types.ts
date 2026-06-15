@@ -1,9 +1,21 @@
-
-
-export type ArticleType = "news" | "blog";
+export type ArticleType = 'news' | 'blog';
+export type ImageInfo = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
 export type Author = {
-    name: string;
-    image: string;
+  name: string;
+  avatar: Avatar;
+  
+ 
+};
+export type Avatar = {
+ src: string;
+  alt: string;
+  width: number;
+  height: number;
 }
 
 export type Stats = {
@@ -11,16 +23,29 @@ export type Stats = {
   views: string;
   shares: number;
 };
-export interface Post {
-    id: string;
-    type: ArticleType;
-    title: string;
-    description: string;
-    author: Author;
-    categoryId: string;
-    date: string;
-    readingTime: string;
-    stats: Stats;
-    image: string
 
-}
+export type PostBase = {
+  id: string;
+  type: ArticleType;
+  title: string;
+  description: string;
+  author: Author;
+  categoryId: string;
+  date: string;
+  readingTime: string;
+  stats: Stats;
+};
+
+export type PostPreview = PostBase;
+
+
+export type PostDetails = PostBase & {
+  bannerImage: ImageInfo;
+  content: {
+    introduction: string;
+    sections: {
+      title: string;
+      paragraphs: string[];
+    }[];
+  };
+};

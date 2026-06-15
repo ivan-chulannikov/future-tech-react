@@ -1,20 +1,20 @@
 import { PostActions } from "@/entities/post";
+import { PostDetails } from "@/entities/post/model/types";
 import { Fragment } from "react";
+import { PostDetailsProps } from "../types/PostDetailsProps";
 
-const BlogDetailSection = ({ post }) => {
+const BlogDetailSection = ({ post}: PostDetailsProps) => {
   if (!post) {
     return null;
   }
 
-  const { title, date, category, readingTime, author, stats, content } = post;
+  const { title, date, categoryId, readingTime, author, stats, content } = post;
 
   return (
     <section className="blog-details">
       <header
         className="blog-details__banner"
-        style={{
-          "--banner-image": `url(${post.bannerImage})`,
-        }}
+        
       >
         <div className="blog-details__inner container">
           <h1 className="blog-details__title">{title}</h1>
@@ -67,7 +67,7 @@ const BlogDetailSection = ({ post }) => {
 
                 <div className="summary__item">
                   <dt className="summary__key">Category</dt>
-                  <dd className="summary__value">{category.label}</dd>
+                  <dd className="summary__value">{categoryId}</dd>
                 </div>
 
                 <div className="summary__item">

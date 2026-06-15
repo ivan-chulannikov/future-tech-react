@@ -1,15 +1,16 @@
 import { Button } from "@/shared/ui/Button";
 import PostActions from "../PostActions";
 import type {PostCardProps} from "./types"
+import { getBlogDetailsRoute } from "@/shared/config/routes";
 const PostCard = ({ post }: PostCardProps) => {
   const {
+    id,
     author,
-   
     date,
     title,
     description,
-   
     stats,
+
   } = post;
 
   return (
@@ -17,10 +18,11 @@ const PostCard = ({ post }: PostCardProps) => {
       <article className="blog-card container">
         <div className="blog-card__author person-card">
           <img
-            src={author.image}
-            width="80"
-            height="80"
-            alt={author.name}
+            src={author.avatar.src}
+            alt={author.avatar.alt}
+            width={author.avatar.width}
+            height={author.avatar.height}
+            loading="lazy"
           />
 
           <div className="person-card__body">
@@ -47,7 +49,7 @@ const PostCard = ({ post }: PostCardProps) => {
           />
         </div>
 
-        <Button type="button" className="blog-card__link" icon="arrow-yellow">
+        <Button to={getBlogDetailsRoute(id)} className="blog-card__link" icon="arrow-yellow">
           View Blog
         </Button>
       </article>

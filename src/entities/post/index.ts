@@ -3,5 +3,5 @@ export {default as  PostList } from "./ui/PostList";
 export { default as PostActions} from "./ui/PostActions"
 
 export { fetchPosts, fetchPostById } from "./api/postApi"
-export { isPostArray, isPost } from "./model/guard"
-export type {ArticleType, Author, Stats, Post} from "./model/types"
+
+export type {ArticleType, Author, Stats} from "./model/types"

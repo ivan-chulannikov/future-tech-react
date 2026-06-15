@@ -49,7 +49,198 @@
       "description": "Explore the revolution in quantum computing, its applications, and its potential impact on various industries.",
       "author": {
         "name": "John Techson",
-        "image": "/images/authors/john-techson.png"
+        "avatar": {
+          "src": "/images/authors/john-techson.png",
+          "alt": "John Techson avatar",
+          "width": 80,
+          "height": 80
+        }
+      },
+      "categoryId": "quantum-computing",
+      "date": "2023-10-15",
+      "readingTime": "10 Min",
+      "stats": {
+        "likes": "32k",
+        "views": "50k",
+        "shares": 20
+      }
+    },
+    {
+      "id": "ai-healthcare",
+      "type": "news",
+      "title": "The Rise of Artificial Intelligence in Healthcare",
+      "description": "Artificial Intelligence is reshaping patient care, diagnostics, research, and disease prevention across the healthcare industry.",
+      "author": {
+        "name": "Dr. Emily Walker",
+        "avatar": {
+          "src": "/images/authors/emily-walker.png",
+          "alt": "Dr. Emily Walker avatar",
+          "width": 80,
+          "height": 80
+        }
+      },
+      "categoryId": "healthcare",
+      "date": "2023-12-20",
+      "readingTime": "10 Min",
+      "stats": {
+        "likes": "24.5k",
+        "views": "50k",
+        "shares": 206
+      }
+    },
+    {
+      "id": "robotics-manufacturing",
+      "type": "blog",
+      "title": "The Future of Robotics in Manufacturing",
+      "description": "Discover how robotics is changing modern manufacturing through automation, precision, and intelligent production systems.",
+      "author": {
+        "name": "Michael Stone",
+        "avatar": {
+          "src": "/images/authors/michael-stone.png",
+          "alt": "Michael Stone avatar",
+          "width": 80,
+          "height": 80
+        }
+      },
+      "categoryId": "robotics",
+      "date": "2023-11-08",
+      "readingTime": "8 Min",
+      "stats": {
+        "likes": "18k",
+        "views": "37k",
+        "shares": 85
+      }
+    },
+    {
+      "id": "cybersecurity-trends",
+      "type": "news",
+      "title": "Cybersecurity Trends Businesses Should Watch",
+      "description": "A look at emerging cybersecurity challenges and the strategies companies are using to protect digital infrastructure.",
+      "author": {
+        "name": "Sophia Carter",
+        "avatar": {
+          "src": "/images/authors/sophia-carter.png",
+          "alt": "Sophia Carter avatar",
+          "width": 80,
+          "height": 80
+        }
+      },
+      "categoryId": "cybersecurity",
+      "date": "2024-01-12",
+      "readingTime": "7 Min",
+      "stats": {
+        "likes": "12.8k",
+        "views": "29k",
+        "shares": 64
+      }
+    },
+    {
+      "id": "ai-education",
+      "type": "blog",
+      "title": "How AI Is Changing Modern Education",
+      "description": "AI tools are helping students learn faster, giving teachers better insights, and creating more personalized learning experiences.",
+      "author": {
+        "name": "Olivia Bennett",
+        "avatar": {
+          "src": "/images/authors/olivia-bennett.png",
+          "alt": "Olivia Bennett avatar",
+          "width": 80,
+          "height": 80
+        }
+      },
+      "categoryId": "education",
+      "date": "2024-02-03",
+      "readingTime": "6 Min",
+      "stats": {
+        "likes": "9.7k",
+        "views": "21k",
+        "shares": 43
+      }
+    },
+    {
+      "id": "future-of-cloud",
+      "type": "news",
+      "title": "The Future of Cloud Infrastructure",
+      "description": "Cloud platforms are evolving toward more scalable, automated, and secure infrastructure for modern digital products.",
+      "author": {
+        "name": "Daniel Brooks",
+        "avatar": {
+          "src": "/images/authors/daniel-brooks.png",
+          "alt": "Daniel Brooks avatar",
+          "width": 80,
+          "height": 80
+        }
+      },
+      "categoryId": "cloud-computing",
+      "date": "2024-02-18",
+      "readingTime": "9 Min",
+      "stats": {
+        "likes": "15.2k",
+        "views": "34k",
+        "shares": 72
+      }
+    },
+    {
+      "id": "machine-learning-business",
+      "type": "blog",
+      "title": "Machine Learning for Business Growth",
+      "description": "Companies use machine learning to improve decision-making, personalize customer experiences, and automate repetitive workflows.",
+      "author": {
+        "name": "Emma Richardson",
+        "avatar": {
+          "src": "/images/authors/emma-richardson.png",
+          "alt": "Emma Richardson avatar",
+          "width": 80,
+          "height": 80
+        }
+      },
+      "categoryId": "machine-learning",
+      "date": "2024-03-01",
+      "readingTime": "8 Min",
+      "stats": {
+        "likes": "21k",
+        "views": "42k",
+        "shares": 118
+      }
+    },
+    {
+      "id": "web3-digital-ownership",
+      "type": "news",
+      "title": "Web3 and the Future of Digital Ownership",
+      "description": "Web3 technologies are introducing new ways to think about identity, ownership, and decentralized digital platforms.",
+      "author": {
+        "name": "Noah Stevens",
+        "avatar": {
+          "src": "/images/authors/noah-stevens.png",
+          "alt": "Noah Stevens avatar",
+          "width": 80,
+          "height": 80
+        }
+      },
+      "categoryId": "web3",
+      "date": "2024-03-16",
+      "readingTime": "7 Min",
+      "stats": {
+        "likes": "11.4k",
+        "views": "26k",
+        "shares": 57
+      }
+    }
+  ],
+  "postDetails": [
+    {
+      "id": "quantum-leap",
+      "type": "blog",
+      "title": "The Quantum Leap in Computing",
+      "description": "Explore the revolution in quantum computing, its applications, and its potential impact on various industries.",
+      "author": {
+        "name": "John Techson",
+        "avatar": {
+          "src": "/images/authors/john-techson.png",
+          "alt": "John Techson avatar",
+          "width": 80,
+          "height": 80
+        }
       },
       "categoryId": "quantum-computing",
       "date": "2023-10-15",
@@ -59,7 +250,31 @@
         "views": "50k",
         "shares": 20
       },
-      "image": "/images/blog/1.png"
+      "bannerImage": {
+        "src": "/images/blog-details/quantum-leap-banner.png",
+        "alt": "The Quantum Leap in Computing banner image",
+        "width": 1920,
+        "height": 720
+      },
+      "content": {
+        "introduction": "Quantum computing represents one of the most significant technological shifts of our time. Unlike classical computers, which process information using bits, quantum computers rely on qubits that can represent multiple states at once.",
+        "sections": [
+          {
+            "title": "What Makes Quantum Computing Different",
+            "paragraphs": [
+              "Traditional computers solve problems step by step using binary logic. Quantum computers use principles such as superposition and entanglement, allowing them to process certain types of problems in a radically different way.",
+              "This does not mean quantum computers will replace everyday devices, but they may become powerful tools for solving highly complex tasks in science, security, medicine, and logistics."
+            ]
+          },
+          {
+            "title": "Potential Applications Across Industries",
+            "paragraphs": [
+              "Quantum computing could accelerate drug discovery, improve financial modeling, strengthen material science research, and optimize supply chains.",
+              "Although the technology is still developing, companies and researchers are already exploring how quantum algorithms could solve problems that are currently too large for classical systems."
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "ai-healthcare",
@@ -68,7 +283,12 @@
       "description": "Artificial Intelligence is reshaping patient care, diagnostics, research, and disease prevention across the healthcare industry.",
       "author": {
         "name": "Dr. Emily Walker",
-        "image": "/images/authors/emily-walker.png"
+        "avatar": {
+          "src": "/images/authors/emily-walker.png",
+          "alt": "Dr. Emily Walker avatar",
+          "width": 80,
+          "height": 80
+        }
       },
       "categoryId": "healthcare",
       "date": "2023-12-20",
@@ -78,7 +298,31 @@
         "views": "50k",
         "shares": 206
       },
-      "image": "/images/blog/2.png"
+      "bannerImage": {
+        "src": "/images/blog-details/ai-healthcare-banner.png",
+        "alt": "The Rise of Artificial Intelligence in Healthcare banner image",
+        "width": 1920,
+        "height": 720
+      },
+      "content": {
+        "introduction": "Artificial Intelligence has emerged as a transformative force in the healthcare industry, reshaping patient care, diagnostics, research, and disease prevention.",
+        "sections": [
+          {
+            "title": "AI in Diagnostics",
+            "paragraphs": [
+              "AI systems can help analyze medical images, patient records, and test results to support faster and more accurate diagnosis.",
+              "These tools do not replace doctors, but they can help healthcare professionals make better-informed decisions."
+            ]
+          },
+          {
+            "title": "Personalized Treatment Plans",
+            "paragraphs": [
+              "AI-powered systems can help create individualized treatment plans by analyzing patient history, symptoms, test results, and other medical data.",
+              "This approach allows healthcare providers to move away from one-size-fits-all methods and focus on treatment strategies that better match each patient."
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "robotics-manufacturing",
@@ -87,7 +331,12 @@
       "description": "Discover how robotics is changing modern manufacturing through automation, precision, and intelligent production systems.",
       "author": {
         "name": "Michael Stone",
-        "image": "/images/authors/michael-stone.png"
+        "avatar": {
+          "src": "/images/authors/michael-stone.png",
+          "alt": "Michael Stone avatar",
+          "width": 80,
+          "height": 80
+        }
       },
       "categoryId": "robotics",
       "date": "2023-11-08",
@@ -97,7 +346,31 @@
         "views": "37k",
         "shares": 85
       },
-      "image": "/images/blog/3.png"
+      "bannerImage": {
+        "src": "/images/blog-details/robotics-manufacturing-banner.png",
+        "alt": "The Future of Robotics in Manufacturing banner image",
+        "width": 1920,
+        "height": 720
+      },
+      "content": {
+        "introduction": "Robotics is becoming a central part of modern manufacturing. From assembly lines to quality control, intelligent machines are helping companies improve efficiency and reduce errors.",
+        "sections": [
+          {
+            "title": "Automation and Precision",
+            "paragraphs": [
+              "Robotic systems can perform repetitive tasks with a high level of accuracy, making them especially valuable in industries where precision is critical.",
+              "By automating routine operations, manufacturers can reduce production delays and allow human workers to focus on supervision, design, maintenance, and process improvement."
+            ]
+          },
+          {
+            "title": "Smart Factories",
+            "paragraphs": [
+              "The combination of robotics, sensors, and data analytics is giving rise to smart factories where machines can communicate, adapt, and optimize workflows.",
+              "These systems can help detect issues earlier, improve resource usage, and make production lines more flexible."
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "cybersecurity-trends",
@@ -106,7 +379,12 @@
       "description": "A look at emerging cybersecurity challenges and the strategies companies are using to protect digital infrastructure.",
       "author": {
         "name": "Sophia Carter",
-        "image": "/images/authors/sophia-carter.png"
+        "avatar": {
+          "src": "/images/authors/sophia-carter.png",
+          "alt": "Sophia Carter avatar",
+          "width": 80,
+          "height": 80
+        }
       },
       "categoryId": "cybersecurity",
       "date": "2024-01-12",
@@ -116,7 +394,31 @@
         "views": "29k",
         "shares": 64
       },
-      "image": "/images/blog/4.png"
+      "bannerImage": {
+        "src": "/images/blog-details/cybersecurity-trends-banner.png",
+        "alt": "Cybersecurity Trends Businesses Should Watch banner image",
+        "width": 1920,
+        "height": 720
+      },
+      "content": {
+        "introduction": "Cybersecurity continues to be one of the most important priorities for businesses as digital systems become more connected and complex.",
+        "sections": [
+          {
+            "title": "Growing Security Risks",
+            "paragraphs": [
+              "Companies are facing increasingly sophisticated attacks, including phishing, ransomware, data breaches, and supply chain vulnerabilities.",
+              "As more business operations move to cloud platforms and remote environments, organizations need stronger security strategies and better monitoring tools."
+            ]
+          },
+          {
+            "title": "Building a Stronger Defense",
+            "paragraphs": [
+              "Modern cybersecurity requires a combination of employee training, access control, data protection, system monitoring, and incident response planning.",
+              "Businesses that invest in proactive security are better prepared to prevent attacks and respond quickly when threats appear."
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "ai-education",
@@ -125,7 +427,12 @@
       "description": "AI tools are helping students learn faster, giving teachers better insights, and creating more personalized learning experiences.",
       "author": {
         "name": "Olivia Bennett",
-        "image": "/images/authors/olivia-bennett.png"
+        "avatar": {
+          "src": "/images/authors/olivia-bennett.png",
+          "alt": "Olivia Bennett avatar",
+          "width": 80,
+          "height": 80
+        }
       },
       "categoryId": "education",
       "date": "2024-02-03",
@@ -135,7 +442,31 @@
         "views": "21k",
         "shares": 43
       },
-      "image": "/images/blog/5.png"
+      "bannerImage": {
+        "src": "/images/blog-details/ai-education-banner.png",
+        "alt": "How AI Is Changing Modern Education banner image",
+        "width": 1920,
+        "height": 720
+      },
+      "content": {
+        "introduction": "AI is changing education by making learning more adaptive, interactive, and data-driven.",
+        "sections": [
+          {
+            "title": "Personalized Learning",
+            "paragraphs": [
+              "AI tools can adapt learning materials to a student's pace, strengths, and weak points.",
+              "This can help students spend more time on difficult topics while moving faster through concepts they already understand."
+            ]
+          },
+          {
+            "title": "Better Insights for Teachers",
+            "paragraphs": [
+              "Teachers can use analytics to understand where students struggle and adjust lessons accordingly.",
+              "Used carefully, AI can support educators without removing the human side of teaching."
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "future-of-cloud",
@@ -144,7 +475,12 @@
       "description": "Cloud platforms are evolving toward more scalable, automated, and secure infrastructure for modern digital products.",
       "author": {
         "name": "Daniel Brooks",
-        "image": "/images/authors/daniel-brooks.png"
+        "avatar": {
+          "src": "/images/authors/daniel-brooks.png",
+          "alt": "Daniel Brooks avatar",
+          "width": 80,
+          "height": 80
+        }
       },
       "categoryId": "cloud-computing",
       "date": "2024-02-18",
@@ -154,7 +490,31 @@
         "views": "34k",
         "shares": 72
       },
-      "image": "/images/blog/6.png"
+      "bannerImage": {
+        "src": "/images/blog-details/future-of-cloud-banner.png",
+        "alt": "The Future of Cloud Infrastructure banner image",
+        "width": 1920,
+        "height": 720
+      },
+      "content": {
+        "introduction": "Cloud infrastructure is becoming more automated, distributed, and security-focused as digital products grow in complexity.",
+        "sections": [
+          {
+            "title": "Scalability and Automation",
+            "paragraphs": [
+              "Modern cloud platforms allow teams to scale applications more easily and automate infrastructure management.",
+              "This reduces manual work and helps products handle changing traffic more reliably."
+            ]
+          },
+          {
+            "title": "Security in the Cloud",
+            "paragraphs": [
+              "As more systems move to the cloud, security configuration, access control, and monitoring become critical.",
+              "Strong cloud infrastructure requires both good tooling and disciplined engineering practices."
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "machine-learning-business",
@@ -163,7 +523,12 @@
       "description": "Companies use machine learning to improve decision-making, personalize customer experiences, and automate repetitive workflows.",
       "author": {
         "name": "Emma Richardson",
-        "image": "/images/authors/emma-richardson.png"
+        "avatar": {
+          "src": "/images/authors/emma-richardson.png",
+          "alt": "Emma Richardson avatar",
+          "width": 80,
+          "height": 80
+        }
       },
       "categoryId": "machine-learning",
       "date": "2024-03-01",
@@ -173,7 +538,31 @@
         "views": "42k",
         "shares": 118
       },
-      "image": "/images/blog/7.png"
+      "bannerImage": {
+        "src": "/images/blog-details/machine-learning-business-banner.png",
+        "alt": "Machine Learning for Business Growth banner image",
+        "width": 1920,
+        "height": 720
+      },
+      "content": {
+        "introduction": "Machine learning helps businesses turn data into predictions, recommendations, and automated decisions.",
+        "sections": [
+          {
+            "title": "Data-Driven Decisions",
+            "paragraphs": [
+              "Machine learning models can identify patterns in customer behavior, sales data, and operational processes.",
+              "These insights can help teams make decisions based on evidence rather than assumptions."
+            ]
+          },
+          {
+            "title": "Automation and Personalization",
+            "paragraphs": [
+              "Businesses use machine learning to automate repetitive workflows and personalize product experiences.",
+              "Recommendation systems, fraud detection, and demand forecasting are common examples of machine learning in business."
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "web3-digital-ownership",
@@ -182,7 +571,12 @@
       "description": "Web3 technologies are introducing new ways to think about identity, ownership, and decentralized digital platforms.",
       "author": {
         "name": "Noah Stevens",
-        "image": "/images/authors/noah-stevens.png"
+        "avatar": {
+          "src": "/images/authors/noah-stevens.png",
+          "alt": "Noah Stevens avatar",
+          "width": 80,
+          "height": 80
+        }
       },
       "categoryId": "web3",
       "date": "2024-03-16",
@@ -192,7 +586,31 @@
         "views": "26k",
         "shares": 57
       },
-      "image": "/images/blog/8.png"
+      "bannerImage": {
+        "src": "/images/blog-details/web3-digital-ownership-banner.png",
+        "alt": "Web3 and the Future of Digital Ownership banner image",
+        "width": 1920,
+        "height": 720
+      },
+      "content": {
+        "introduction": "Web3 technologies explore new models of digital ownership, identity, and decentralized participation.",
+        "sections": [
+          {
+            "title": "Digital Ownership",
+            "paragraphs": [
+              "Web3 introduces systems where users can own and transfer digital assets without relying fully on centralized platforms.",
+              "This changes how people think about identity, content, communities, and online economies."
+            ]
+          },
+          {
+            "title": "Decentralized Platforms",
+            "paragraphs": [
+              "Decentralized platforms aim to reduce dependence on single controlling organizations.",
+              "The technology is still evolving, and many products must balance decentralization with usability, safety, and regulation."
+            ]
+          }
+        ]
+      }
     }
   ]
 }

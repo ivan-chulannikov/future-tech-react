@@ -1,15 +1,18 @@
-import { apiClient } from "@/shared/api/client";
-import { isPostArray, isPost } from "../model/guard";
-import { Post } from "../model/types";
+import { apiClient } from '@/shared/api/client';
+import { isPostDetails, isPostPreviewArray } from '../model/guard';
+import type { PostDetails, PostPreview } from '../model/types';
 
-export const fetchPosts = async (categoryId: string = 'all'): Promise<Post[]> => {
+export const fetchPosts = async (
+  categoryId: string = 'all',
+): Promise<PostPreview[]> => {
   const endpoint =
     categoryId === 'all'
       ? 'posts'
       : `posts?categoryId=${categoryId}`;
 
-  return apiClient<Post[]>(endpoint, isPostArray);
+  return apiClient<PostPreview[]>(endpoint, isPostPreviewArray);
 };
-export const fetchPostById = async (postId: string): Promise<Post> => {
-  return apiClient<Post>(`posts/${postId}`, isPost);
+
+export const fetchPostById = async (postId: string): Promise<PostDetails> => {
+  return apiClient<PostDetails>(`postDetails/${postId}`, isPostDetails);
 };
