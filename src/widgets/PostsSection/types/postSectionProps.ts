@@ -1,11 +1,12 @@
 import { Category } from "@/entities/categories";
-import {  Post } from "@/entities/post";
+
+import { PostBase } from "@/entities/post/model/types";
 import { SectionHeaderProps } from "@/shared/ui/SectionHeader";
 
 export interface PostSectionProps {
-    posts: Post[];
+    posts: PostBase[];
     tabs: Category[];
     sectionHeader: SectionHeaderProps;
     activeCategoryId: string;
-    onCategoryChange: (activeCategoryId: string) => void;
+    handleCategoryChange: (activeCategoryId: string) => void;
 }

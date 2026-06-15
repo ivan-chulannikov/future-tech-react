@@ -1,24 +1,33 @@
 import { useEffect, useState } from 'react';
 
-import { Footer, Header } from '@/widgets/layout';
+
 import { HeroSection } from '@/widgets/HeroSection';
 import { FeaturesSection } from '@/widgets/FeaturesSection';
 import { PostsSection } from '@/widgets/PostsSection';
 import { ResourcesSection } from '@/widgets/ResourcesSection';
 import { ReviewsSection } from '@/widgets/ReviewsSection';
 import { AboutSection } from '@/widgets/AboutSection';
-
+import { useSearchParams } from 'react-router-dom';
 import { fetchPosts } from '@/entities/post';
-import type { Post } from '@/entities/post';
 import type { Category } from '@/entities/categories';
 import { homePostsSection } from '../model/postSection';
 import { fetchCategories } from '@/entities/categories/api/categoriesApi';
+import { PostPreview } from '@/entities/post/model/types';
 
 const Home = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<PostPreview[]>([]);
   const [error, setError] = useState(false);
   const [tabs, setTabs] = useState<Category[]>([])
-  const [activeCategoryId, setActiveCategoryId] = useState("all");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeCategoryId = searchParams.get('category') ?? 'all'
+  const handleCategoryChange  = (categoryId: string) => {
+    if(categoryId === "all"){
+      setSearchParams({})
+      return;
+    }
+   
+    setSearchParams({category: categoryId})
+  }
   const loadTabs = async () => {
   try {
     setError(false);
@@ -55,8 +64,6 @@ useEffect(() => {
 
   return (
     <>
-      <Header />
-      <main>
         <HeroSection />
         <FeaturesSection />
 
@@ -65,13 +72,11 @@ useEffect(() => {
           posts={posts}
           tabs={tabs}
           activeCategoryId = {activeCategoryId}
-          onCategoryChange = {setActiveCategoryId}
+          handleCategoryChange = {handleCategoryChange}
         />
         <ResourcesSection />
         <ReviewsSection />
         <AboutSection />
-      </main>
-      <Footer />
     </>
   );
 };

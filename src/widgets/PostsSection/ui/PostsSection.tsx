@@ -6,7 +6,7 @@ import { PostList} from "@/entities/post";
 import { PostSectionProps } from "../types/postSectionProps";
 
 
-const PostsSection = ({ posts, tabs, sectionHeader, activeCategoryId, onCategoryChange}: PostSectionProps) => {
+const PostsSection = ({ posts, tabs, sectionHeader, activeCategoryId, handleCategoryChange}: PostSectionProps) => {
  
 
   
@@ -18,7 +18,7 @@ const PostsSection = ({ posts, tabs, sectionHeader, activeCategoryId, onCategory
         <TabsList
           tabs={tabs}
           activeTab={activeCategoryId}
-          onTabChangeHandler={onCategoryChange}
+          onTabChangeHandler={handleCategoryChange}
         />
 
         <div className="tabs__body">
