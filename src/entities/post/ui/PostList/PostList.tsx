@@ -1,10 +1,10 @@
 import { PostCard } from "../PostCard";
 import {PostListProps} from "./types/PostListProps"
-const PostList = ({posts}: PostListProps) => {
+const PostList = ({posts, renderActions}: PostListProps) => {
 
   
   return (
-    <ul className="list">
+    
      <ul className="list">
       {
        
@@ -12,12 +12,13 @@ const PostList = ({posts}: PostListProps) => {
             <PostCard 
           key={post.id}
           post = {post}
+          actionsSlot={renderActions?.(post)}
           /> 
           )
        
       }
     </ul>
-    </ul>
+   
   );
 };
 export default PostList;

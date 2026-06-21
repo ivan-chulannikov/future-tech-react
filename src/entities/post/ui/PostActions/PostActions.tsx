@@ -1,9 +1,6 @@
-const PostActions = (props) => {
-    const {
-        likes,
-        views,
-        shares
-    } = props
+import type {PostActionsProps} from "./types/PostActionsProps"
+const PostActions = ({likes, views, shares, children  }: PostActionsProps) => {
+   
     return (
          <div className="blog-details__actions actions">
             <ul className="blog-actions__list">
@@ -31,7 +28,6 @@ const PostActions = (props) => {
                   <span>{likes}</span>
                 </button>
               </li>
-
               <li className="blog-actions__item">
                 <button type="button" className="blog-actions__button">
                   <span className="blog-actions__icon-wrapper">
@@ -54,7 +50,6 @@ const PostActions = (props) => {
                   <span>{views}</span>
                 </button>
               </li>
-
               <li className="blog-actions__item">
                 <button type="button" className="blog-actions__button">
                   <span className="blog-actions__icon-wrapper">
@@ -77,6 +72,7 @@ const PostActions = (props) => {
                   <span>{shares}</span>
                 </button>
               </li>
+              {children}
             </ul>
           </div>
     )

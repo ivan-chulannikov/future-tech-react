@@ -1,8 +1,8 @@
 import { Button } from "@/shared/ui/Button";
 import PostActions from "../PostActions";
-import type {PostCardProps} from "./types"
+import type {PostCardProps} from "./types/types"
 import { getBlogDetailsRoute } from "@/shared/config/routes";
-const PostCard = ({ post }: PostCardProps) => {
+const PostCard = ({ post, actionsSlot }: PostCardProps) => {
   const {
     id,
     author,
@@ -41,12 +41,12 @@ const PostCard = ({ post }: PostCardProps) => {
             <div className="blog-card__desc">{description}</div>
           </div>
 
-          <PostActions
-            className="blog-card__actions"
+          <PostActions  className="blog-card__actions"
             likes={stats.likes}
             views={stats.views}
-            shares={stats.shares}
-          />
+            shares={stats.shares}>
+           {actionsSlot}
+          </PostActions>
         </div>
 
         <Button to={getBlogDetailsRoute(id)} className="blog-card__link" icon="arrow-yellow">
