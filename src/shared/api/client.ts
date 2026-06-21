@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001";
+const API_URL = "http://localhost:3000";
 
 
 export const apiClient = async <T>(endpoint: string, validate: (data: unknown) => data is T):Promise<T> => {
