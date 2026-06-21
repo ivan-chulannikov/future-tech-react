@@ -1,0 +1,14 @@
+@use '../helpers' as *;
+.posts-section{
+    &__pagination{
+        
+        padding-bottom: fluid(22,24);
+    }
+    &__content {
+        transition: opacity var(--transition-duration);
+    }
+    &.is-loading{
+        opacity: 0.55;
+        pointer-events: none;
+    }
+}
