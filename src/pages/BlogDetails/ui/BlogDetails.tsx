@@ -1,60 +1,44 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
 import AboutSection from '@/widgets/AboutSection';
 import BlogDetailSection from '@/widgets/BlogDetailSection';
-import { NotFound } from '@/pages/NotFound';
-
-import { fetchPostById } from '@/entities/post';
-import type { PostDetails } from '@/entities/post/model/types';
-
+import { StateView } from '@/shared/ui/StateView';
+import { blogDetailsStateViewContent } from '../model/stateViewPresets';
+import { useGetPostByIdQuery } from '@/entities/post/api/postApi';
 const BlogDetails = () => {
-  const [post, setPost] = useState<PostDetails | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
   const { id } = useParams<{ id: string }>();
-
-  const loadPost = async (postId: string) => {
-    try {
-      setIsLoading(true);
-      setIsError(false);
-      setPost(null);
-
-      const post = await fetchPostById(postId);
-
-      setPost(post);
-    } catch (error) {
-      console.error(error);
-      setIsError(true);
-      setPost(null);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!id) {
-      setIsError(true);
-      setIsLoading(false);
-      return;
-    }
-
-    loadPost(id);
-  }, [id]);
-
-  if (isLoading) {
+  const {
+    data: postResponse,
+    isLoading: isPostLoadingQuery,
+    isError: isPostErrorQuery,
+    refetch: refetchPost,
+  } = useGetPostByIdQuery(id ?? '', {
+    skip: !id
+  })
+  const post = postResponse ?? null
+  if (isPostLoadingQuery) {
     return (
-      <section className="section container">
-        <h1>Loading...</h1>
-      </section>
-    );
+      <StateView
+      size='page'
+      {...blogDetailsStateViewContent.loading}
+      /> 
+    )
   }
-
-  if (isError || !post) {
-    return <NotFound />;
+  if (isPostErrorQuery || !post) {
+    return (
+        <StateView 
+         size='page'
+        {
+          ...blogDetailsStateViewContent.error
+        }
+        action = {
+          <button 
+          className='button button--accent' 
+          type='button' 
+          onClick={refetchPost}>Try again</button>
+        }
+        />
+    )
   }
-
   return (
     <>
       <BlogDetailSection post={post} />
@@ -62,5 +46,4 @@ const BlogDetails = () => {
     </>
   );
 };
-
 export default BlogDetails;

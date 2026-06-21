@@ -1,25 +1,60 @@
+import { PostList } from '@/entities/post';
 
-import { SectionHeader } from "@/shared/ui/SectionHeader";
-import { TabPanel } from "@/shared/ui/TabPanel";
-import { TabsList } from "@/shared/ui/TabsList";
-import { PostList} from "@/entities/post";
-import { PostSectionProps } from "../types/postSectionProps";
+import { Button } from '@/shared/ui/Button';
+import { SectionHeader } from '@/shared/ui/SectionHeader';
+import { StateView } from '@/shared/ui/StateView';
+import { TabPanel } from '@/shared/ui/TabPanel';
+import { TabsList } from '@/shared/ui/TabsList';
 
+import { postsSectionStateViewContent } from '../model/stateViewPresets';
+import type { PostSectionProps } from '../types/postSectionProps';
+import { SavePostButton } from '@/features/save-post';
+const PostsSection = ({
+  posts,
+  tabs,
+  sectionHeader,
+  activeCategoryId,
+  handleCategoryChange,
+  isTabsLoading,
+  isPostsLoading,
+  isPostsError,
+  isTabsError,
+  onPostsRetry,
+  onTabsRetry,
+  paginationSlot,
+  isPostsFetching,
 
-const PostsSection = ({ posts, tabs, sectionHeader, activeCategoryId, handleCategoryChange}: PostSectionProps) => {
- 
+}: PostSectionProps) => {
+  const isInitialLoading = isPostsLoading && posts.length === 0
 
-  
   return (
     <section className="section">
       <SectionHeader {...sectionHeader} />
 
       <div className="section__body tabs">
-        <TabsList
-          tabs={tabs}
-          activeTab={activeCategoryId}
-          onTabChangeHandler={handleCategoryChange}
-        />
+        {isTabsLoading && (
+          <StateView {...postsSectionStateViewContent.tabsLoading} />
+        )}
+
+        {!isTabsLoading && isTabsError && (
+          <StateView
+            size="section"
+            {...postsSectionStateViewContent.tabsError}
+            action={
+              <Button type="button" onClick={onTabsRetry}>
+                Try Again
+              </Button>
+            }
+          />
+        )}
+
+        {!isTabsLoading && !isTabsError && (
+          <TabsList
+            tabs={tabs}
+            activeTab={activeCategoryId}
+            onTabChangeHandler={handleCategoryChange}
+          />
+        )}
 
         <div className="tabs__body">
           <TabPanel
@@ -27,7 +62,40 @@ const PostsSection = ({ posts, tabs, sectionHeader, activeCategoryId, handleCate
             id={`tabpanel-${activeCategoryId}`}
             labelledBy={`tab-${activeCategoryId}`}
           >
-            <PostList posts={posts}/>
+            {isInitialLoading && (
+              <StateView {...postsSectionStateViewContent.postsLoading} />
+            )}
+
+            {!isPostsLoading && isPostsError && (
+              <StateView
+                {...postsSectionStateViewContent.postsError}
+                action={
+                  <Button type="button" onClick={onPostsRetry}>
+                    Try Again
+                  </Button>
+                }
+              />
+            )}
+
+         {!isInitialLoading && !isPostsError && posts.length > 0 && (
+  <>
+    <div className={isPostsFetching ? 'posts-section__content is-loading' : 'posts-section__content'}>
+       <PostList
+      posts={posts}
+      renderActions={(post) => (
+        <li className="blog-actions__item">
+          <SavePostButton postId={post.id} />
+        </li>
+      )}
+    />
+    </div>
+    {paginationSlot && (
+      <div className="posts-section__pagination">
+        {paginationSlot}
+      </div>
+    )}
+  </>
+)}
           </TabPanel>
         </div>
       </div>

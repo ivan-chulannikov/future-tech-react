@@ -1,5 +1,5 @@
 import type { PostBase, PostPreview, PostDetails } from './types';
-
+import type {PaginatedResponse} from "@/shared/api/types/types"
 const isObject = (value: unknown): value is Record<string, unknown> => {
   return typeof value === 'object' && value !== null;
 };
@@ -98,4 +98,26 @@ export const isPostPreviewArray = (value: unknown): value is PostPreview[] => {
 
 export const isPostDetailsArray = (value: unknown): value is PostDetails[] => {
   return Array.isArray(value) && value.every(isPostDetails);
+};
+
+const isNullableNumber = (value: unknown): value is number | null => {
+  return typeof value === 'number' || value === null;
+};
+
+export const isPaginatedPostPreviewResponse = (
+  value: unknown,
+): value is PaginatedResponse<PostPreview> => {
+  if (!isObject(value)) {
+    return false;
+  }
+
+  return (
+    typeof value.first === 'number' &&
+    isNullableNumber(value.prev) &&
+    isNullableNumber(value.next) &&
+    typeof value.last === 'number' &&
+    typeof value.pages === 'number' &&
+    typeof value.items === 'number' &&
+    isPostPreviewArray(value.data)
+  );
 };
