@@ -5,6 +5,7 @@ import  ScrollToTop  from './ScrollToTop/ScrollToTop';
 import RootLayout from "../layouts/RootLayout";
 import {NotFound}  from "@/pages/NotFound"
 import { AppRoutes } from "@/shared/config/routes";
+import { SavedPosts } from '@/pages/SavedPosts';
 export const AppRouter = () => {
   return (
     <BrowserRouter>
@@ -14,6 +15,7 @@ export const AppRouter = () => {
           <Route path= {AppRoutes.home} element={<Home />} />
           <Route path= {AppRoutes.blogDetails} element = {<BlogDetails />} />
           <Route path="*" element={<NotFound />} />
+          <Route path= {AppRoutes.savedPosts} element = {<SavedPosts />}/>
         </Route>
        
       </Routes>

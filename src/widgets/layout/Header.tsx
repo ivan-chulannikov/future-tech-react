@@ -22,6 +22,8 @@ const Header  = () => {
                         height="50"
                     />
                 </Link>
+               
+                
                 <div className="header__overlay" data-js-header-overlay>
                     <nav className="header__menu">
                         <ul className="header__menu-list">
@@ -36,9 +38,9 @@ const Header  = () => {
                         </ul>
                         
                     </nav>
-                    <a href="/contacts.html" className="header__contact-us-link button button--accent">
+                    <Link to ="/contacts.html" className="header__contact-us-link button button--accent">
                         Contact Us
-                    </a>
+                    </Link>
                 </div>
                 <button className="header__burger-button burger-button visible-mobile"
                 type="button" aria-label="Open menu" title="Open Menu" data-js-header-burger-button>
