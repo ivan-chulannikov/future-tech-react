@@ -1,165 +1,160 @@
 @use '../helpers' as *;
 
 .not-found {
-  min-height: calc(100vh - rem(100));
-  display: flex;
-  align-items: center;
-  border-block: var(--border);
-
-  &__inner {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr rem(520);
-    column-gap: rem(80);
-    align-items: center;
-    padding-block: fluid(80, 160);
-
-    @include laptop {
-      grid-template-columns: 1fr rem(420);
-      column-gap: rem(40);
-    }
-
-    @include tablet {
-      grid-template-columns: 1fr;
-      row-gap: rem(40);
-    }
-  }
-
-  &__body {
-    max-width: rem(760);
-  }
-
-  &__tag {
-    margin-bottom: rem(24);
-
-    @include laptop {
-      margin-bottom: rem(16);
-    }
-  }
-
-  &__title {
-    margin-bottom: rem(24);
-    color: var(--color-light);
-    font-family: var(--font-family-accent);
-    font-weight: 500;
-    line-height: 1.1;
-
-    @include fluid-text(44, 88);
-
-    @include laptop {
-      margin-bottom: rem(16);
-    }
-  }
-
-  &__description {
-    max-width: rem(620);
-    margin-bottom: rem(40);
-    color: var(--color-grey-60);
-    line-height: 1.5;
-
-    @include fluid-text(16, 20);
-
-    @include laptop {
-      margin-bottom: rem(32);
-    }
-  }
-
-  &__actions {
+    min-height: calc(100vh - rem(100));
     display: flex;
     align-items: center;
-    column-gap: rem(16);
-  }
+    border-block: var(--border);
 
-  &__info {
-    position: relative;
-    overflow: hidden;
-    min-height: rem(420);
-    border: var(--border);
-    border-radius: rem(16);
-    background-color: var(--color-dark-10);
-    padding: rem(40);
+    &__inner {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr rem(520);
+        column-gap: rem(80);
+        align-items: center;
+        padding-block: fluid(80, 160);
 
-    @include laptop {
-      min-height: rem(340);
-      padding: rem(32);
-      border-radius: rem(12);
+        @include laptop {
+            grid-template-columns: 1fr rem(420);
+            column-gap: rem(40);
+        }
+
+        @include tablet {
+            grid-template-columns: 1fr;
+            row-gap: rem(40);
+        }
     }
 
-    @include mobile {
-      min-height: rem(280);
-      padding: rem(24);
+    &__body {
+        max-width: rem(760);
     }
 
-    &::before {
-      content: '';
-      position: absolute;
-      inset: rem(1);
-      border-radius: inherit;
-      background:
-        linear-gradient(
-          135deg,
-          rgb(255 209 26 / 0.16),
-          transparent 38%
-        );
-      pointer-events: none;
+    &__tag {
+        margin-bottom: rem(24);
+
+        @include laptop {
+            margin-bottom: rem(16);
+        }
     }
 
-    &::after {
-      content: '';
-      position: absolute;
-      right: rem(-80);
-      bottom: rem(-80);
-      width: rem(220);
-      height: rem(220);
-      border-radius: 50%;
-      background-color: rgb(255 209 26 / 0.08);
-      pointer-events: none;
+    &__title {
+        margin-bottom: rem(24);
+        color: var(--color-light);
+        font-family: var(--font-family-accent);
+        font-weight: 500;
+        line-height: 1.1;
 
-      @include mobile {
-        width: rem(160);
-        height: rem(160);
-      }
-    }
-  }
+        @include fluid-text(44, 88);
 
-  &__code {
-    position: relative;
-    z-index: 1;
-    margin-bottom: rem(80);
-    color: var(--color-accent);
-    font-family: var(--font-family-accent);
-    font-weight: 600;
-    line-height: 1;
-
-    @include fluid-text(80, 160);
-
-    @include laptop {
-      margin-bottom: rem(56);
+        @include laptop {
+            margin-bottom: rem(16);
+        }
     }
 
-    @include mobile {
-      margin-bottom: rem(40);
+    &__description {
+        max-width: rem(620);
+        margin-bottom: rem(40);
+        color: var(--color-grey-60);
+        line-height: 1.5;
+
+        @include fluid-text(16, 20);
+
+        @include laptop {
+            margin-bottom: rem(32);
+        }
     }
-  }
 
-  &__info-body {
-    position: relative;
-    z-index: 1;
-  }
+    &__actions {
+        display: flex;
+        align-items: center;
+        column-gap: rem(16);
+    }
 
-  &__info-title {
-    margin-bottom: rem(12);
-    color: var(--color-light);
-    font-family: var(--font-family-accent);
-    font-weight: 500;
+    &__info {
+        position: relative;
+        overflow: hidden;
+        min-height: rem(420);
+        border: var(--border);
+        border-radius: rem(16);
+        background-color: var(--color-dark-10);
+        padding: rem(40);
 
-    @include fluid-text(22, 32);
-  }
+        @include laptop {
+            min-height: rem(340);
+            padding: rem(32);
+            border-radius: rem(12);
+        }
 
-  &__info-description {
-    color: var(--color-grey-60);
-    line-height: 1.5;
+        @include mobile {
+            min-height: rem(280);
+            padding: rem(24);
+        }
 
-    @include fluid-text(14, 18);
-  }
+        &::before {
+            content: '';
+            position: absolute;
+            inset: rem(1);
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgb(255 209 26 / 0.16), transparent 38%);
+            pointer-events: none;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: rem(-80);
+            bottom: rem(-80);
+            width: rem(220);
+            height: rem(220);
+            border-radius: 50%;
+            background-color: rgb(255 209 26 / 0.08);
+            pointer-events: none;
+
+            @include mobile {
+                width: rem(160);
+                height: rem(160);
+            }
+        }
+    }
+
+    &__code {
+        position: relative;
+        z-index: 1;
+        margin-bottom: rem(80);
+        color: var(--color-accent);
+        font-family: var(--font-family-accent);
+        font-weight: 600;
+        line-height: 1;
+
+        @include fluid-text(80, 160);
+
+        @include laptop {
+            margin-bottom: rem(56);
+        }
+
+        @include mobile {
+            margin-bottom: rem(40);
+        }
+    }
+
+    &__info-body {
+        position: relative;
+        z-index: 1;
+    }
+
+    &__info-title {
+        margin-bottom: rem(12);
+        color: var(--color-light);
+        font-family: var(--font-family-accent);
+        font-weight: 500;
+
+        @include fluid-text(22, 32);
+    }
+
+    &__info-description {
+        color: var(--color-grey-60);
+        line-height: 1.5;
+
+        @include fluid-text(14, 18);
+    }
 }

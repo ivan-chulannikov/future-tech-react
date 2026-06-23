@@ -1,95 +1,88 @@
 @use '../helpers' as *;
 
-.card{
-    @include tablet-above{
+.card {
+    @include tablet-above {
         display: grid;
         grid-template-columns: 37.5% auto;
     }
-    &__preview, &__body{
+    &__preview,
+    &__body {
         padding: rem(80);
         @include laptop {
             padding: rem(60);
         }
     }
-    &__preview{
+    &__preview {
         display: flex;
         flex-direction: column;
         justify-content: center;
         padding-left: 0;
 
-        @include tablet-above{
+        @include tablet-above {
             border-right: var(--border);
         }
-       
+
         @include tablet {
             padding-right: 0;
             padding-block: rem(50);
             border-bottom: var(--border);
         }
-        &-main{
+        &-main {
             display: grid;
             row-gap: rem(40);
-           
-            @include laptop{
+
+            @include laptop {
                 row-gap: rem(30);
             }
             @include tablet {
                 justify-content: start;
             }
         }
-        &-icon{
-            --iconFeatureSize : #{rem(80)};
+        &-icon {
+            --iconFeatureSize: #{rem(80)};
             @include square(var(--iconFeatureSize));
-            @include laptop{
-                --iconFeatureSize : #{rem(60)};
+            @include laptop {
+                --iconFeatureSize: #{rem(60)};
             }
-            @include tablet{
-                --iconFeatureSize : #{rem(50)};
+            @include tablet {
+                --iconFeatureSize: #{rem(50)};
             }
         }
-        &-info{
+        &-info {
             display: grid;
-            row-gap: fluid(6,16);
-            &:has(.card__rating-view){
+            row-gap: fluid(6, 16);
+            &:has(.card__rating-view) {
                 grid-template-columns: 1fr auto;
                 column-gap: rem(1);
                 .card__preview-title {
-                    @include fluid-text(20,40);
-                  }
-
-
+                    @include fluid-text(20, 40);
+                }
             }
-
         }
-       
     }
-    &__rating{
-        &-view{
+    &__rating {
+        &-view {
             align-items: center;
         }
     }
-    &__body{
+    &__body {
         padding-right: 0;
-        @include tablet{
+        @include tablet {
             padding-block: rem(30);
             padding-inline: rem(16);
         }
     }
-    &__grid{
+    &__grid {
         display: grid;
-        &--2-cols{
-           
+        &--2-cols {
             gap: rem(20);
-          @include tablet-above{
-            
-            grid-template-columns: repeat(2,1fr);
-            
-
-          }
-        }
-        &--3-cols{
             @include tablet-above {
-                grid-template-columns: repeat(3,1fr);
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        &--3-cols {
+            @include tablet-above {
+                grid-template-columns: repeat(3, 1fr);
                 gap: rem(20);
             }
 
@@ -97,67 +90,58 @@
                 gap: rem(16);
             }
         }
-        &--3-cols-alt{
-            
+        &--3-cols-alt {
             gap: rem(30) rem(20);
             @include laptop {
                 gap: rem(24) rem(16);
-               
             }
             @include mobile-above {
                 display: grid;
-            grid-template-columns: repeat(3,1fr);
-         
-
+                grid-template-columns: repeat(3, 1fr);
             }
         }
-        &--2-cols-alt{
-            
+        &--2-cols-alt {
             gap: rem(30) rem(20);
             @include laptop {
                 gap: rem(24) rem(16);
-               
             }
             @include mobile-above {
                 display: grid;
-            grid-template-columns: auto 1fr;
-         
-
+                grid-template-columns: auto 1fr;
             }
         }
     }
-    &__cell{
+    &__cell {
         display: flex;
         flex-direction: column;
         justify-content: start;
         row-gap: 4;
-        &:has(> *:only-child){
+        &:has(> *:only-child) {
             justify-content: center;
         }
-        &:has(.card__cell-link){
+        &:has(.card__cell-link) {
             display: grid;
             grid-template-columns: 1fr auto;
-            grid-template-areas: 
-            'other link'
-            'other link';
+            grid-template-areas:
+                'other link'
+                'other link';
             align-items: center;
             column-gap: rem(20);
         }
-        &--wide{
+        &--wide {
             grid-column: 1 / -1;
         }
-        
-        &-image{
+
+        &-image {
             border-radius: rem(12);
             width: 100%;
-            height: fluid(169,332);
+            height: fluid(169, 332);
             object-fit: cover;
-            @include laptop{
+            @include laptop {
                 border-radius: rem(10);
             }
-
         }
-        &-link{
+        &-link {
             grid-area: link;
         }
     }

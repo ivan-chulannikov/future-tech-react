@@ -1,6 +1,5 @@
 @use '../helpers' as *;
-.accordion__group{
-
+.accordion__group {
     display: grid;
-    row-gap: fluid(20,30);
+    row-gap: fluid(20, 30);
 }

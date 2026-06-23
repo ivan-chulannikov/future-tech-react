@@ -1,19 +1,19 @@
 @use '../helpers' as *;
-.checkbox{
+.checkbox {
     display: inline-flex;
     column-gap: rem(10);
     color: var(--color-light);
-    @include laptop{
+    @include laptop {
         column-gap: rem(6);
     }
-    @include hover{
+    @include hover {
         color: var(--color-accent);
-        .checkbox__input{
+        .checkbox__input {
             border-color: var(--color-accent);
         }
     }
-    &__input{
-        --size:#{rem(28)};
+    &__input {
+        --size: #{rem(28)};
         @include square(var(--size));
         @include flex-center;
         border: var(--border);
@@ -22,20 +22,17 @@
         appearance: none;
         margin: 0;
         @include laptop {
-            --size:#{rem(24)};
+            --size: #{rem(24)};
         }
-        &:not(:checked){
-            &::after{
+        &:not(:checked) {
+            &::after {
                 @include hide;
             }
         }
-        &::after{
+        &::after {
             content: '✔';
             color: var(--color-light);
             transition-duration: var(--transition-duration);
-
-
         }
     }
-   
 }

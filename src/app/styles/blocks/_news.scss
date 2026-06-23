@@ -1,21 +1,21 @@
 @use '../helpers' as *;
-.news{
+.news {
     padding-block: fluid(40, 80);
     display: grid;
     row-gap: rem(60);
-    @include laptop{
+    @include laptop {
         row-gap: rem(40);
-    };
-    &__header{
+    }
+    &__header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         column-gap: rem(16);
     }
-  
-    &__list{
+
+    &__list {
         display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(rem(358),1fr));
+        grid-template-columns: repeat(auto-fit, minmax(rem(358), 1fr));
         column-gap: rem(30);
         row-gap: rem(30);
         align-items: center;

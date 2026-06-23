@@ -7,11 +7,11 @@
     @include laptop {
         column-gap: rem(30);
     }
-    &__team{
-        --personImageSize:#{rem(50)};
-       
+    &__team {
+        --personImageSize: #{rem(50)};
+
         @include laptop {
-            --personImageSize:#{rem(40)};
+            --personImageSize: #{rem(40)};
         }
     }
 }

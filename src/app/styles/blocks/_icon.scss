@@ -1,42 +1,34 @@
 @use '../helpers' as *;
 
-.icon{
+.icon {
     display: inline-flex;
     align-items: center;
     column-gap: rem(10);
-    &::after{
+    &::after {
         --size: #{rem(24)};
         @include square(var(--size));
         content: '';
         flex-shrink: 0;
 
-       
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
     }
-    @include laptop{
+    @include laptop {
         --size: #{rem(20)};
-       
-       
-      
     }
-    &--arrow-yellow{
-       
-        &::after{
+    &--arrow-yellow {
+        &::after {
             background-image: url('/icons/arrow-yellow.svg');
-
         }
     }
-    &--eye-yellow{
-       
-        &::after{
+    &--eye-yellow {
+        &::after {
             background-image: url('/icons/yellow-eye.svg');
-
         }
     }
-    &--grey-arrow-down{
-        &::after{
+    &--grey-arrow-down {
+        &::after {
             background-image: url('/icons/blog-details/icon.svg');
         }
     }

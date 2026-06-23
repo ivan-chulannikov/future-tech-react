@@ -1,6 +1,6 @@
 @use '../helpers' as *;
 
-.success-message{
+.success-message {
     color: green;
     &:not(.is-active) {
         @include hide;

@@ -1,19 +1,16 @@
 @use '../helpers' as *;
 
-.tabs{
-    &__header{
+.tabs {
+    &__header {
         @include tablet {
             overflow-x: auto;
         }
     }
-    &__buttons{
+    &__buttons {
         display: grid;
-        grid-template-columns: repeat(6,1fr);
+        grid-template-columns: repeat(6, 1fr);
         gap: rem(20);
         padding-block: rem(50);
-       
-      
-       
 
         @include laptop {
             padding-block: rem(40);
@@ -26,8 +23,8 @@
             padding-block: rem(20);
         }
     }
-    &__button{
-        @include fluid-text (14, 18);
+    &__button {
+        @include fluid-text(14, 18);
         color: var(--color-grey-60);
         background-color: transparent;
         padding-block: fluid(18, 30);
@@ -40,16 +37,14 @@
             color: var(--color-accent);
             border-color: var(--color-accent);
         }
-        &.is-active{
+        &.is-active {
             color: var(--color-light);
             font-weight: 500;
             background-color: var(--color-dark-10);
             pointer-events: none;
         }
-
     }
     &__body {
-        
     }
     &__content {
         &:not(.is-active) {
@@ -59,5 +54,4 @@
             outline-offset: -1rem;
         }
     }
-    
 }

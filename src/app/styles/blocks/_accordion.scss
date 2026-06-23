@@ -1,67 +1,65 @@
 @use '../helpers' as *;
 
-
-.accordion{
-    &__details{
-        &[open]{
-            .accordion__title{
-                &::before,&::after{
+.accordion {
+    &__details {
+        &[open] {
+            .accordion__title {
+                &::before,
+                &::after {
                     background-color: var(--color-light);
                 }
-                &::after{
+                &::after {
                     rotate: 0deg;
-    
                 }
             }
-            & + .accordion__content{
+            & + .accordion__content {
                 grid-template-rows: 1fr;
             }
-           
         }
     }
 
-    &__summary{
+    &__summary {
         list-style: none;
         color: var(--color-light);
-        @include hover{
+        @include hover {
             color: var(--color-accent);
         }
-        &::-webkit-details-marker{
+        &::-webkit-details-marker {
             display: none;
         }
     }
-    &__title{
+    &__title {
         transition-duration: var(--transition-duration);
         position: relative;
         padding-right: rem(50);
         color: inherit;
-        &::after,&::before{
+        &::after,
+        &::before {
             @include abs-y-center;
             right: 0;
-            content:'';
+            content: '';
             width: rem(16);
             height: rem(2);
             background-color: var(--color-accent);
             border-radius: 1rem;
             transition-duration: var(--transition-duration);
         }
-        &::after{
+        &::after {
             rotate: 90deg;
         }
     }
-    &__content{
+    &__content {
         display: grid;
         grid-template-rows: 0fr;
         transition-duration: 0.3s;
-        &-inner{
+        &-inner {
             overflow: hidden;
         }
-        &-body{
-            --offsetTop:#{fluid(16,24)};
+        &-body {
+            --offsetTop: #{fluid(16, 24)};
             margin-top: var(--offsetTop);
             padding-top: var(--offsetTop);
             border-top: var(--border);
         }
     }
-  
 }

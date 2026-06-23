@@ -1,54 +1,51 @@
 @use 'sass:math';
 @use 'functions' as *;
 
-
 @mixin fluid-text($min: 10, $max: 100) {
-  
-
-  font-size: fluid($min, $max);
-};
+    font-size: fluid($min, $max);
+}
 @mixin hide {
     opacity: 0;
     visibility: hidden;
-};
+}
 @mixin show {
     opacity: 1;
     visibility: visible;
-};
+}
 @mixin flex-center($isInline: false) {
     @if $isInline {
-      display: inline-flex;
-    } @else  {
-      display: flex;
+        display: inline-flex;
+    } @else {
+        display: flex;
     }
-  
+
     justify-content: center;
     align-items: center;
-  };
-  
-  @mixin abs-center {
+}
+
+@mixin abs-center {
     position: absolute;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-  };
-  @mixin abs-x-center {
+}
+@mixin abs-x-center {
     position: absolute;
     left: 50%;
     translate: -50% 0;
-  };  
-  @mixin abs-y-center {
+}
+@mixin abs-y-center {
     position: absolute;
     top: 50%;
     translate: 0 -50%;
-  };
-  
-  @mixin square($size) {
+}
+
+@mixin square($size) {
     width: $size;
     height: $size;
-  };
-  
-  @mixin visually-hidden {
+}
+
+@mixin visually-hidden {
     position: absolute !important;
     width: 1px !important;
     height: 1px !important;
@@ -59,4 +56,4 @@
     clip-path: inset(100%) !important;
     clip: rect(0 0 0 0) !important;
     overflow: hidden !important;
-  };
+}

@@ -1,9 +1,9 @@
 @use '../helpers' as *;
-.video-player{
+.video-player {
     position: relative;
 
-    &__video{
-        height: fluid(210,412);
+    &__video {
+        height: fluid(210, 412);
         width: 100%;
         object-fit: cover;
         border-radius: rem(12);
@@ -11,7 +11,7 @@
             border-radius: rem(10);
         }
     }
-    &__panel{
+    &__panel {
         position: absolute;
         inset: 0;
         padding: rem(30);
@@ -20,29 +20,28 @@
         align-items: end;
         column-gap: rem(1);
         transition-duration: var(--transition-duration);
-        &:not(.is-active){
+        &:not(.is-active) {
             @include hide;
-        } 
-        &::before{
+        }
+        &::before {
             content: '';
             position: absolute;
             inset: 0;
             background-image: linear-gradient(180deg, rgba(20, 20, 20, 0) 44.27%, #141414 100%);
         }
-        *{
+        * {
             position: relative;
             z-index: 1;
         }
     }
-    &__panel{
-        &--center{
-        justify-content: center;
-        align-items: center;
+    &__panel {
+        &--center {
+            justify-content: center;
+            align-items: center;
         }
-        
     }
-    &__play{
-        --size:#{rem(70)};
+    &__play {
+        --size: #{rem(70)};
         @include square(var(--size));
         @include flex-center;
         padding: 0;
@@ -53,11 +52,10 @@
             color: var(--color-accent);
         }
         @include laptop {
-            --size:#{rem(50)};
+            --size: #{rem(50)};
         }
     }
-    &__duration{
+    &__duration {
         color: var(--grey-50);
-
     }
 }

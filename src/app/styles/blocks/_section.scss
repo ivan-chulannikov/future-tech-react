@@ -1,19 +1,16 @@
 @use '../helpers' as *;
 
-.section{
-    &__header{
-        
+.section {
+    &__header {
         background-color: var(--color-dark-10);
         padding-block: fluid(40, 120);
-        &-inner{
+        &-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-       
     }
-    &__body{
+    &__body {
         border-block: var(--border);
     }
-   
 }

@@ -1,53 +1,54 @@
 @use '../helpers' as *;
-.select{
-    &__original-control{
+.select {
+    &__original-control {
         min-width: rem(100);
-        @include mobile-above{
+        @include mobile-above {
             @include visually-hidden;
         }
     }
-    &__body{
+    &__body {
         position: relative;
-        @include mobile{
+        @include mobile {
             @include visually-hidden;
         }
     }
-    &__button, &__option{
+    &__button,
+    &__option {
         user-select: none;
         cursor: pointer;
-        *{
-            pointer-events: none
+        * {
+            pointer-events: none;
         }
     }
-    &__button{
+    &__button {
         display: flex;
         align-items: center;
         justify-content: space-between;
         column-gap: rem(6);
         transition-duration: var(--transition-duration);
-        &.is-expanded{
-            &::after{
+        &.is-expanded {
+            &::after {
                 rotate: -180deg;
             }
         }
-        
+
         &::after {
-            --size:#{rem(24)};
+            --size: #{rem(24)};
             @include square(var(--size));
             content: '';
             background: url('.././icons/contacts/3.svg') center/contain no-repeat;
             transition-duration: var(--transition-duration);
-            @include laptop{
-                --size:#{rem(20)};
+            @include laptop {
+                --size: #{rem(20)};
                 column-gap: rem(4);
             }
         }
     }
 
-    &__dropdown{
+    &__dropdown {
         @include hide;
         pointer-events: none;
-        transition-duration:var(--transition-duration);
+        transition-duration: var(--transition-duration);
         position: absolute;
         display: grid;
         row-gap: rem(4);
@@ -63,9 +64,9 @@
         &.is-expanded {
             pointer-events: auto;
             @include show;
-          }
+        }
     }
-    &__option{
+    &__option {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -73,13 +74,13 @@
         padding: rem(10);
         border: var(--border);
         border-radius: inherit;
-        @include hover{
+        @include hover {
             color: var(--color-accent);
             background-color: var(--color-dark);
         }
-        &.is-selected{
+        &.is-selected {
             color: var(--color-accent);
-            &::after{
+            &::after {
                 content: '✔';
             }
         }

@@ -1,6 +1,6 @@
 @use '../helpers' as *;
 
-.resources-preview{
+.resources-preview {
     display: flex;
     row-gap: rem(30);
     flex-direction: column;
@@ -8,13 +8,12 @@
     align-items: start;
     @include tablet {
         padding-top: rem(100);
-    };
-   
-    &__button{
+    }
+
+    &__button {
         column-gap: rem(4);
         @include mobile-s {
             width: 100%;
-            
         }
     }
 }

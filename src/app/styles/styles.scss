@@ -1,4 +1,3 @@
-
 @use 'normalize';
 @use 'fonts';
 @use 'variables';
@@ -12,11 +11,9 @@
 @use './blocks/button';
 @use './blocks/logo';
 
-
 @use './blocks/footer';
 @use './blocks/badge';
 @use './blocks/soc1als';
-
 
 @use './blocks/hero';
 @use './blocks/metrics';
@@ -24,14 +21,11 @@
 @use './blocks/resources-preview';
 @use './blocks/team';
 
-
-
 @use './blocks/section';
 @use './blocks/card';
 @use './blocks/list';
 @use './blocks/tag';
 @use './blocks/tile';
-
 
 @use './blocks/blog-actions';
 @use './blocks/blog-card';
@@ -40,36 +34,23 @@
 @use './blocks/download-info';
 @use './blocks/error-state';
 
-
-
-
 @use './blocks/bordered-grid';
 @use './blocks/review-card';
 @use './blocks/rating-view';
 
-
-
 @use './blocks/about-card';
 @use './blocks/about';
-
-
 
 @use './blocks/news';
 @use './blocks/hero-alt';
 @use './blocks/news-card';
 @use './blocks/summary';
 
-
-
 @use './blocks/video-player';
 @use './blocks/video-card';
 
-
-
 @use './blocks/table-of-contents';
 @use './blocks/blog-details';
-
-
 
 @use './blocks//resources-cat';
 @use './blocks/resource-card';
@@ -85,5 +66,6 @@
 @use './blocks/contacts';
 @use './blocks/not-found';
 @use './blocks/state-view';
-@use'./blocks/post-section';
-@use'./blocks/pagination';
+@use './blocks/post-section';
+@use './blocks/pagination';
+@use './blocks/auth';
