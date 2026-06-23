@@ -1,12 +1,14 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FormInput } from '@/shared/ui/FormInput';
 import Button from '@/shared/ui/Button';
+import { AppRoutes } from '@/shared/config/routes';
 import { RegisterFormErrors, RegisterFormTouched, RegisterFormValues } from '../../model/types';
-import { validateField } from '../helpers/validateField';
-import { validateForm } from '../helpers/validateForm';
 import { useRegisterMutation } from '../../api/authApi';
+import { validateRegisterField, validateRegisterForm } from '../helpers/validateRegisterForm';
 
 const RegisterForm = () => {
+    const navigate = useNavigate();
     const [values, setValues] = useState<RegisterFormValues>({
         name: '',
         email: '',
@@ -23,7 +25,7 @@ const RegisterForm = () => {
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        const validationErrors = validateForm(values);
+        const validationErrors = validateRegisterForm(values);
 
         setErrors(validationErrors);
 
@@ -40,13 +42,13 @@ const RegisterForm = () => {
         }
 
         try {
-            const response = await register({
+            await register({
                 email: values.email,
                 username: values.name,
                 password: values.password,
             }).unwrap();
 
-            console.log('register success:', response);
+            navigate(AppRoutes.login);
         } catch (error) {
             console.log('register error:', error);
         }
@@ -63,12 +65,32 @@ const RegisterForm = () => {
         }));
 
         if (touched[name as keyof RegisterFormTouched]) {
-            const error = validateField(name, fieldValue);
+            const nextValues = {
+                ...values,
+                [name]: fieldValue,
+            } as RegisterFormValues;
+
+            const error = validateRegisterField(
+                name as keyof RegisterFormValues,
+                fieldValue,
+                nextValues,
+            );
 
             setErrors((prev) => ({
                 ...prev,
                 [name]: error,
             }));
+
+            if ((name === 'password' || name === 'confirmPassword') && touched.confirmPassword) {
+                setErrors((prev) => ({
+                    ...prev,
+                    confirmPassword: validateRegisterField(
+                        'confirmPassword',
+                        nextValues.confirmPassword,
+                        nextValues,
+                    ),
+                }));
+            }
         }
     };
 
@@ -82,7 +104,7 @@ const RegisterForm = () => {
             [name]: true,
         }));
 
-        const error = validateField(name, fieldValue, values);
+        const error = validateRegisterField(name as keyof RegisterFormValues, fieldValue, values);
 
         setErrors((prev) => ({
             ...prev,
@@ -104,7 +126,6 @@ const RegisterForm = () => {
                 onBlur={onBlur}
                 error={touched.name ? errors.name : undefined}
             />
-
             <FormInput
                 id="email"
                 label="Email"
@@ -117,7 +138,6 @@ const RegisterForm = () => {
                 onBlur={onBlur}
                 error={touched.email ? errors.email : undefined}
             />
-
             <FormInput
                 id="password"
                 label="Password"
@@ -130,7 +150,6 @@ const RegisterForm = () => {
                 onBlur={onBlur}
                 error={touched.password ? errors.password : undefined}
             />
-
             <FormInput
                 id="confirmPassword"
                 label="Confirm password"
@@ -143,7 +162,6 @@ const RegisterForm = () => {
                 onBlur={onBlur}
                 error={touched.confirmPassword ? errors.confirmPassword : undefined}
             />
-
             <div className="auth__form-extra">
                 <label className="checkbox">
                     <input
@@ -154,15 +172,12 @@ const RegisterForm = () => {
                         onBlur={onBlur}
                         checked={values.agreement}
                     />
-
                     <span>Agreement with terms</span>
                 </label>
-
                 {touched.agreement && errors.agreement && (
                     <p className="field__error">{errors.agreement}</p>
                 )}
             </div>
-
             <Button type="submit" className="button--accent auth__submit">
                 {isLoading ? 'Loading...' : 'Sign up'}
             </Button>

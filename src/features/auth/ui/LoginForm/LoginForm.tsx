@@ -5,7 +5,12 @@ import { useState } from 'react';
 import { validateField } from '../helpers/validateField';
 import { validateForm } from '../helpers/validateForm';
 import { useLoginMutation } from '../../api/authApi';
+import { useNavigate } from 'react-router-dom';
+import { setCredentials } from '../../model/authSlice';
+import { useAppDispatch } from '@/app/store/hooks';
 const LoginForm = () => {
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const [values, setValues] = useState<LoginFormValues>({
         email: '',
         password: '',
@@ -31,11 +36,13 @@ const LoginForm = () => {
 
         try {
             const response = await login({
-                username: values.email,
+                email: values.email,
                 password: values.password,
             }).unwrap();
-
-            console.log('login success:', response);
+            console.log(response);
+            navigate('/');
+            const { user, accessToken } = response;
+            dispatch(setCredentials({ user, accessToken }));
         } catch (error) {
             console.log('login error:', error);
         }
@@ -115,15 +122,12 @@ const LoginForm = () => {
                         onBlur={onBlur}
                         checked={values.rememberMe}
                     />
-
                     <span>Remember me</span>
                 </label>
-
                 <a className="auth__link" href="/">
                     Forgot password?
                 </a>
             </div>
-
             <Button type="submit" className="button--accent auth__submit">
                 Sign In
             </Button>
