@@ -1,36 +1,24 @@
 import { authApi } from '@/shared/api/baseApi';
+import { AuthResponse } from '../model/types';
 
 type LoginRequest = {
-    username: string;
+    email: string;
     password: string;
 };
 
-type LoginResponse = {
-    id: number;
-    username: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    accessToken: string;
-    refreshToken: string;
-};
+type LoginResponse = AuthResponse;
 type RegisterRequest = {
     email: string;
     username: string;
     password: string;
 };
 
-type RegisterResponse = {
-    id: number;
-    email: string;
-    username: string;
-    createdAt: string;
-};
+type RegisterResponse = AuthResponse;
 export const authApiRtk = authApi.injectEndpoints({
     endpoints: (builder) => ({
         login: builder.mutation<LoginResponse, LoginRequest>({
             query: (body) => ({
-                url: '/auth/login',
+                url: '/login',
                 method: 'POST',
                 body,
             }),

@@ -25,3 +25,17 @@ export type RegisterFormTouched = {
 };
 
 export type RegisterFormErrors = Partial<Record<keyof RegisterFormValues, string>>;
+export interface AuthUser {
+    id: string;
+    email: string;
+    username: string;
+    createdAt: string;
+}
+export type AuthState = {
+    user: AuthUser | null;
+    accessToken: string | null;
+};
+export type AuthResponse = {
+    user: AuthUser;
+    accessToken: string;
+};

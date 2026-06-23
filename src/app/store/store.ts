@@ -14,6 +14,7 @@ import {
 import storage from 'redux-persist/es/storage';
 
 import { savedPostsReducer } from '@/features/save-post';
+import { authReducer } from '@/features/auth/model/authSlice';
 
 const savedPostsPersistConfig = {
     key: 'savedPosts',
@@ -25,6 +26,7 @@ const persistedSavedPostsReducer = persistReducer(savedPostsPersistConfig, saved
 export const store = configureStore({
     reducer: {
         savedPosts: persistedSavedPostsReducer,
+        auth: authReducer,
         [baseApi.reducerPath]: baseApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
     },
