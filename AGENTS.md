@@ -247,3 +247,19 @@ Whether a PR was created.
 What the user should review next.
 
 Do not hide errors. If something failed, report it clearly.
+
+
+
+## GitHub CLI
+
+Use GitHub CLI to create issues, inspect issues, and work with pull requests.
+
+Default command:
+
+```txt
+gh
+If gh is not available in PATH, use this full Windows path instead:
+"C:\Program Files\GitHub CLI\gh.exe"
+Before creating issues, verify GitHub CLI access with:
+"C:\Program Files\GitHub CLI\gh.exe" auth status
+"C:\Program Files\GitHub CLI\gh.exe"  repo view
