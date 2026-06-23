@@ -1,123 +1,123 @@
 import type { PostBase, PostPreview, PostDetails } from './types';
-import type {PaginatedResponse} from "@/shared/api/types/types"
+import type { PaginatedResponse } from '@/shared/api/types/types';
 const isObject = (value: unknown): value is Record<string, unknown> => {
-  return typeof value === 'object' && value !== null;
+    return typeof value === 'object' && value !== null;
 };
 
 const isStringArray = (value: unknown): value is string[] => {
-  return Array.isArray(value) && value.every((item) => typeof item === 'string');
+    return Array.isArray(value) && value.every((item) => typeof item === 'string');
 };
 
 const isAvatar = (value: unknown): value is PostBase['author']['avatar'] => {
-  if (!isObject(value)) return false;
+    if (!isObject(value)) return false;
 
-  return (
-    typeof value.src === 'string' &&
-    typeof value.alt === 'string' &&
-    typeof value.width === 'number' &&
-    typeof value.height === 'number'
-  );
+    return (
+        typeof value.src === 'string' &&
+        typeof value.alt === 'string' &&
+        typeof value.width === 'number' &&
+        typeof value.height === 'number'
+    );
 };
 
 const isAuthor = (value: unknown): value is PostBase['author'] => {
-  if (!isObject(value)) return false;
+    if (!isObject(value)) return false;
 
-  return typeof value.name === 'string' && isAvatar(value.avatar);
+    return typeof value.name === 'string' && isAvatar(value.avatar);
 };
 
 const isStats = (value: unknown): value is PostBase['stats'] => {
-  if (!isObject(value)) return false;
+    if (!isObject(value)) return false;
 
-  return (
-    typeof value.likes === 'string' &&
-    typeof value.views === 'string' &&
-    typeof value.shares === 'number'
-  );
+    return (
+        typeof value.likes === 'string' &&
+        typeof value.views === 'string' &&
+        typeof value.shares === 'number'
+    );
 };
 
 const isPostBase = (value: unknown): value is PostBase => {
-  if (!isObject(value)) return false;
+    if (!isObject(value)) return false;
 
-  return (
-    typeof value.id === 'string' &&
-    (value.type === 'news' || value.type === 'blog') &&
-    typeof value.title === 'string' &&
-    typeof value.description === 'string' &&
-    isAuthor(value.author) &&
-    typeof value.categoryId === 'string' &&
-    typeof value.date === 'string' &&
-    typeof value.readingTime === 'string' &&
-    isStats(value.stats)
-  );
+    return (
+        typeof value.id === 'string' &&
+        (value.type === 'news' || value.type === 'blog') &&
+        typeof value.title === 'string' &&
+        typeof value.description === 'string' &&
+        isAuthor(value.author) &&
+        typeof value.categoryId === 'string' &&
+        typeof value.date === 'string' &&
+        typeof value.readingTime === 'string' &&
+        isStats(value.stats)
+    );
 };
 
 export const isPostPreview = (value: unknown): value is PostPreview => {
-  return isPostBase(value);
+    return isPostBase(value);
 };
 
 const isBannerImage = (value: unknown): value is PostDetails['bannerImage'] => {
-  if (!isObject(value)) return false;
+    if (!isObject(value)) return false;
 
-  return (
-    typeof value.src === 'string' &&
-    typeof value.alt === 'string' &&
-    typeof value.width === 'number' &&
-    typeof value.height === 'number'
-  );
+    return (
+        typeof value.src === 'string' &&
+        typeof value.alt === 'string' &&
+        typeof value.width === 'number' &&
+        typeof value.height === 'number'
+    );
 };
 
 const isPostContentSection = (
-  value: unknown,
+    value: unknown,
 ): value is PostDetails['content']['sections'][number] => {
-  if (!isObject(value)) return false;
+    if (!isObject(value)) return false;
 
-  return typeof value.title === 'string' && isStringArray(value.paragraphs);
+    return typeof value.title === 'string' && isStringArray(value.paragraphs);
 };
 
 const isPostContent = (value: unknown): value is PostDetails['content'] => {
-  if (!isObject(value)) return false;
+    if (!isObject(value)) return false;
 
-  return (
-    typeof value.introduction === 'string' &&
-    Array.isArray(value.sections) &&
-    value.sections.every(isPostContentSection)
-  );
+    return (
+        typeof value.introduction === 'string' &&
+        Array.isArray(value.sections) &&
+        value.sections.every(isPostContentSection)
+    );
 };
 
 export const isPostDetails = (value: unknown): value is PostDetails => {
-  if (!isObject(value)) return false;
+    if (!isObject(value)) return false;
 
-  const { bannerImage, content } = value;
+    const { bannerImage, content } = value;
 
-  return isPostBase(value) && isBannerImage(bannerImage) && isPostContent(content);
+    return isPostBase(value) && isBannerImage(bannerImage) && isPostContent(content);
 };
 
 export const isPostPreviewArray = (value: unknown): value is PostPreview[] => {
-  return Array.isArray(value) && value.every(isPostPreview);
+    return Array.isArray(value) && value.every(isPostPreview);
 };
 
 export const isPostDetailsArray = (value: unknown): value is PostDetails[] => {
-  return Array.isArray(value) && value.every(isPostDetails);
+    return Array.isArray(value) && value.every(isPostDetails);
 };
 
 const isNullableNumber = (value: unknown): value is number | null => {
-  return typeof value === 'number' || value === null;
+    return typeof value === 'number' || value === null;
 };
 
 export const isPaginatedPostPreviewResponse = (
-  value: unknown,
+    value: unknown,
 ): value is PaginatedResponse<PostPreview> => {
-  if (!isObject(value)) {
-    return false;
-  }
+    if (!isObject(value)) {
+        return false;
+    }
 
-  return (
-    typeof value.first === 'number' &&
-    isNullableNumber(value.prev) &&
-    isNullableNumber(value.next) &&
-    typeof value.last === 'number' &&
-    typeof value.pages === 'number' &&
-    typeof value.items === 'number' &&
-    isPostPreviewArray(value.data)
-  );
+    return (
+        typeof value.first === 'number' &&
+        isNullableNumber(value.prev) &&
+        isNullableNumber(value.next) &&
+        typeof value.last === 'number' &&
+        typeof value.pages === 'number' &&
+        typeof value.items === 'number' &&
+        isPostPreviewArray(value.data)
+    );
 };
