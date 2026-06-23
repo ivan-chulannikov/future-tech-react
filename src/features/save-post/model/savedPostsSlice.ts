@@ -1,35 +1,29 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { SavedPostsState } from "./types";
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { SavedPostsState } from './types';
 
 const initialState: SavedPostsState = {
-    savedPostIds: []
-}
+    savedPostIds: [],
+};
 const savedPostsSlice = createSlice({
-    name: "savedPosts",
+    name: 'savedPosts',
     initialState,
     reducers: {
         toggleSavedPost(state, action: PayloadAction<string>) {
-            const postId = action.payload 
-            if(state.savedPostIds.includes(postId)) {
+            const postId = action.payload;
+            if (state.savedPostIds.includes(postId)) {
                 state.savedPostIds = state.savedPostIds.filter((id) => id !== postId);
             } else {
-                state.savedPostIds.push(postId)
+                state.savedPostIds.push(postId);
             }
-            
         },
         removeSavedPost(state, action: PayloadAction<string>) {
-            const postId = action.payload
-            state.savedPostIds =  state.savedPostIds.filter((id) => id !== postId)
-
+            const postId = action.payload;
+            state.savedPostIds = state.savedPostIds.filter((id) => id !== postId);
         },
         clearSavedPosts(state) {
-            state.savedPostIds = []
+            state.savedPostIds = [];
         },
-    }
-})
-export const {
-    toggleSavedPost,
-    removeSavedPost,
-    clearSavedPosts, 
-} = savedPostsSlice.actions;
+    },
+});
+export const { toggleSavedPost, removeSavedPost, clearSavedPosts } = savedPostsSlice.actions;
 export const savedPostsReducer = savedPostsSlice.reducer;

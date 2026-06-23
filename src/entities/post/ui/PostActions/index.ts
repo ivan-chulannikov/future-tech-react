@@ -1,1 +1,1 @@
-export {default} from "./PostActions"
+export { default } from './PostActions';

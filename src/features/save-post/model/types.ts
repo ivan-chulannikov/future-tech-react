@@ -1,3 +1,3 @@
 export interface SavedPostsState {
-    savedPostIds: string[]
+    savedPostIds: string[];
 }
