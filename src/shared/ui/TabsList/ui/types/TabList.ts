@@ -1,7 +1,7 @@
-import { Category } from "@/entities/category";
+import { Category } from '@/entities/category';
 
 export type TabListProps = {
     activeTab: string;
-    onTabChangeHandler: (activeTabId: string) => void; 
-    tabs: Category[]
-}
+    onTabChangeHandler: (activeTabId: string) => void;
+    tabs: Category[];
+};

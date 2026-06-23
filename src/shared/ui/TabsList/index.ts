@@ -1,1 +1,1 @@
-export { TabsList } from "./ui";
+export { TabsList } from './ui';

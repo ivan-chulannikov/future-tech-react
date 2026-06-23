@@ -1,6 +1,4 @@
-import type { ReactNode, KeyboardEventHandler } from "react";
-
-
+import type { ReactNode, KeyboardEventHandler } from 'react';
 
 export type TabButtonProps = {
     className: string;
@@ -10,4 +8,4 @@ export type TabButtonProps = {
     tabId: string;
     panelId: string;
     onKeyDown: KeyboardEventHandler<HTMLButtonElement>;
-}
+};
