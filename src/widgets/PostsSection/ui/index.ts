@@ -1,2 +1,2 @@
-export { default } from "./PostsSection";
-export { default as PostsSection } from "./PostsSection";
+export { default } from './PostsSection';
+export { default as PostsSection } from './PostsSection';

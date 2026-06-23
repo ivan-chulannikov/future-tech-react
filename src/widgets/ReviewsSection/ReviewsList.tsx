@@ -1,10 +1,10 @@
-import ReviewItem from "./ReviewItem"
+import ReviewItem from './ReviewItem';
 
-const ReviewsList  = () => {
+const ReviewsList = () => {
     return (
         <ul className="bordered-grid bordered-grid--3-cols container">
             <ReviewItem />
-       </ul>
-    )
-}
-export default ReviewsList
+        </ul>
+    );
+};
+export default ReviewsList;

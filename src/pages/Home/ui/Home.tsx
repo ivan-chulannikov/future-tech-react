@@ -10,87 +10,94 @@ import { homePostsSection } from '../model/postSection';
 import { Pagination } from '@/shared/ui/Pagination';
 import { useGetPostsQuery } from '@/entities/post/api/postApi';
 import { useGetCategoriesQuery } from '@/entities/category/api/categoriesApi';
+import { SavePostButton } from '@/features/save-post';
 const Home = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const activeCategoryId = searchParams.get('category') ?? 'all'
-  const pageParam = Number(searchParams.get('page'))
-  const currentPage = Number.isInteger(pageParam) && pageParam > 0 ? pageParam: 1;
-  const {
-  data: postsResponse,
-  isLoading: isPostsLoadingQuery,
-  isFetching: isPostsFetching,
-  isError: isPostsErrorQuery,
-  refetch: refetchPosts
-} = useGetPostsQuery({
-  categoryId: activeCategoryId,
-  page: currentPage,
-  limit: POSTS_PER_PAGE,
-})
-  const posts = postsResponse?.data ?? []
-  const totalPages  = postsResponse?.pages ?? 1
-  const handleCategoryChange = (categoryId: string) => {
-  if (categoryId === 'all') {
-    setSearchParams({
-      page: '1',
+    const [searchParams, setSearchParams] = useSearchParams();
+    const activeCategoryId = searchParams.get('category') ?? 'all';
+    const pageParam = Number(searchParams.get('page'));
+    const currentPage = Number.isInteger(pageParam) && pageParam > 0 ? pageParam : 1;
+    const {
+        data: postsResponse,
+        isLoading: isPostsLoadingQuery,
+        isFetching: isPostsFetching,
+        isError: isPostsErrorQuery,
+        refetch: refetchPosts,
+    } = useGetPostsQuery({
+        categoryId: activeCategoryId,
+        page: currentPage,
+        limit: POSTS_PER_PAGE,
     });
-    return;
-  }
-  setSearchParams({
-    category: categoryId,
-    page: '1',
-  });
-};
+    const posts = postsResponse?.data ?? [];
+    const totalPages = postsResponse?.pages ?? 1;
+    const handleCategoryChange = (categoryId: string) => {
+        if (categoryId === 'all') {
+            setSearchParams({
+                page: '1',
+            });
+            return;
+        }
+        setSearchParams({
+            category: categoryId,
+            page: '1',
+        });
+    };
 
-const {
-  data: tabsResponse,
-  isLoading: isTabsLoadingQuery,
-  isError : isTabsError,
-  refetch: refetchTabs,
+    const {
+        data: tabsResponse,
+        isLoading: isTabsLoadingQuery,
+        isError: isTabsError,
+        refetch: refetchTabs,
+    } = useGetCategoriesQuery();
 
-} = useGetCategoriesQuery()
+    const tabs = tabsResponse ?? [];
 
-const tabs = tabsResponse ?? []
+    const onPageChange = (page: number) => {
+        setSearchParams((prevParams) => {
+            const nextParams = new URLSearchParams(prevParams);
 
+            nextParams.set('page', String(page));
 
+            return nextParams;
+        });
+    };
 
-  const onPageChange = (page: number) => {
-  setSearchParams((prevParams) => {
-    const nextParams = new URLSearchParams(prevParams);
+    return (
+        <>
+            <HeroSection />
+            <FeaturesSection />
 
-    nextParams.set('page', String(page));
+            <PostsSection
+                sectionHeader={homePostsSection.header}
+                posts={posts}
+                tabs={tabs}
+                activeCategoryId={activeCategoryId}
+                handleCategoryChange={handleCategoryChange}
+                isPostsLoading={isPostsLoadingQuery}
+                isPostsError={isPostsErrorQuery}
+                isPostsFetching={isPostsFetching}
+                isTabsLoading={isTabsLoadingQuery}
+                isTabsError={isTabsError}
+                onPostsRetry={refetchPosts}
+                onTabsRetry={refetchTabs}
+                paginationSlot={
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={onPageChange}
+                    />
+                }
+                renderPostActions={(post) => (
+                    <li className="blog-actions__item">
+                        <SavePostButton postId={post.id} />
+                    </li>
+                )}
+            />
 
-    return nextParams;
-  });
-};
- 
-  return (
-    <>
-        <HeroSection />
-        <FeaturesSection />
-            
-        <PostsSection
-          sectionHeader={homePostsSection.header}
-          posts={posts}
-          tabs={tabs}
-          activeCategoryId={activeCategoryId}
-          handleCategoryChange={handleCategoryChange}
-          isPostsLoading={isPostsLoadingQuery}
-          isPostsError={isPostsErrorQuery}
-          isPostsFetching = {isPostsFetching}
-          isTabsLoading={isTabsLoadingQuery}
-          isTabsError={isTabsError}
-          onPostsRetry={refetchPosts}
-          onTabsRetry={refetchTabs}
-          paginationSlot = {
-            <Pagination  currentPage  = {currentPage} totalPages = {totalPages} onPageChange = {onPageChange}   />
-          }
-        />
-        
-        <ResourcesSection />
-        <ReviewsSection />
-        <AboutSection />
-    </>
-  );
+            <ResourcesSection />
+            <ReviewsSection />
+            <AboutSection />
+        </>
+    );
 };
 
 export default Home;

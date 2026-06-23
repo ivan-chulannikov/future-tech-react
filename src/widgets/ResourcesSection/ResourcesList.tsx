@@ -1,10 +1,10 @@
-import ResourcesItem from "./ResourceItem"
+import ResourcesItem from './ResourceItem';
 
 const ResourcesList = () => {
     return (
         <ul className="list">
             <ResourcesItem />
         </ul>
-    )
-}
-export default ResourcesList
+    );
+};
+export default ResourcesList;
