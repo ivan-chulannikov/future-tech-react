@@ -1,0 +1,199 @@
+@use '../helpers' as *;
+
+.auth {
+    border-block: var(--border);
+    min-height: calc(100vh - rem(160));
+    display: flex;
+    align-items: center;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 209, 26, 0.08), transparent 30%),
+        radial-gradient(circle at 85% 70%, rgba(255, 209, 26, 0.05), transparent 32%),
+        var(--color-dark);
+
+    &__inner {
+        width: 100%;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) rem(560);
+        gap: rem(40);
+        padding-block: clamp(3.75rem, 2.794rem + 3.922vw, 7.5rem);
+
+        @include laptop {
+            grid-template-columns: minmax(0, 1fr) rem(480);
+            gap: rem(30);
+        }
+
+        @include tablet {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__preview {
+        position: relative;
+        overflow: hidden;
+        min-height: rem(560);
+        padding: clamp(1.875rem, 1.397rem + 1.961vw, 3.75rem);
+        border: var(--border);
+        border-radius: rem(16);
+        background:
+            linear-gradient(135deg, rgba(255, 209, 26, 0.12), transparent 36%),
+            linear-gradient(180deg, var(--color-dark-10), var(--color-dark));
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        @include laptop {
+            min-height: rem(480);
+            border-radius: rem(12);
+        }
+
+        @include tablet {
+            min-height: auto;
+            row-gap: rem(60);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: rem(-120);
+            bottom: rem(-120);
+            width: rem(320);
+            height: rem(320);
+            border-radius: 50%;
+            background-color: rgba(255, 209, 26, 0.08);
+            pointer-events: none;
+        }
+    }
+
+    &__badge {
+        width: fit-content;
+        color: var(--color-accent);
+        background-color: var(--color-dark);
+        border: var(--border);
+        border-radius: rem(100);
+        padding: rem(8) rem(14);
+        font-size: rem(14);
+        font-weight: 500;
+    }
+
+    &__preview-body {
+        position: relative;
+        z-index: 1;
+        max-width: rem(720);
+        display: grid;
+        row-gap: rem(20);
+
+        @include laptop {
+            row-gap: rem(14);
+        }
+    }
+
+    &__title {
+        max-width: rem(760);
+    }
+
+    &__description {
+        max-width: rem(680);
+        color: var(--color-grey-60);
+        font-size: clamp(1rem, 0.936rem + 0.261vw, 1.25rem);
+    }
+
+    &__features {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: rem(12);
+
+        @include mobile {
+            gap: rem(10);
+        }
+    }
+
+    &__feature {
+        color: var(--color-light);
+        background-color: rgba(26, 26, 26, 0.8);
+        border: var(--border);
+        border-radius: rem(10);
+        padding: rem(16) rem(18);
+
+        &::before {
+            content: '✦';
+            color: var(--color-accent);
+            margin-right: rem(10);
+        }
+    }
+
+    &__card {
+        align-self: center;
+        padding: clamp(1.5rem, 1.022rem + 1.961vw, 3.375rem);
+        border: var(--border);
+        border-radius: rem(16);
+        background-color: var(--color-dark-10);
+        box-shadow: var(--shadow);
+        display: grid;
+        row-gap: rem(32);
+
+        @include laptop {
+            row-gap: rem(24);
+            border-radius: rem(12);
+        }
+    }
+
+    &__card-header {
+        display: grid;
+        row-gap: rem(10);
+    }
+
+    &__eyebrow {
+        width: fit-content;
+        color: var(--color-dark);
+        background-color: var(--color-accent);
+        border-radius: rem(6);
+        padding: rem(4) rem(10);
+        font-size: rem(14);
+        font-weight: 600;
+    }
+
+    &__card-title {
+        font-size: clamp(1.75rem, 1.367rem + 1.569vw, 3.25rem);
+    }
+
+    &__card-description {
+        color: var(--color-grey-60);
+    }
+
+    &__form {
+        display: grid;
+        row-gap: rem(20);
+
+        @include laptop {
+            row-gap: rem(16);
+        }
+    }
+
+    &__form-extra {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: rem(16);
+
+        @include mobile {
+            align-items: start;
+            flex-direction: column;
+        }
+    }
+
+    &__link {
+        color: var(--color-accent);
+        font-weight: 500;
+    }
+
+    &__submit {
+        width: 100%;
+        margin-top: rem(8);
+    }
+
+    &__footer {
+        text-align: center;
+        color: var(--color-grey-60);
+    }
+}
