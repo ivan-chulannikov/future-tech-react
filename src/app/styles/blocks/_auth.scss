@@ -136,6 +136,9 @@
             row-gap: rem(24);
             border-radius: rem(12);
         }
+        @include tablet {
+            order: -1;
+        }
     }
 
     &__card-header {
@@ -188,8 +191,12 @@
     }
 
     &__submit {
-        width: 100%;
+        width: 50%;
         margin-top: rem(8);
+        justify-self: center;
+        @include mobile-s {
+            width: 100%;
+        }
     }
 
     &__footer {
