@@ -1,9 +1,9 @@
 ---
 name: Dev Task
 about: Задача по  React/Redux FUTURE-TECH проекту
-title: "[area] "
-labels: "type: learning"
-assignees: ""
+title: '[area] '
+labels: 'type: learning'
+assignees: ''
 ---
 
 ## Цель
@@ -16,9 +16,9 @@ assignees: ""
 
 ## План
 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ]
+- [ ]
+- [ ]
 
 ## Трудность
 
@@ -34,7 +34,7 @@ assignees: ""
 
 ## Файлы
 
-- 
+-
 
 ## Проверки
 
