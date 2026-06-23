@@ -24,3 +24,5 @@ scripts/git-review.txt
 *.njsproj
 *.sln
 *.sw?
+# Backend lives in a separate repository
+/backend/
