@@ -1,17 +1,17 @@
-import { Outlet } from "react-router-dom"
+import { Outlet } from 'react-router-dom';
 import { Header, Footer } from '@/widgets/layout';
 const RootLayout = () => {
-     return (
-    <>
-      <Header />
+    return (
+        <>
+            <Header />
 
-      <main className="main">
-        <Outlet />
-      </main>
+            <main className="main">
+                <Outlet />
+            </main>
 
-      <Footer />
-    </>
-  );
+            <Footer />
+        </>
+    );
 };
 
-export default RootLayout
+export default RootLayout;

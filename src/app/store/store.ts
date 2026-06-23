@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { baseApi } from '@/shared/api/baseApi';
+import { baseApi, authApi } from '@/shared/api/baseApi';
 import {
-  persistReducer,
-  persistStore,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
+    persistReducer,
+    persistStore,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
 } from 'redux-persist';
 
 import storage from 'redux-persist/es/storage';
@@ -16,27 +16,27 @@ import storage from 'redux-persist/es/storage';
 import { savedPostsReducer } from '@/features/save-post';
 
 const savedPostsPersistConfig = {
-  key: 'savedPosts',
-  storage,
+    key: 'savedPosts',
+    storage,
 };
 
-const persistedSavedPostsReducer = persistReducer(
-  savedPostsPersistConfig,
-  savedPostsReducer
-);
+const persistedSavedPostsReducer = persistReducer(savedPostsPersistConfig, savedPostsReducer);
 
 export const store = configureStore({
-  reducer: {
-    savedPosts: persistedSavedPostsReducer,
-    [baseApi.reducerPath]: baseApi.reducer,
-  },
+    reducer: {
+        savedPosts: persistedSavedPostsReducer,
+        [baseApi.reducerPath]: baseApi.reducer,
+        [authApi.reducerPath]: authApi.reducer,
+    },
 
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }).concat(baseApi.middleware)
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        })
+            .concat(baseApi.middleware)
+            .concat(authApi.middleware),
 });
 
 export const persistor = persistStore(store);
