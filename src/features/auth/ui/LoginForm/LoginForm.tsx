@@ -8,6 +8,7 @@ import { useLoginMutation } from '../../api/authApi';
 import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '../../model/authSlice';
 import { useAppDispatch } from '@/app/store/hooks';
+import { AppRoutes } from '@/shared/config/routes';
 const LoginForm = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -39,10 +40,10 @@ const LoginForm = () => {
                 email: values.email,
                 password: values.password,
             }).unwrap();
-            console.log(response);
-            navigate('/');
             const { user, accessToken } = response;
             dispatch(setCredentials({ user, accessToken }));
+            navigate(AppRoutes.home);
+  
         } catch (error) {
             console.log('login error:', error);
         }
