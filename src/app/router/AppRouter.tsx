@@ -20,6 +20,7 @@ export const AppRouter = () => {
                     <Route path={AppRoutes.savedPosts} element={<SavedPosts />} />
                     <Route path={AppRoutes.login} element={<Login />} />
                     <Route path={AppRoutes.register} element={<RegisterForm />} />
+                    <Route path={AppRoutes.profile} element={<></>} />
                 </Route>
             </Routes>
         </BrowserRouter>
