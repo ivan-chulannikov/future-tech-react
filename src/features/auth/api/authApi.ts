@@ -11,6 +11,7 @@ type RegisterRequest = {
     email: string;
     username: string;
     password: string;
+    description?: string;
 };
 
 type RegisterResponse = AuthResponse;

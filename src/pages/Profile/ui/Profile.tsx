@@ -1,12 +1,20 @@
 import { useAppSelector } from '@/app/store/hooks';
 import { selectUser } from '@/features/auth';
 import Button from '@/shared/ui/Button';
-
+import { Navigate } from 'react-router-dom';
+import { AppRoutes } from '@/shared/config/routes';
+import { formatMemberSince } from '../helpers/formatMemberSince';
 const Profile = () => {
     const user = useAppSelector(selectUser);
     console.log(user)
-    return (
+if (!user) {
+    return <Navigate to={AppRoutes.login} replace />;
+}
 
+const { email, username, createdAt, description} = user;
+console.log(description)
+    
+    return (
         <main className="profile">
             <section className="profile__hero section">
                 <div className="profile__inner container">
@@ -18,21 +26,21 @@ const Profile = () => {
 
                             <div className="profile__info">
                                 <div className="profile__name-row">
-                                    <h1 className="profile__name">Ivan Petrov</h1>
+                                    <h1 className="profile__name">{username}</h1>
                                     <span className="profile__badge">PRO</span>
                                 </div>
 
-                                <p className="profile__username">@ivanpetrov</p>
+                                <p className="profile__username">{email}</p>
 
-                                <p className="profile__description">
-                                    Tech enthusiast, AI explorer and builder. Exploring the future
-                                    of technology and its impact on business, society and daily
-                                    life.
+                                {description && (
+                                    <p className="profile__description">
+                                    {description}
                                 </p>
+                                )}
 
                                 <div className="profile__meta">
-                                    <span>Member since Mar 2024</span>
-                                    <span>Moscow, Russia</span>
+                                    <span>Member since {formatMemberSince(createdAt)}</span>
+                                    
                                 </div>
                             </div>
 

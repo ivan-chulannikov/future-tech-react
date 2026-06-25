@@ -6,6 +6,7 @@ import { AppRoutes } from '@/shared/config/routes';
 import { RegisterFormErrors, RegisterFormTouched, RegisterFormValues } from '../../model/types';
 import { useRegisterMutation } from '../../api/authApi';
 import { validateRegisterField, validateRegisterForm } from '../helpers/validateRegisterForm';
+import { getErrorMessage } from '@/shared/helpers/getErrorMessage';
 
 const RegisterForm = () => {
     const navigate = useNavigate();
@@ -15,20 +16,18 @@ const RegisterForm = () => {
         password: '',
         confirmPassword: '',
         agreement: false,
+        description: '',
     });
 
-    const [register, { isLoading }] = useRegisterMutation();
-
+    const [register, { isLoading, isError, error }] = useRegisterMutation();
+    const errorMessage  = isError ? getErrorMessage(error) : '' 
     const [errors, setErrors] = useState<RegisterFormErrors>({});
     const [touched, setTouched] = useState<RegisterFormTouched>({});
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
+        event.preventDefault(); 
         const validationErrors = validateRegisterForm(values);
-
         setErrors(validationErrors);
-
         setTouched({
             name: true,
             email: true,
@@ -36,18 +35,18 @@ const RegisterForm = () => {
             confirmPassword: true,
             agreement: true,
         });
-
         if (Object.keys(validationErrors).length > 0) {
             return;
         }
-
         try {
-            await register({
+            const response = await register({
                 email: values.email,
                 username: values.name,
                 password: values.password,
+                description: values.description
+                
             }).unwrap();
-
+            console.log(response)
             navigate(AppRoutes.login);
         } catch (error) {
             console.log('register error:', error);
@@ -139,6 +138,17 @@ const RegisterForm = () => {
                 error={touched.email ? errors.email : undefined}
             />
             <FormInput
+                id="description"
+                label="Description"
+                name="description"
+                type="text"
+                placeholder="Enter your description"
+                value={values?.description}
+                onChange={onChange}
+                onBlur={onBlur}
+                error={touched.description ? errors.description : undefined}
+            />
+            <FormInput
                 id="password"
                 label="Password"
                 name="password"
@@ -181,6 +191,7 @@ const RegisterForm = () => {
             <Button type="submit" className="button--accent auth__submit">
                 {isLoading ? 'Loading...' : 'Sign up'}
             </Button>
+             {errorMessage && <p className='feedback-form__error feedback-form__error--submit'>{errorMessage}</p>}
         </form>
     );
 };

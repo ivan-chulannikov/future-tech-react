@@ -31,5 +31,8 @@
     }
     &__error {
         color: red;
+        &--submit {
+            font-size: 1.125rem;
+        }
     }
 }
