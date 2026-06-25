@@ -1,7 +1,7 @@
 export type LoginFormValues = {
     email: string;
     password: string;
-    rememberMe: boolean;
+    rememberMe?: boolean;
 };
 export type LoginFormErrors = Partial<Record<keyof LoginFormValues, string>>;
 export type RegisterFormValues = {
@@ -10,6 +10,7 @@ export type RegisterFormValues = {
     password: string;
     confirmPassword: string;
     agreement: boolean;
+    description: string;
 };
 export type LoginFormTouched = {
     email?: boolean;
@@ -22,6 +23,7 @@ export type RegisterFormTouched = {
     password?: boolean;
     confirmPassword?: boolean;
     agreement?: boolean;
+    description?: boolean;
 };
 
 export type RegisterFormErrors = Partial<Record<keyof RegisterFormValues, string>>;
@@ -30,6 +32,7 @@ export interface AuthUser {
     email: string;
     username: string;
     createdAt: string;
+    description?: string;
 }
 export type AuthState = {
     user: AuthUser | null;

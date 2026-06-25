@@ -69,4 +69,7 @@
 @use './blocks/post-section';
 @use './blocks/pagination';
 @use './blocks/auth';
-@use 'blocks/profile';
+@use './blocks/profile';
+@use './blocks/profile-auth-button';
+@use './blocks/profile-menu-button';
+@use './blocks/profile-dropdown'

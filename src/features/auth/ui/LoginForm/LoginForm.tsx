@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '../../model/authSlice';
 import { useAppDispatch } from '@/app/store/hooks';
 import { AppRoutes } from '@/shared/config/routes';
+import { getErrorMessage } from '@/shared/helpers/getErrorMessage';
 const LoginForm = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -16,10 +17,16 @@ const LoginForm = () => {
         email: '',
         password: '',
         rememberMe: false,
+
     });
-    const [login, { isLoading, error }] = useLoginMutation();
+    const [login, { isLoading, error, isError }] = useLoginMutation();
     const [errors, setErrors] = useState<LoginFormErrors>({});
     const [touched, setTouched] = useState<LoginFormTouched>({});
+    
+
+
+    const errorMessage = isError ? getErrorMessage(error) : ''
+
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -40,7 +47,10 @@ const LoginForm = () => {
                 email: values.email,
                 password: values.password,
             }).unwrap();
+            
+            
             const { user, accessToken } = response;
+
             dispatch(setCredentials({ user, accessToken }));
             navigate(AppRoutes.home);
   
@@ -130,8 +140,9 @@ const LoginForm = () => {
                 </a>
             </div>
             <Button type="submit" className="button--accent auth__submit">
-                Sign In
+                {isLoading ? 'Loading...' : 'Sign in'}
             </Button>
+            {errorMessage && <p className='feedback-form__error feedback-form__error--submit'>{errorMessage}</p>}
         </form>
     );
 };
