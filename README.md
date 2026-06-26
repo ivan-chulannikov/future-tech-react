@@ -1,16 +1,127 @@
-# React + Vite
+# FutureTech
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend-приложение на React и TypeScript для просмотра технологических статей, работы с категориями, детальными страницами постов, авторизацией пользователя и сохранёнными материалами.
 
-Currently, two official plugins are available:
+Проект развивался как pet project с упором на production-подход: типизация, архитектура, работа с API, авторизация, runtime-проверка данных, состояние приложения и адаптивный интерфейс.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Стек
 
-## React Compiler
+* React
+* TypeScript
+* Redux Toolkit
+* RTK Query
+* React Router
+* SCSS / Sass
+* Vite
+* REST API
+* JWT auth
+* ESLint
+* Prettier
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Что реализовано
 
-## Expanding the ESLint configuration
+* Главная страница с категориями и списком постов
+* Получение постов и категорий через REST API
+* Пагинация списка постов
+* Фильтрация постов по категориям
+* Детальная страница поста
+* Авторизация и регистрация пользователя
+* Access token + refresh token flow
+* Protected routes
+* Профиль пользователя
+* Dropdown пользователя в Header
+* Сохранённые посты
+* Runtime guards для проверки ответов API
+* Обработка loading / error / empty states
+* Адаптивная верстка
+* Настройка ESLint и Prettier
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Архитектура
+
+Проект организован по FSD-like подходу:
+
+```txt
+src/
+  app/
+  pages/
+  widgets/
+  features/
+  entities/
+  shared/
+```
+
+Основная идея структуры:
+
+* `app` — настройка приложения, router, providers, store
+* `pages` — страницы приложения
+* `widgets` — крупные UI-блоки
+* `features` — пользовательские сценарии
+* `entities` — бизнес-сущности
+* `shared` — переиспользуемые компоненты, helpers, config, api
+
+## Работа с API
+
+Для запросов используется RTK Query.
+
+Реализованы endpoints для:
+
+* получения категорий
+* получения списка постов с пагинацией
+* получения детального поста
+* регистрации
+* авторизации
+* обновления access token
+* выхода из аккаунта
+* работы с сохранёнными постами
+
+Ответы API дополнительно проверяются через runtime guards, чтобы frontend не доверял неизвестным данным из backend напрямую.
+
+## Авторизация
+
+Реализован auth flow:
+
+* регистрация пользователя
+* логин
+* сохранение access token в Redux
+* refresh token через httpOnly cookie
+* защищённые маршруты
+* logout
+* получение текущего пользователя
+
+## Запуск проекта
+
+Установить зависимости:
+
+```bash
+npm install
+```
+
+Запустить frontend:
+
+```bash
+npm run dev
+```
+
+Проверить код:
+
+```bash
+npm run lint
+```
+
+Собрать проект:
+
+```bash
+npm run build
+```
+
+## Статус проекта
+
+Проект находится в активной разработке.
+
+В планах:
+
+* улучшить страницу сохранённых постов
+* добавить optimistic updates
+* доработать профиль пользователя
+* улучшить README со скриншотами
+* добавить тесты для ключевой логики
