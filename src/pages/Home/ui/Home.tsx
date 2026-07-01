@@ -51,7 +51,7 @@ const Home = () => {
 
     const tabs = tabsResponse ?? [];
 
-    const onPageChange = (page: number) => {
+    const handlePageChange = (page: number) => {
         setSearchParams((prevParams) => {
             const nextParams = new URLSearchParams(prevParams);
 
@@ -83,7 +83,7 @@ const Home = () => {
                     <Pagination
                         currentPage={currentPage}
                         totalPages={totalPages}
-                        onPageChange={onPageChange}
+                        onPageChange={handlePageChange}
                     />
                 }
                 renderPostActions={(post) => (

@@ -50,16 +50,29 @@ $mobile-s: 480.98;
     }
 }
 
-@mixin hover($hasActiveEffectOnMobile: true) {
+@mixin hover($hasActiveEffectOnMobile: true, $ignoreFocus: false) {
     @media (any-hover: hover) {
-        &:hover {
-            @content;
+        @if ($ignoreFocus) {
+            &:hover:not(:focus-within) {
+                @content;
+            }
+        } @else {
+            &:hover {
+                @content;
+            }
         }
     }
+
     @if ($hasActiveEffectOnMobile) {
         @media (any-hover: none) {
-            &:active {
-                @content;
+            @if ($ignoreFocus) {
+                &:active:not(:focus-within) {
+                    @content;
+                }
+            } @else {
+                &:active {
+                    @content;
+                }
             }
         }
     }

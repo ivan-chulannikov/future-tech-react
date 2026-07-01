@@ -20,11 +20,11 @@ export const profileDropdownIcons = {
     ),
 
     contact: (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 6h16v12H4V6Z" />
-        <path d="M4 7l8 6 8-6" />
-    </svg>
-),
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 6h16v12H4V6Z" />
+            <path d="M4 7l8 6 8-6" />
+        </svg>
+    ),
 
     logout: (
         <svg viewBox="0 0 24 24" aria-hidden="true">

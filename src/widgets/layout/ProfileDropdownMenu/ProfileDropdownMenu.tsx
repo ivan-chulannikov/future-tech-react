@@ -12,11 +12,12 @@ const ProfileDropdownMenu = ({ handleLogOut, className }: ProfileDropdownMenuPro
         <div className={menuClassName}>
             <ul className="profile-dropdown__list">
                 <li className="profile-dropdown__item">
-                    <NavLink to={AppRoutes.profile} className={({isActive}) => 
-                        isActive 
-                            ? 'profile-dropdown__link is-active'
-                            : 'profile-dropdown__link'
-                    }>
+                    <NavLink
+                        to={AppRoutes.profile}
+                        className={({ isActive }) =>
+                            isActive ? 'profile-dropdown__link is-active' : 'profile-dropdown__link'
+                        }
+                    >
                         <span className="profile-dropdown__icon" aria-hidden="true">
                             {profileDropdownIcons.profile}
                         </span>
@@ -25,11 +26,12 @@ const ProfileDropdownMenu = ({ handleLogOut, className }: ProfileDropdownMenuPro
                 </li>
 
                 <li className="profile-dropdown__item">
-                    <NavLink to={AppRoutes.savedPosts} className={({isActive}) => 
-                        isActive
-                            ? 'profile-dropdown__link is-active'
-                            : 'profile-dropdown__link'
-                    }>
+                    <NavLink
+                        to={AppRoutes.savedPosts}
+                        className={({ isActive }) =>
+                            isActive ? 'profile-dropdown__link is-active' : 'profile-dropdown__link'
+                        }
+                    >
                         <span className="profile-dropdown__icon" aria-hidden="true">
                             {profileDropdownIcons.saved}
                         </span>

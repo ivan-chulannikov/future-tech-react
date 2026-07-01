@@ -102,33 +102,28 @@
         cursor: pointer;
         transition-duration: var(--transition-duration);
         transition-property: color, background-color;
-         padding-block: rem(14);
+        padding-block: rem(14);
         padding-inline: rem(26);
-            &.is-active {
-                background-color: var(--color-dark);
-                border: var(--border);
-                border-radius: 0.625rem;
-                font-weight: 500;
-                pointer-events: none;
-                color: var(--color-light);
-
-            }
+        &.is-active {
+            background-color: var(--color-dark);
+            border: var(--border);
+            border-radius: 0.625rem;
+            font-weight: 500;
+            pointer-events: none;
+            color: var(--color-light);
+        }
         @include laptop {
-                padding-block: rem(10);
-                padding-inline: rem(18);
-            }
+            padding-block: rem(10);
+            padding-inline: rem(18);
+        }
 
         @include mobile {
             justify-content: center;
             min-height: auto;
             border-radius: 0;
             color: var(--color-grey-50);
-
-           
         }
     }
-
-   
 
     &__icon {
         display: inline-flex;

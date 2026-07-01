@@ -6,14 +6,14 @@ This is a React + TypeScript + Redux Toolkit + RTK Query + Vite project using an
 
 Main stack:
 
-* React
-* TypeScript
-* Redux Toolkit
-* React Redux
-* RTK Query
-* Vite
-* SCSS
-* FSD-like architecture
+- React
+- TypeScript
+- Redux Toolkit
+- React Redux
+- RTK Query
+- Vite
+- SCSS
+- FSD-like architecture
 
 ## Core Rules
 
@@ -154,15 +154,15 @@ feature/7-add-profile-header
 
 ### Rules
 
-* Do not implement code.
-* Do not edit React files.
-* Do not edit Redux files.
-* Do not edit styles.
-* Do not commit.
-* Do not push.
-* Do not create PR.
-* Stop after creating the branch.
-* Tell the user what issue was created and what branch is ready.
+- Do not implement code.
+- Do not edit React files.
+- Do not edit Redux files.
+- Do not edit styles.
+- Do not commit.
+- Do not push.
+- Do not create PR.
+- Stop after creating the branch.
+- Tell the user what issue was created and what branch is ready.
 
 ### Final report format
 
@@ -324,15 +324,15 @@ src/
 
 General rules:
 
-* `app` contains store, providers, app-level routing and global setup.
-* `pages` assemble page-level UI.
-* `widgets` are large reusable page sections.
-* `features` are user actions.
-* `entities` contain business entities.
-* `shared` contains reusable UI, API, config, and helpers.
-* Do not put business logic into `shared`.
-* Do not put page-specific logic into `shared`.
-* Do not create unnecessary abstractions before they are needed.
+- `app` contains store, providers, app-level routing and global setup.
+- `pages` assemble page-level UI.
+- `widgets` are large reusable page sections.
+- `features` are user actions.
+- `entities` contain business entities.
+- `shared` contains reusable UI, API, config, and helpers.
+- Do not put business logic into `shared`.
+- Do not put page-specific logic into `shared`.
+- Do not create unnecessary abstractions before they are needed.
 
 ## Auth Rules
 
@@ -340,27 +340,27 @@ Auth state lives in Redux.
 
 `authSlice` stores:
 
-* `user`
-* `accessToken`
+- `user`
+- `accessToken`
 
 `authSlice` must not store:
 
-* password
-* passwordHash
-* refreshToken
+- password
+- passwordHash
+- refreshToken
 
 Refresh token is stored only in httpOnly cookie and must not be accessed from frontend JavaScript.
 
 Use selectors for reading auth state:
 
-* `selectUser`
-* `selectAccessToken`
-* `selectIsAuthenticated`
+- `selectUser`
+- `selectAccessToken`
+- `selectIsAuthenticated`
 
 Use typed Redux hooks:
 
-* `useAppDispatch`
-* `useAppSelector`
+- `useAppDispatch`
+- `useAppSelector`
 
 Do not use raw `useDispatch` or raw `useSelector` in new code.
 
@@ -388,12 +388,12 @@ when protected endpoints are introduced.
 
 The profile page should follow the approved FutureTech design direction:
 
-* dark theme
-* yellow accent color
-* card-based layout
-* clean borders
-* English UI text
-* desktop-first layout with responsive mobile behavior
+- dark theme
+- yellow accent color
+- card-based layout
+- clean borders
+- English UI text
+- desktop-first layout with responsive mobile behavior
 
 The profile page should not become one huge component.
 

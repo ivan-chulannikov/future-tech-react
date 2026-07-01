@@ -100,10 +100,6 @@ export const isPostDetailsArray = (value: unknown): value is PostDetails[] => {
     return Array.isArray(value) && value.every(isPostDetails);
 };
 
-const isNullableNumber = (value: unknown): value is number | null => {
-    return typeof value === 'number' || value === null;
-};
-
 export const isPaginatedPostPreviewResponse = (
     value: unknown,
 ): value is PaginatedResponse<PostPreview> => {
@@ -112,12 +108,11 @@ export const isPaginatedPostPreviewResponse = (
     }
 
     return (
-        typeof value.first === 'number' &&
-        isNullableNumber(value.prev) &&
-        isNullableNumber(value.next) &&
-        typeof value.last === 'number' &&
-        typeof value.pages === 'number' &&
-        typeof value.items === 'number' &&
-        isPostPreviewArray(value.data)
+        Array.isArray(value.data) &&
+        isPostPreviewArray(value.data) &&
+        typeof value.page === 'number' &&
+        typeof value.limit === 'number' &&
+        typeof value.total === 'number' &&
+        typeof value.pages === 'number'
     );
 };

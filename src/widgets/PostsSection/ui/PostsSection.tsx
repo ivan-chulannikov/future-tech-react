@@ -29,10 +29,8 @@ const PostsSection = ({
     return (
         <section className="section">
             <SectionHeader {...sectionHeader} />
-
             <div className="section__body tabs">
                 {isTabsLoading && <StateView {...postsSectionStateViewContent.tabsLoading} />}
-
                 {!isTabsLoading && isTabsError && (
                     <StateView
                         size="section"
@@ -44,7 +42,6 @@ const PostsSection = ({
                         }
                     />
                 )}
-
                 {!isTabsLoading && !isTabsError && (
                     <TabsList
                         tabs={tabs}
@@ -52,7 +49,6 @@ const PostsSection = ({
                         onTabChangeHandler={handleCategoryChange}
                     />
                 )}
-
                 <div className="tabs__body">
                     <TabPanel
                         isActive={true}
@@ -62,7 +58,6 @@ const PostsSection = ({
                         {isInitialLoading && (
                             <StateView {...postsSectionStateViewContent.postsLoading} />
                         )}
-
                         {!isPostsLoading && isPostsError && (
                             <StateView
                                 {...postsSectionStateViewContent.postsError}
@@ -73,7 +68,6 @@ const PostsSection = ({
                                 }
                             />
                         )}
-
                         {!isInitialLoading && !isPostsError && posts.length > 0 && (
                             <>
                                 <div

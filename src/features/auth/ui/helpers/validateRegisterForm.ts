@@ -30,9 +30,7 @@ export const validateRegisterField = (
             return 'The password must be at least 6 characters long';
         }
     }
-     if (name === 'description') {
-       
-
+    if (name === 'description') {
         if (typeof value === 'string' && value.length < 5) {
             return 'The description must be at least 6 characters long';
         }
