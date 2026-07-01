@@ -1,4 +1,3 @@
-const POSTS_PER_PAGE = 3;
 import { HeroSection } from '@/widgets/HeroSection';
 import { FeaturesSection } from '@/widgets/FeaturesSection';
 import { PostsSection } from '@/widgets/PostsSection';
@@ -11,11 +10,15 @@ import { Pagination } from '@/shared/ui/Pagination';
 import { useGetPostsQuery } from '@/entities/post/api/postApi';
 import { useGetCategoriesQuery } from '@/entities/category/api/categoriesApi';
 import { SavePostButton } from '@/features/save-post';
+import { getValidPage } from '../helpers/getValidPage';
+import { clampPage } from '../helpers/clampPage'
+import {useEffect} from 'react'
+const POSTS_PER_PAGE = 3;
 const Home = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const activeCategoryId = searchParams.get('category') ?? 'all';
-    const pageParam = Number(searchParams.get('page'));
-    const currentPage = Number.isInteger(pageParam) && pageParam > 0 ? pageParam : 1;
+    const pageParam = searchParams.get('page');
+    const currentPage = getValidPage(pageParam); 
     const {
         data: postsResponse,
         isLoading: isPostsLoadingQuery,
@@ -27,8 +30,10 @@ const Home = () => {
         page: currentPage,
         limit: POSTS_PER_PAGE,
     });
+  
+    const totalPagesFromResponse = postsResponse?.pages;
+    const totalPages = totalPagesFromResponse ?? 1;
     const posts = postsResponse?.data ?? [];
-    const totalPages = postsResponse?.pages ?? 1;
     const handleCategoryChange = (categoryId: string) => {
         if (categoryId === 'all') {
             setSearchParams({
@@ -60,7 +65,23 @@ const Home = () => {
             return nextParams;
         });
     };
+    useEffect(() => {
+        if (totalPagesFromResponse === undefined) {
+            return;
+        }
 
+        const validPage = clampPage(currentPage, totalPagesFromResponse);
+
+        if (validPage !== currentPage) {
+            setSearchParams((prevParams) => {
+                const nextParams = new URLSearchParams(prevParams);
+
+                nextParams.set('page', String(validPage));
+
+                return nextParams;
+            });
+        }
+    }, [currentPage, totalPagesFromResponse, setSearchParams]);
     return (
         <>
             <HeroSection />
