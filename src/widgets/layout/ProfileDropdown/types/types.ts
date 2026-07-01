@@ -1,3 +1,3 @@
-export type ProfileDropdownProps  = {
+export type ProfileDropdownProps = {
     className?: string;
-}
+};

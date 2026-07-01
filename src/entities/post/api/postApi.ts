@@ -16,8 +16,9 @@ export const postApiRtk = baseApi.injectEndpoints({
                 if (categoryId !== 'all') {
                     params.set('categoryId', categoryId);
                 }
-                params.set('_page', String(page));
-                params.set('_per_page', String(limit));
+
+                params.set('page', String(page));
+                params.set('limit', String(limit));
                 return `posts?${params.toString()}`;
             },
             transformResponse: (response: unknown) => {
@@ -37,11 +38,12 @@ export const postApiRtk = baseApi.injectEndpoints({
             },
         }),
         getPostById: build.query<PostDetails, string>({
-            query: (postId) => `postDetails/${encodeURIComponent(postId)}`,
+            query: (id) => `posts/${id}`,
             transformResponse: (response: unknown) => {
                 if (!isPostDetails(response)) {
                     throw new Error('Invalid post details response');
                 }
+
                 return response;
             },
         }),
