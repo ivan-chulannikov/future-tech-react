@@ -63,23 +63,37 @@
         @include mobile {
             overflow-y: auto;
         }
+
         &-list {
             display: flex;
             column-gap: rem(16);
             align-items: center;
+
             @include laptop {
                 column-gap: rem(6);
             }
+
             @include mobile {
                 flex-direction: column;
                 row-gap: 1rem;
                 justify-content: center;
             }
         }
+
         &-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
             padding-block: rem(14);
             padding-inline: rem(26);
+
             color: var(--color-grey-50);
+            border: var(--border);
+            border-color: transparent;
+            border-radius: rem(10);
+            font-weight: 500;
+
             @include laptop {
                 padding-block: rem(10);
                 padding-inline: rem(18);
@@ -87,10 +101,8 @@
 
             &.is-active {
                 background-color: var(--color-dark);
-                border: var(--border);
-                border-radius: rem(10);
+                border-color: var(--color-dark-15);
                 color: var(--color-light);
-                font-weight: 500;
                 pointer-events: none;
             }
         }
