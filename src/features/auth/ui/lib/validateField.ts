@@ -1,4 +1,5 @@
-export const validateField = (name: string, value: string | boolean): string => {
+type LoginValidatedFieldName = 'email' | 'password';
+export const validateField = (name: LoginValidatedFieldName, value: string): string => {
     if (name === 'email') {
         if (!value) return 'Enter email';
 

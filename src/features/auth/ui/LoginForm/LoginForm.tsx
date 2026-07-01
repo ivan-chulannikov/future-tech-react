@@ -2,8 +2,8 @@ import { FormInput } from '@/shared/ui/FormInput';
 import Button from '@/shared/ui/Button';
 import { LoginFormErrors, LoginFormTouched, LoginFormValues } from '../../model/types';
 import { useState } from 'react';
-import { validateField } from '../helpers/validateField';
-import { validateForm } from '../helpers/validateForm';
+import { validateField } from '../lib/validateField';
+import { validateForm } from '../lib/validateForm';
 import { useLoginMutation } from '../../api/authApi';
 import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '../../model/authSlice';
@@ -53,42 +53,48 @@ const LoginForm = () => {
             console.log('login error:', error);
         }
     };
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, type, value, checked } = event.target;
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, type, value, checked } = event.target;
 
-        const fieldValue = type === 'checkbox' ? checked : value;
+    const fieldValue = type === 'checkbox' ? checked : value;
 
-        setValues((prev) => ({
-            ...prev,
-            [name]: fieldValue,
-        }));
+    setValues((prev) => ({
+        ...prev,
+        [name]: fieldValue,
+    }));
 
-        if (touched[name as keyof LoginFormTouched]) {
-            const error = validateField(name, fieldValue);
+    if (name !== 'email' && name !== 'password') {
+        return;
+    }
 
-            setErrors((prev) => ({
-                ...prev,
-                [name]: error,
-            }));
-        }
-    };
-    const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-        const { name, type, value, checked } = event.target;
-
-        const fieldValue = type === 'checkbox' ? checked : value;
-
-        setTouched((prev) => ({
-            ...prev,
-            [name]: true,
-        }));
-
-        const error = validateField(name, fieldValue);
+    if (touched[name]) {
+        const error = validateField(name, value);
 
         setErrors((prev) => ({
             ...prev,
             [name]: error,
         }));
-    };
+    }
+};
+  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    setTouched((prev) => ({
+        ...prev,
+        [name]: true,
+    }));
+
+    if (name !== 'email' && name !== 'password') {
+        return;
+    }
+
+    const error = validateField(name, value);
+
+    setErrors((prev) => ({
+        ...prev,
+        [name]: error,
+    }));
+};
 
     return (
         <form className="auth__form" onSubmit={onSubmit}>

@@ -1,4 +1,5 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+
 export const getErrorMessage = (error: unknown) => {
     if (!error) {
         return null;

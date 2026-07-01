@@ -5,7 +5,7 @@ export const validateForm = (values: LoginFormValues): LoginFormErrors => {
 
     const emailError = validateField('email', values.email);
     const passwordError = validateField('password', values.password);
-
+    
     if (emailError) {
         errors.email = emailError;
     }
