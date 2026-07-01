@@ -10,8 +10,7 @@ import { Pagination } from '@/shared/ui/Pagination';
 import { useGetPostsQuery } from '@/entities/post/api/postApi';
 import { useGetCategoriesQuery } from '@/entities/category/api/categoriesApi';
 import { SavePostButton } from '@/features/save-post';
-import { getValidPage } from '../helpers/getValidPage';
-import { clampPage } from '../helpers/clampPage'
+import { clampPage, getValidPage } from '@/shared/lib/pagination';
 import {useEffect} from 'react'
 const POSTS_PER_PAGE = 3;
 const Home = () => {

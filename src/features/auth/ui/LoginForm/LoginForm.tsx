@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '../../model/authSlice';
 import { useAppDispatch } from '@/app/store/hooks';
 import { AppRoutes } from '@/shared/config/routes';
-import { getErrorMessage } from '@/shared/helpers/getErrorMessage';
+import { getErrorMessage } from '@/shared/lib/errors';
 const LoginForm = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
