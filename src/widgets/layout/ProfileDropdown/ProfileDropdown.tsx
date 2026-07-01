@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import {NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { selectIsAuthenticated } from '@/features/auth/model/selectors';
@@ -7,57 +7,57 @@ import { AppRoutes } from '@/shared/config/routes';
 import Button from '@/shared/ui/Button';
 
 import { logout } from '@/features/auth/model/authSlice';
-import {ProfileDropdownProps} from '../ProfileDropdown/types/types'
+import { ProfileDropdownProps } from '../ProfileDropdown/types/types';
 import ProfileDropdownMenu from '../ProfileDropdownMenu/ProfileDropdownMenu';
-export const ProfileDropdown = ({className}: ProfileDropdownProps) => {
-     const dropdownRef = useRef<HTMLDivElement>(null);
-       const [isOpen, setIsOpen] = useState(false);
-        const isAuthenticated = useAppSelector(selectIsAuthenticated);
-        const dispatch = useAppDispatch()
-        const navigate = useNavigate()
-   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-        if (!dropdownRef.current) return;
+export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
+    const dropdownRef = useRef<HTMLDivElement>(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const isAuthenticated = useAppSelector(selectIsAuthenticated);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (!dropdownRef.current) return;
 
-        const isClickInside = dropdownRef.current.contains(event.target as Node);
+            const isClickInside = dropdownRef.current.contains(event.target as Node);
 
-        if (!isClickInside) {
-            setIsOpen(false);
-        }
-    };
+            if (!isClickInside) {
+                setIsOpen(false);
+            }
+        };
 
-    document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside);
 
-    return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-    };
-}, []);
-  
-   
-   
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     if (!isAuthenticated) {
         return (
-            <NavLink to={AppRoutes.login} className={({isActive}) => 
-                isActive 
-                    ? `${className} is-active profile-auth-button`
-                    : `${className} profile-auth-button`
-            }>
+            <NavLink
+                to={AppRoutes.login}
+                className={({ isActive }) =>
+                    isActive
+                        ? `${className} is-active profile-auth-button`
+                        : `${className} profile-auth-button`
+                }
+            >
                 <span className="profile-auth-button__icon" aria-hidden="true"></span>
                 <span className="profile-auth-button__label">Sign in</span>
             </NavLink>
         );
     }
-    const handleClose = (key:string) => {
-        if(key === 'Escape'){
-            setIsOpen(false)
-
+    const handleClose = (key: string) => {
+        if (key === 'Escape') {
+            setIsOpen(false);
         }
-    }
-    
+    };
+
     const handleLogOut = () => {
-        dispatch(logout())
-        navigate(AppRoutes.home)
-    }
+        dispatch(logout());
+        navigate(AppRoutes.home);
+    };
     return (
         <div className="profile-dropdown" ref={dropdownRef}>
             <Button
@@ -65,7 +65,9 @@ export const ProfileDropdown = ({className}: ProfileDropdownProps) => {
                 type="button"
                 onClick={() => setIsOpen((prev) => !prev)}
                 aria-expanded={isOpen}
-                onKeyDown={(event) => {handleClose(event.key)}}
+                onKeyDown={(event) => {
+                    handleClose(event.key);
+                }}
             >
                 <span className="profile-menu-button__icon" aria-hidden="true"></span>
                 <span className="profile-menu-button__initials">IP</span>
@@ -73,9 +75,15 @@ export const ProfileDropdown = ({className}: ProfileDropdownProps) => {
             </Button>
 
             {isOpen && (
-               <ProfileDropdownMenu className='profile-dropdown__menu--desktop' handleLogOut = {handleLogOut}/>
+                <ProfileDropdownMenu
+                    className="profile-dropdown__menu--desktop"
+                    handleLogOut={handleLogOut}
+                />
             )}
-                <ProfileDropdownMenu className='profile-dropdown__menu--mobile' handleLogOut = {handleLogOut}/>
+            <ProfileDropdownMenu
+                className="profile-dropdown__menu--mobile"
+                handleLogOut={handleLogOut}
+            />
         </div>
     );
 };

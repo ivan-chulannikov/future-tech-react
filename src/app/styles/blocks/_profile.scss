@@ -43,8 +43,7 @@
         border: rem(2) solid var(--color-dark-40);
         border-radius: 50%;
         background:
-            linear-gradient(135deg, rgba(255, 209, 26, 0.25), transparent),
-            var(--color-dark-15);
+            linear-gradient(135deg, rgba(255, 209, 26, 0.25), transparent), var(--color-dark-15);
         color: var(--color-accent);
         font-family: var(--font-family-accent);
         font-size: fluid(28, 44);

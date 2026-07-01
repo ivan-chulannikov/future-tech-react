@@ -6,14 +6,14 @@ import { AppRoutes } from '@/shared/config/routes';
 import { formatMemberSince } from '../helpers/formatMemberSince';
 const Profile = () => {
     const user = useAppSelector(selectUser);
-    console.log(user)
-if (!user) {
-    return <Navigate to={AppRoutes.login} replace />;
-}
+    console.log(user);
+    if (!user) {
+        return <Navigate to={AppRoutes.login} replace />;
+    }
 
-const { email, username, createdAt, description} = user;
-console.log(description)
-    
+    const { email, username, createdAt, description } = user;
+    console.log(description);
+
     return (
         <main className="profile">
             <section className="profile__hero section">
@@ -33,14 +33,11 @@ console.log(description)
                                 <p className="profile__username">{email}</p>
 
                                 {description && (
-                                    <p className="profile__description">
-                                    {description}
-                                </p>
+                                    <p className="profile__description">{description}</p>
                                 )}
 
                                 <div className="profile__meta">
                                     <span>Member since {formatMemberSince(createdAt)}</span>
-                                    
                                 </div>
                             </div>
 
