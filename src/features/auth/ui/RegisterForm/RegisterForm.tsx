@@ -6,7 +6,7 @@ import { AppRoutes } from '@/shared/config/routes';
 import { RegisterFormErrors, RegisterFormTouched, RegisterFormValues } from '../../model/types';
 import { useRegisterMutation } from '../../api/authApi';
 import { validateRegisterField, validateRegisterForm } from '../helpers/validateRegisterForm';
-import { getErrorMessage } from '@/shared/helpers/getErrorMessage';
+import { getErrorMessage } from '@/shared/lib/errors';
 
 const RegisterForm = () => {
     const navigate = useNavigate();
