@@ -1,3 +1,1 @@
-export {
-    selectUser,
-} from './model/selectors'
+export { selectUser } from './model/selectors';

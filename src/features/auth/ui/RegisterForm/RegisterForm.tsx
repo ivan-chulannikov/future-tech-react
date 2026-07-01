@@ -20,12 +20,12 @@ const RegisterForm = () => {
     });
 
     const [register, { isLoading, isError, error }] = useRegisterMutation();
-    const errorMessage  = isError ? getErrorMessage(error) : '' 
+    const errorMessage = isError ? getErrorMessage(error) : '';
     const [errors, setErrors] = useState<RegisterFormErrors>({});
     const [touched, setTouched] = useState<RegisterFormTouched>({});
 
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); 
+        event.preventDefault();
         const validationErrors = validateRegisterForm(values);
         setErrors(validationErrors);
         setTouched({
@@ -43,10 +43,9 @@ const RegisterForm = () => {
                 email: values.email,
                 username: values.name,
                 password: values.password,
-                description: values.description
-                
+                description: values.description,
             }).unwrap();
-            console.log(response)
+            console.log(response);
             navigate(AppRoutes.login);
         } catch (error) {
             console.log('register error:', error);
@@ -191,7 +190,9 @@ const RegisterForm = () => {
             <Button type="submit" className="button--accent auth__submit">
                 {isLoading ? 'Loading...' : 'Sign up'}
             </Button>
-             {errorMessage && <p className='feedback-form__error feedback-form__error--submit'>{errorMessage}</p>}
+            {errorMessage && (
+                <p className="feedback-form__error feedback-form__error--submit">{errorMessage}</p>
+            )}
         </form>
     );
 };
