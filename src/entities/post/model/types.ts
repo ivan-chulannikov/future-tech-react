@@ -17,8 +17,8 @@ export type Avatar = {
 };
 
 export type Stats = {
-    likes: string;
-    views: string;
+    likes: number;
+    views: number;
     shares: number;
 };
 
@@ -36,7 +36,7 @@ export type PostBase = {
 
 export type PostPreview = PostBase;
 
-export type PostDetails = PostBase & {
+export interface PostDetails extends PostBase  {
     bannerImage: ImageInfo;
     content: {
         introduction: string;
