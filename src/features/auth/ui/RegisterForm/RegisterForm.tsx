@@ -5,8 +5,9 @@ import Button from '@/shared/ui/Button';
 import { AppRoutes } from '@/shared/config/routes';
 import { RegisterFormErrors, RegisterFormTouched, RegisterFormValues } from '../../model/types';
 import { useRegisterMutation } from '../../api/authApi';
-import { validateRegisterField, validateRegisterForm } from '../lib/validateRegisterForm';
+import {validateRegisterForm } from '../lib/validateRegisterForm';
 import { getErrorMessage } from '@/shared/lib/errors';
+import { validateRegisterField } from '../lib/validateFieldRegister';
 
 const RegisterForm = () => {
     const navigate = useNavigate();

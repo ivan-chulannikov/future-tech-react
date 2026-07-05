@@ -9,7 +9,7 @@ export const validateField = (name: LoginValidatedFieldName, value: string): str
     }
 
     if (name === 'password') {
-        if (!value) return 'Введите пароль';
+        if (!value) return 'Enter password';
 
         if (typeof value === 'string' && value.length < 6) {
             return 'The password must be at least 6 characters long';
