@@ -16,7 +16,6 @@ export const postApiRtk = baseApi.injectEndpoints({
                 if (categoryId !== 'all') {
                     params.set('categoryId', categoryId);
                 }
-
                 params.set('page', String(page));
                 params.set('limit', String(limit));
                 return `posts?${params.toString()}`;

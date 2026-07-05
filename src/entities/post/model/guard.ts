@@ -29,8 +29,8 @@ const isStats = (value: unknown): value is PostBase['stats'] => {
     if (!isObject(value)) return false;
 
     return (
-        typeof value.likes === 'string' &&
-        typeof value.views === 'string' &&
+        typeof value.likes === 'number' &&
+        typeof value.views === 'number' &&
         typeof value.shares === 'number'
     );
 };
