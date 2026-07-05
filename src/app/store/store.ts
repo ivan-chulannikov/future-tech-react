@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { baseApi, authApi } from '@/shared/api/baseApi';
+import { baseApi} from '@/shared/api/baseApi';
 import {
     persistReducer,
     persistStore,
@@ -28,7 +28,6 @@ export const store = configureStore({
         savedPosts: persistedSavedPostsReducer,
         auth: authReducer,
         [baseApi.reducerPath]: baseApi.reducer,
-        [authApi.reducerPath]: authApi.reducer,
     },
 
     middleware: (getDefaultMiddleware) =>
@@ -37,8 +36,8 @@ export const store = configureStore({
                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
         })
-            .concat(baseApi.middleware)
-            .concat(authApi.middleware),
+            .concat(baseApi.middleware),
+            
 });
 
 export const persistor = persistStore(store);

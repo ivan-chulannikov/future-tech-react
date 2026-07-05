@@ -1,4 +1,4 @@
-import { authApi } from '@/shared/api/baseApi';
+import { baseApi } from '@/shared/api/baseApi';
 import { AuthResponse } from '../model/types';
 
 type LoginRequest = {
@@ -15,7 +15,7 @@ type RegisterRequest = {
 };
 
 type RegisterResponse = AuthResponse;
-export const authApiRtk = authApi.injectEndpoints({
+export const authApiRtk = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         login: builder.mutation<LoginResponse, LoginRequest>({
             query: (body) => ({

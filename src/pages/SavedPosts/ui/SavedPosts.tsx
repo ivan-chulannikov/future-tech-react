@@ -1,42 +1,39 @@
-import { useAppSelector } from '@/app/store/hooks';
+
 
 import { PostPreview } from '@/entities/post/model/types';
-import { selectSavedPostIds } from '@/features/save-post';
+
 import { StateView } from '@/shared/ui/StateView';
 import { savedPostsViewContent } from '../model/stateViewPresets';
 import { SavePostButton } from '@/features/save-post';
 import { Button } from '@/shared/ui/Button';
-import { PostList, useGetAllPostsQuery } from '@/entities/post';
+import { PostList } from '@/entities/post';
+import { useGetSavedPostsQuery } from '@/entities/post/api/postApi';
 export const SavedPosts = () => {
-    const savedPostIds = useAppSelector(selectSavedPostIds);
-    const {
-        data: postsResponse,
-        isLoading: isSavedPostsLoadingQuery,
-        isError: isSavedPostsErrorQuery,
-        refetch: refetchSavedPosts,
-    } = useGetAllPostsQuery(undefined, {
-        skip: savedPostIds.length === 0,
-    });
+    const savedPosts = []
+  const {
+    data: savedPostsResponse,
+    isLoading: isSavedPostsLoading,
+    isFetching: isSavedFetching,
+    isError: isSavedPostsError,
+    refetch: refetchPosts,
 
-    const savedPostIdsSet = new Set(savedPostIds);
-    const posts = postsResponse ?? [];
-
-    const savedPosts = posts.filter((post) => savedPostIdsSet.has(post.id));
+  } = useGetSavedPostsQuery()
+  console.log(savedPostsResponse)
 
     return (
         <main>
             <section className="section">
                 <div className="section__body">
                     {/* loading */}
-                    {isSavedPostsLoadingQuery && <StateView {...savedPostsViewContent.loading} />}
+                    {isSavedPostsLoading && <StateView {...savedPostsViewContent.loading} />}
 
                     {/* error */}
-                    {!isSavedPostsLoadingQuery && isSavedPostsErrorQuery && (
+                    {!isSavedPostsLoading && isSavedPostsError && (
                         <StateView
                             size="page"
                             {...savedPostsViewContent.error}
                             action={
-                                <Button type="button" onClick={refetchSavedPosts}>
+                                <Button type="button" onClick={refetchPosts}>
                                     Try Again
                                 </Button>
                             }
@@ -44,24 +41,24 @@ export const SavedPosts = () => {
                     )}
 
                     {/* no saved ids */}
-                    {!isSavedPostsLoadingQuery &&
-                        !isSavedPostsErrorQuery &&
-                        savedPostIds.length === 0 && (
+                    {!isSavedPostsLoading &&
+                        !isSavedPostsError &&
+                        savedPostsResponse?.length === 0 && (
                             <StateView size="page" {...savedPostsViewContent.empty} />
                         )}
 
                     {/* saved ids есть, но посты не нашлись */}
-                    {!isSavedPostsLoadingQuery &&
-                        !isSavedPostsErrorQuery &&
-                        savedPostIds.length > 0 &&
-                        savedPosts.length === 0 && (
+                    {!isSavedPostsLoading &&
+                        !isSavedPostsError &&
+                        savedPostsResponse?.length > 0 &&
+                        savedPostsResponse?.length === 0 && (
                             <StateView {...savedPostsViewContent.errorFindIds} />
                         )}
 
                     {/* success */}
-                    {!isSavedPostsLoadingQuery &&
-                        !isSavedPostsErrorQuery &&
-                        savedPosts.length > 0 && (
+                    {!isSavedPostsLoading &&
+                        !isSavedPostsError &&
+                        savedPostsResponse?.length > 0 && (
                             <PostList
                                 posts={savedPosts}
                                 renderActions={(post: PostPreview) => (

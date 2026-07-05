@@ -1,7 +1,7 @@
 import type { PostDetails, PostPreview } from '../model/types';
 import type { PaginatedResponse } from '@/shared/api/types/types';
 import { baseApi } from '@/shared/api/baseApi';
-import { isPaginatedPostPreviewResponse, isPostPreviewArray, isPostDetails } from '../model/guard';
+import { isPaginatedPostPreviewResponse, isPostPreviewArray, isPostDetails, isSavedPostsResponse } from '../model/guard';
 type GetPostsParams = {
     categoryId: string;
     page: number;
@@ -46,7 +46,16 @@ export const postApiRtk = baseApi.injectEndpoints({
                 return response;
             },
         }),
+       getSavedPosts: build.query<PostPreview[], void>({
+            query: () => 'saved-posts',
+            transformResponse: (response: unknown) => {
+                if (!isSavedPostsResponse(response)) {
+                    throw new Error('Invalid saved posts response');
+                }
+                 return response.data;
+            },
+        }),
     }),
 });
 
-export const { useGetPostsQuery, useGetAllPostsQuery, useGetPostByIdQuery } = postApiRtk;
+export const { useGetPostsQuery, useGetAllPostsQuery, useGetPostByIdQuery, useGetSavedPostsQuery } = postApiRtk;

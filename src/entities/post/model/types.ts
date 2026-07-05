@@ -22,7 +22,7 @@ export type Stats = {
     shares: number;
 };
 
-export type PostBase = {
+export interface PostBase {
     id: string;
     type: ArticleType;
     title: string;
@@ -33,6 +33,7 @@ export type PostBase = {
     readingTime: string;
     stats: Stats;
 };
+
 
 export type PostPreview = PostBase;
 

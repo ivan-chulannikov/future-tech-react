@@ -8,6 +8,9 @@ const isStringArray = (value: unknown): value is string[] => {
     return Array.isArray(value) && value.every((item) => typeof item === 'string');
 };
 
+type SavedPostsResponse = {
+    data: PostPreview[];
+};
 const isAvatar = (value: unknown): value is PostBase['author']['avatar'] => {
     if (!isObject(value)) return false;
 
@@ -114,5 +117,15 @@ export const isPaginatedPostPreviewResponse = (
         typeof value.limit === 'number' &&
         typeof value.total === 'number' &&
         typeof value.pages === 'number'
+    );
+};
+
+
+export const isSavedPostsResponse = (value: unknown): value is SavedPostsResponse => {
+    return (
+        typeof value === 'object' &&
+        value !== null &&
+        'data' in value &&
+        isPostPreviewArray(value.data)
     );
 };
