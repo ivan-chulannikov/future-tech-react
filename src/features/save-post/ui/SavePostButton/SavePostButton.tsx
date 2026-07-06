@@ -1,17 +1,31 @@
-import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { toggleSavedPost, selectIsPostSaved } from '@/features/save-post';
-import { SavePostButtonProps } from './types/SavePostButtonProps';
-export const SavePostButton = ({ postId, className = '' }: SavePostButtonProps) => {
-    const dispatch = useAppDispatch();
-    const isSaved = useAppSelector((state) => selectIsPostSaved(state, postId));
+import { useAddSavedPostMutation } from '@/entities/post/api/postApi';
+import type { SavePostButtonProps } from './types/SavePostButtonProps';
+
+export const SavePostButton = ({
+    postId,
+    isSaved = false,
+    className = '',
+}: SavePostButtonProps) => {
+    const [addSavedPost, { isLoading }] = useAddSavedPostMutation();
+   
+    const handleAddSavedPost = async () => {
+        if (isSaved) return;
+
+        try {
+            await addSavedPost(postId).unwrap();
+        } catch {
+            console.error('Failed to save post');
+        }
+    };
 
     return (
         <button
             type="button"
             className={`${className} blog-actions__button ${isSaved ? 'is-active' : ''}`}
-            aria-label={isSaved ? 'Remove from saved posts' : 'Save post'}
+            aria-label={isSaved ? 'Post is already saved' : 'Save post'}
             aria-pressed={isSaved}
-            onClick={() => dispatch(toggleSavedPost(postId))}
+            onClick={() => void handleAddSavedPost()}
+            disabled={isLoading}
         >
             <span className="blog-actions__icon-wrapper">
                 <svg
@@ -23,7 +37,7 @@ export const SavePostButton = ({ postId, className = '' }: SavePostButtonProps) 
                 >
                     <path
                         d="M5.8335 3.33325H14.1668C14.6268 3.33325 15.0002 3.70659 15.0002 4.16659V16.6666L10.0002 13.7499L5.00016 16.6666V4.16659C5.00016 3.70659 5.3735 3.33325 5.8335 3.33325Z"
-                        stroke="#666666"
+                        stroke="currentColor"
                         strokeWidth="1.5"
                         strokeLinejoin="round"
                     />

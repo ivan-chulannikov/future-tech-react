@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { SavedPostsState } from './types';
+import type  { SavedPostsState } from './types';
 
 const initialState: SavedPostsState = {
     savedPostIds: [],

@@ -80,9 +80,9 @@ const Header = () => {
                         }}
                         aria-expanded={isMenuOpen}
                     >
-                        <span className="burger-button__line"></span>
-                        <span className="burger-button__line"></span>
-                        <span className="burger-button__line"></span>
+                        <span className="burger-button__line" />
+                        <span className="burger-button__line" />
+                        <span className="burger-button__line" />
                     </button>
                 </div>
             </div>

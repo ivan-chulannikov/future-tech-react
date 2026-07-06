@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FormInput } from '@/shared/ui/FormInput';
 import Button from '@/shared/ui/Button';
 import { AppRoutes } from '@/shared/config/routes';
-import { RegisterFormErrors, RegisterFormTouched, RegisterFormValues } from '../../model/types';
+import type { RegisterFormErrors, RegisterFormTouched, RegisterFormValues } from '../../model/types';
 import { useRegisterMutation } from '../../api/authApi';
 import {validateRegisterForm } from '../lib/validateRegisterForm';
 import { getErrorMessage } from '@/shared/lib/errors';
@@ -40,14 +40,13 @@ const RegisterForm = () => {
             return;
         }
         try {
-            const response = await register({
+            await register({
                 email: values.email,
                 username: values.name,
                 password: values.password,
                 description: values.description,
             }).unwrap();
-            console.log(response);
-            navigate(AppRoutes.login);
+            void navigate(AppRoutes.login);
         } catch (error) {
             console.log('register error:', error);
         }
@@ -67,7 +66,7 @@ const RegisterForm = () => {
             const nextValues = {
                 ...values,
                 [name]: fieldValue,
-            } as RegisterFormValues;
+            };
 
             const error = validateRegisterField(
                 name as keyof RegisterFormValues,
@@ -112,7 +111,7 @@ const RegisterForm = () => {
     };
 
     return (
-        <form className="auth__form" onSubmit={onSubmit}>
+        <form className="auth__form" onSubmit={(event) => void onSubmit(event)}>
             <FormInput
                 id="name"
                 label="Name"

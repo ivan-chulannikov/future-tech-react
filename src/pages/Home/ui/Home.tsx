@@ -7,7 +7,7 @@ import { AboutSection } from '@/widgets/AboutSection';
 import { useSearchParams } from 'react-router-dom';
 import { homePostsSection } from '../model/postSection';
 import { Pagination } from '@/shared/ui/Pagination';
-import { useGetPostsQuery } from '@/entities/post/api/postApi';
+import { useGetPostsQuery, useGetSavedPostsQuery  } from '@/entities/post/api/postApi';
 import { useGetCategoriesQuery } from '@/entities/category/api/categoriesApi';
 import { SavePostButton } from '@/features/save-post';
 import { clampPage, getValidPage } from '@/shared/lib/pagination';
@@ -29,6 +29,7 @@ const Home = () => {
         page: currentPage,
         limit: POSTS_PER_PAGE,
     });
+    const { data: savedPosts = [] } = useGetSavedPostsQuery();
   
     const totalPagesFromResponse = postsResponse?.pages;
     const totalPages = totalPagesFromResponse ?? 1;
@@ -97,8 +98,8 @@ const Home = () => {
                 isPostsFetching={isPostsFetching}
                 isTabsLoading={isTabsLoadingQuery}
                 isTabsError={isTabsError}
-                onPostsRetry={refetchPosts}
-                onTabsRetry={refetchTabs}
+                onPostsRetry={() => void refetchPosts()}
+                onTabsRetry={() => void refetchTabs()}
                 paginationSlot={
                     <Pagination
                         currentPage={currentPage}
@@ -106,11 +107,16 @@ const Home = () => {
                         onPageChange={handlePageChange}
                     />
                 }
-                renderPostActions={(post) => (
-                    <li className="blog-actions__item">
-                        <SavePostButton postId={post.id} />
-                    </li>
-                )}
+                renderPostActions={(post) => {
+                    const isSaved = savedPosts.some((savedPost) => savedPost.id === post.id)
+                      return (
+                        <li className="blog-actions__item">
+                            <SavePostButton postId={post.id} isSaved={isSaved} />
+                        </li>
+                            );
+                }
+                
+                }
             />
 
             <ResourcesSection />

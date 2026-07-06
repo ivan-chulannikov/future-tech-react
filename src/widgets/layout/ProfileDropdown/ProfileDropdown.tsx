@@ -7,7 +7,7 @@ import { AppRoutes } from '@/shared/config/routes';
 import Button from '@/shared/ui/Button';
 
 import { logout } from '@/features/auth/model/authSlice';
-import { ProfileDropdownProps } from '../ProfileDropdown/types/types';
+import type { ProfileDropdownProps } from '../ProfileDropdown/types/types';
 import ProfileDropdownMenu from '../ProfileDropdownMenu/ProfileDropdownMenu';
 export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -43,7 +43,7 @@ export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
                         : `${className} profile-auth-button`
                 }
             >
-                <span className="profile-auth-button__icon" aria-hidden="true"></span>
+                <span className="profile-auth-button__icon" aria-hidden="true"/>
                 <span className="profile-auth-button__label">Sign in</span>
             </NavLink>
         );
@@ -54,10 +54,10 @@ export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
         }
     };
 
-    const handleLogOut = () => {
-        dispatch(logout());
-        navigate(AppRoutes.home);
-    };
+   const handleLogOut = () => {
+    dispatch(logout());
+    void navigate(AppRoutes.home);
+};
     return (
         <div className="profile-dropdown" ref={dropdownRef}>
             <Button
@@ -69,9 +69,9 @@ export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
                     handleClose(event.key);
                 }}
             >
-                <span className="profile-menu-button__icon" aria-hidden="true"></span>
+                <span className="profile-menu-button__icon" aria-hidden="true"/>
                 <span className="profile-menu-button__initials">IP</span>
-                <span className="profile-menu-button__arrow" aria-hidden="true"></span>
+                <span className="profile-menu-button__arrow" aria-hidden="true"/>
             </Button>
 
             {isOpen && (

@@ -6,13 +6,12 @@ import { AppRoutes } from '@/shared/config/routes';
 import { formatMemberSince } from '../lib/formatMemberSince';
 const Profile = () => {
     const user = useAppSelector(selectUser);
-    console.log(user);
+   
     if (!user) {
         return <Navigate to={AppRoutes.login} replace />;
     }
 
     const { email, username, createdAt, description } = user;
-    console.log(description);
 
     return (
         <main className="profile">

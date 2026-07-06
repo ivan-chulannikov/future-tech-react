@@ -55,7 +55,14 @@ export const postApiRtk = baseApi.injectEndpoints({
                  return response.data;
             },
         }),
+        addSavedPost: build.mutation<{ message: string }, string>({
+    query: (postId) => ({
+        url: `saved-posts/${postId}`,
+        method: 'POST',
+    }),
+    invalidatesTags: ['SavedPosts'],
+}),
     }),
 });
 
-export const { useGetPostsQuery, useGetAllPostsQuery, useGetPostByIdQuery, useGetSavedPostsQuery } = postApiRtk;
+export const { useGetPostsQuery, useGetAllPostsQuery, useGetPostByIdQuery, useGetSavedPostsQuery, useAddSavedPostMutation } = postApiRtk;

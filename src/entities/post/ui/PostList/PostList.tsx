@@ -1,5 +1,5 @@
 import { PostCard } from '../PostCard';
-import { PostListProps } from './types/PostListProps';
+import type { PostListProps } from './types/PostListProps';
 const PostList = ({ posts, renderActions }: PostListProps) => {
     return (
         <ul className="list">

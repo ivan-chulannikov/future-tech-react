@@ -17,11 +17,11 @@ const ReviewCard = () => {
                 </div>
                 <div className="review-card__info tile">
                     <div className="review-card__rating-view rating-view">
-                        <div className="rating-view__star is-active"></div>
-                        <div className="rating-view__star is-active"></div>
-                        <div className="rating-view__star is-active"></div>
-                        <div className="rating-view__star is-active"></div>
-                        <div className="rating-view__star is-active"></div>
+                        <div className="rating-view__star is-active" />
+                        <div className="rating-view__star is-active" />
+                        <div className="rating-view__star is-active" />
+                        <div className="rating-view__star is-active" />
+                        <div className="rating-view__star is-active" />
                     </div>
                     <blockquote className="rating-view__desc">
                         <p>

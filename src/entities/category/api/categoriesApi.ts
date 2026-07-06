@@ -1,5 +1,5 @@
 import { isCategoryArray } from '../model/guard';
-import { Category } from '../model/types';
+import type { Category } from '../model/types';
 import { baseApi } from '@/shared/api/baseApi';
 
 export const categoryApiRtk = baseApi.injectEndpoints({

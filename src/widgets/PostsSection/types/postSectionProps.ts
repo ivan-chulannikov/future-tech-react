@@ -1,8 +1,8 @@
-import { Category } from '@/entities/category';
+import type { Category } from '@/entities/category';
 
-import { PostBase } from '@/entities/post/model/types';
-import { SectionHeaderProps } from '@/shared/ui/SectionHeader';
-import { ReactNode } from 'react';
+import type { PostBase } from '@/entities/post/model/types';
+import type { SectionHeaderProps } from '@/shared/ui/SectionHeader';
+import type { ReactNode } from 'react';
 export interface PostSectionProps {
     posts: PostBase[];
     tabs: Category[];

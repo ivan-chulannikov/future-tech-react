@@ -1,5 +1,5 @@
 import { baseApi } from '@/shared/api/baseApi';
-import { AuthResponse } from '../model/types';
+import type { AuthResponse } from '../model/types';
 
 type LoginRequest = {
     email: string;

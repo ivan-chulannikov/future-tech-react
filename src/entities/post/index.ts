@@ -4,4 +4,4 @@ export { default as PostActions } from './ui/PostActions';
 
 export { useGetAllPostsQuery } from './api/postApi';
 
-export type { ArticleType, Author, Stats, PostPreview } from './model/types';
+export type { ArticleType, Author, Stats, PostPreview } from './model';

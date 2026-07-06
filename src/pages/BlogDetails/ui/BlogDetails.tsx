@@ -24,7 +24,7 @@ const BlogDetails = () => {
                 size="page"
                 {...blogDetailsStateViewContent.error}
                 action={
-                    <button className="button button--accent" type="button" onClick={refetchPost}>
+                    <button className="button button--accent" type="button" onClick={() => void refetchPost()}>
                         Try again
                     </button>
                 }

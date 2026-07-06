@@ -1,6 +1,6 @@
 import { PostActions } from '@/entities/post';
 import { Fragment } from 'react';
-import { PostDetailsProps } from '../types/PostDetailsProps';
+import type { PostDetailsProps } from '../types/PostDetailsProps';
 
 const BlogDetailSection = ({ post }: PostDetailsProps) => {
     if (!post) {

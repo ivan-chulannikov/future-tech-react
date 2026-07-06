@@ -1,6 +1,6 @@
 import { FormInput } from '@/shared/ui/FormInput';
 import Button from '@/shared/ui/Button';
-import { LoginFormErrors, LoginFormTouched, LoginFormValues } from '../../model/types';
+import type { LoginFormErrors, LoginFormTouched, LoginFormValues } from '../../model/types';
 import { useState } from 'react';
 import { validateField } from '../lib/validateField';
 import { validateForm } from '../lib/validateForm';
@@ -48,7 +48,7 @@ const LoginForm = () => {
             const { user, accessToken } = response;
 
             dispatch(setCredentials({ user, accessToken }));
-            navigate(AppRoutes.home);
+            void navigate(AppRoutes.home);
         } catch (error) {
             console.log('login error:', error);
         }
@@ -97,7 +97,7 @@ const LoginForm = () => {
 };
 
     return (
-        <form className="auth__form" onSubmit={onSubmit}>
+        <form className="auth__form" onSubmit={(event) => void onSubmit(event)}>
             <FormInput
                 id="email"
                 label="Email"

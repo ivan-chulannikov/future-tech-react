@@ -51,7 +51,7 @@ const PostsSection = ({
                 )}
                 <div className="tabs__body">
                     <TabPanel
-                        isActive={true}
+                        isActive
                         id={`tabpanel-${activeCategoryId}`}
                         labelledBy={`tab-${activeCategoryId}`}
                     >
