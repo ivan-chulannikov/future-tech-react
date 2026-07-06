@@ -44,7 +44,7 @@ export const SavedPosts = () => {
                             posts={savedPosts}
                         
                             renderActions={(post: PostPreview) => {
-                                    const isSaved = savedPosts.some((savedPost) => savedPost.id === post.id);
+                                    
                                 return (
                                      <li className="blog-actions__item">
                                     <SavePostButton

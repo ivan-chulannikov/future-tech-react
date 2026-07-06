@@ -3,11 +3,10 @@ import type { SavePostButtonProps } from './types/SavePostButtonProps';
 
 export const SavePostButton = ({
     postId,
-    isSaved = false,
+    isSaved,
     className = '',
 }: SavePostButtonProps) => {
     const [addSavedPost, { isLoading }] = useAddSavedPostMutation();
-   
     const handleAddSavedPost = async () => {
         if (isSaved) return;
 

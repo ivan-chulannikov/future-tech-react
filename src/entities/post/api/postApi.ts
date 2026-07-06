@@ -54,6 +54,7 @@ export const postApiRtk = baseApi.injectEndpoints({
                 }
                  return response.data;
             },
+            providesTags: ['SavedPosts'],
         }),
         addSavedPost: build.mutation<{ message: string }, string>({
     query: (postId) => ({
