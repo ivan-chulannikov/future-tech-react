@@ -12,9 +12,12 @@ import { useGetCategoriesQuery } from '@/entities/category/api/categoriesApi';
 import { SavePostButton } from '@/features/save-post';
 import { clampPage, getValidPage } from '@/shared/lib/pagination';
 import {useEffect} from 'react'
+import { useAppSelector } from '@/app/store/hooks';
+import { selectToken } from '@/features/auth/model/selectors';
 const POSTS_PER_PAGE = 3;
 const Home = () => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const accessToken = useAppSelector(selectToken);
     const activeCategoryId = searchParams.get('category') ?? 'all';
     const pageParam = searchParams.get('page');
     const currentPage = getValidPage(pageParam); 
@@ -29,7 +32,9 @@ const Home = () => {
         page: currentPage,
         limit: POSTS_PER_PAGE,
     });
-    const { data: savedPosts = [] } = useGetSavedPostsQuery();
+    const { data: savedPosts = [] } = useGetSavedPostsQuery(undefined, {
+    skip: !accessToken,
+});
   
     const totalPagesFromResponse = postsResponse?.pages;
     const totalPages = totalPagesFromResponse ?? 1;
