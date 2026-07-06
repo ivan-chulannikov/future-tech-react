@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { selectIsAuthenticated } from '@/features/auth/model/selectors';
+import { useLogoutRequestMutation } from '@/features/auth/api/authApi';
 import { AppRoutes } from '@/shared/config/routes';
 import Button from '@/shared/ui/Button';
 
@@ -10,6 +11,7 @@ import { logout } from '@/features/auth/model/authSlice';
 import type { ProfileDropdownProps } from '../ProfileDropdown/types/types';
 import ProfileDropdownMenu from '../ProfileDropdownMenu/ProfileDropdownMenu';
 export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
+    const [logoutRequest] = useLogoutRequestMutation()
     const dropdownRef = useRef<HTMLDivElement>(null);
     const [isOpen, setIsOpen] = useState(false);
     const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -54,9 +56,15 @@ export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
         }
     };
 
-   const handleLogOut = () => {
-    dispatch(logout());
-    void navigate(AppRoutes.home);
+   const handleLogOut = async () => {
+    try {
+        await logoutRequest().unwrap();
+    } catch {
+        console.error('Failed to logout on server');
+    } finally {
+        dispatch(logout());
+        void navigate(AppRoutes.home);
+    }
 };
     return (
         <div className="profile-dropdown" ref={dropdownRef}>
@@ -77,12 +85,12 @@ export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
             {isOpen && (
                 <ProfileDropdownMenu
                     className="profile-dropdown__menu--desktop"
-                    handleLogOut={handleLogOut}
+                    handleLogOut={() => void handleLogOut()}
                 />
             )}
             <ProfileDropdownMenu
                 className="profile-dropdown__menu--mobile"
-                handleLogOut={handleLogOut}
+                handleLogOut={() => void handleLogOut()}
             />
         </div>
     );

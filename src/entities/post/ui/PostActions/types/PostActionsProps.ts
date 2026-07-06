@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react';
 export interface PostActionsProps {
-    likes: string;
+    likes: number;
     shares: number;
-    views: string;
+    views: number;
     className?: string;
     children?: ReactNode;
 }
