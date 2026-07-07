@@ -44,7 +44,6 @@ export const SavedPosts = () => {
                             posts={savedPosts}
                         
                             renderActions={(post: PostPreview) => {
-                                    
                                 return (
                                      <li className="blog-actions__item">
                                     <SavePostButton

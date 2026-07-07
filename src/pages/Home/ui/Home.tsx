@@ -119,7 +119,7 @@ const Home = () => {
                         <li className="blog-actions__item">
                             <SavePostButton postId={post.id} isSaved={isSaved} />
                         </li>
-                            );
+                        );
                 }
                 
                 }

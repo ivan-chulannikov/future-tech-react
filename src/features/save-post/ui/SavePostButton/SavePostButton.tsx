@@ -1,4 +1,8 @@
-import { useAddSavedPostMutation } from '@/entities/post/api/postApi';
+import {
+    useAddSavedPostMutation,
+    useDeleteSavedPostMutation,
+} from '@/entities/post/api/postApi';
+
 import type { SavePostButtonProps } from './types/SavePostButtonProps';
 
 export const SavePostButton = ({
@@ -6,14 +10,22 @@ export const SavePostButton = ({
     isSaved,
     className = '',
 }: SavePostButtonProps) => {
-    const [addSavedPost, { isLoading }] = useAddSavedPostMutation();
-    const handleAddSavedPost = async () => {
-        if (isSaved) return;
+    const [addSavedPost, { isLoading: isAddSavedPostLoading }] = useAddSavedPostMutation();
+    const [deleteSavedPost, { isLoading: isDeleteSavedPostLoading }] =
+        useDeleteSavedPostMutation();
 
+    const isLoading = isAddSavedPostLoading || isDeleteSavedPostLoading;
+
+    const handleToggleSavedPost = async () => {
         try {
+            if (isSaved) {
+                await deleteSavedPost(postId).unwrap();
+                return;
+            }
+
             await addSavedPost(postId).unwrap();
         } catch {
-            console.error('Failed to save post');
+            console.error('Failed to toggle saved post');
         }
     };
 
@@ -21,9 +33,9 @@ export const SavePostButton = ({
         <button
             type="button"
             className={`${className} blog-actions__button ${isSaved ? 'is-active' : ''}`}
-            aria-label={isSaved ? 'Post is already saved' : 'Save post'}
+            aria-label={isSaved ? 'Remove from saved posts' : 'Save post'}
             aria-pressed={isSaved}
-            onClick={() => void handleAddSavedPost()}
+            onClick={() => void handleToggleSavedPost()}
             disabled={isLoading}
         >
             <span className="blog-actions__icon-wrapper">

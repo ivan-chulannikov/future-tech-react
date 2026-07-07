@@ -46,24 +46,34 @@ export const postApiRtk = baseApi.injectEndpoints({
                 return response;
             },
         }),
-       getSavedPosts: build.query<PostPreview[], void>({
-            query: () => 'saved-posts',
-            transformResponse: (response: unknown) => {
-                if (!isSavedPostsResponse(response)) {
-                    throw new Error('Invalid saved posts response');
-                }
-                 return response.data;
-            },
-            providesTags: ['SavedPosts'],
-        }),
-        addSavedPost: build.mutation<{ message: string }, string>({
+      getSavedPosts: build.query<PostPreview[], void>({
+    query: () => 'saved-posts',
+    transformResponse: (response: unknown) => {
+        if (!isSavedPostsResponse(response)) {
+            throw new Error('Invalid saved posts response');
+        }
+
+        return response.data;
+    },
+    providesTags: ['SavedPosts'],
+}),
+
+addSavedPost: build.mutation<{ message: string }, string>({
     query: (postId) => ({
         url: `saved-posts/${postId}`,
         method: 'POST',
     }),
     invalidatesTags: ['SavedPosts'],
 }),
+
+deleteSavedPost: build.mutation<{ message: string }, string>({
+    query: (postId) => ({
+        url: `saved-posts/${postId}`,
+        method: 'DELETE',
+    }),
+    invalidatesTags: ['SavedPosts'],
+}),
     }),
 });
 
-export const { useGetPostsQuery, useGetAllPostsQuery, useGetPostByIdQuery, useGetSavedPostsQuery, useAddSavedPostMutation } = postApiRtk;
+export const { useGetPostsQuery, useGetAllPostsQuery, useGetPostByIdQuery, useGetSavedPostsQuery, useAddSavedPostMutation, useDeleteSavedPostMutation } = postApiRtk;

@@ -5,3 +5,8 @@ export type PaginatedResponse<T> = {
     total: number;
     pages: number;
 };
+export type BaseApiState = {
+    auth: {
+        accessToken: string | null;
+    };
+};
