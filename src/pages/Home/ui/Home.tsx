@@ -6,18 +6,15 @@ import { ReviewsSection } from '@/widgets/ReviewsSection';
 import { AboutSection } from '@/widgets/AboutSection';
 import { homePostsSection } from '../model/postSection';
 import { Pagination } from '@/shared/ui/Pagination';
-import { useGetPostsQuery, useGetSavedPostsQuery  } from '@/entities/post/api/postApi';
+import { useGetPostsQuery} from '@/entities/post/api/postApi';
 import { useGetCategoriesQuery } from '@/entities/category/api/categoriesApi';
 import { SavePostButton } from '@/features/save-post';
-import { useAppSelector } from '@/app/store/hooks';
-import { selectToken } from '@/features/auth/model/selectors';
 import { usePaginationParams } from '@/shared/lib/pagination/usePaginationParams';
 import { useNormalizePaginationPage } from '@/shared/lib/pagination/useNormalizePaginationPage';
 import { usePostCategoryParams } from '@/features/filter-posts-by-category/lib/usePostCategoryParams';
 const POSTS_PER_PAGE = 3;
 const Home = () => {
  
-    const accessToken = useAppSelector(selectToken);
     const { activeCategoryId, handleCategoryChange } = usePostCategoryParams()
 
     const { currentPage, handlePageChange } = usePaginationParams();
@@ -36,9 +33,7 @@ const {
 
 useNormalizePaginationPage(currentPage, postsResponse?.pages);
 
-const { data: savedPosts = [] } = useGetSavedPostsQuery(undefined, {
-    skip: !accessToken,
-});
+
 
 const totalPages = postsResponse?.pages ?? 1;
 const posts = postsResponse?.data ?? [];
@@ -78,14 +73,12 @@ const posts = postsResponse?.data ?? [];
                     />
                 }
                 renderPostActions={(post) => {
-                    const isSaved = savedPosts.some((savedPost) => savedPost.id === post.id)
                       return (
                         <li className="blog-actions__item">
-                            <SavePostButton postId={post.id} isSaved={isSaved} />
+                            <SavePostButton postId={post.id} isSaved={post.isSaved} />
                         </li>
                         );
                 }
-                
                 }
             />
 

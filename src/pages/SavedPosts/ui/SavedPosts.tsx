@@ -1,22 +1,34 @@
-import type { PostPreview } from '@/entities/post/model/types';
-
-import { useGetSavedPostsQuery } from '@/entities/post/api/postApi';
+import { useGetPostsQuery } from '@/entities/post/api/postApi';
 import { PostList } from '@/entities/post';
 import { SavePostButton } from '@/features/save-post';
 import { Button } from '@/shared/ui/Button';
 import { StateView } from '@/shared/ui/StateView';
 import { savedPostsViewContent } from '../model/stateViewPresets';
+import { Pagination } from '@/shared/ui/Pagination';
+import { usePaginationParams } from '@/shared/lib/pagination/usePaginationParams';
+import { useNormalizePaginationPage } from '@/shared/lib/pagination/useNormalizePaginationPage';
+
+const POSTS_PER_PAGE = 3;
 
 export const SavedPosts = () => {
+    const { currentPage, handlePageChange } = usePaginationParams();
+
     const {
         data: savedPostsResponse,
         isLoading: isSavedPostsLoading,
         isError: isSavedPostsError,
         refetch: refetchPosts,
-    } = useGetSavedPostsQuery();
+    } = useGetPostsQuery({
+        page: currentPage,
+        limit: POSTS_PER_PAGE,
+        savedOnly: true,
+    });
 
-    const savedPosts = savedPostsResponse ?? [];
-   
+    useNormalizePaginationPage(currentPage, savedPostsResponse?.pages);
+
+    const savedPosts = savedPostsResponse?.data ?? [];
+    const totalPages = savedPostsResponse?.pages ?? 1;
+
     return (
         <main>
             <section className="section">
@@ -40,22 +52,24 @@ export const SavedPosts = () => {
                     )}
 
                     {!isSavedPostsLoading && !isSavedPostsError && savedPosts.length > 0 && (
-                        <PostList
-                            posts={savedPosts}
-                        
-                            renderActions={(post: PostPreview) => {
-                                return (
-                                     <li className="blog-actions__item">
-                                    <SavePostButton
-
-                                    postId={post.id} isSaved={true} />
-                                </li>
-                                )
-                            }
-                                
-                               
-                            }
-                        />
+                        <>
+                            <PostList
+                                posts={savedPosts}
+                                renderActions={(post) => (
+                                    <li className="blog-actions__item">
+                                        <SavePostButton postId={post.id} isSaved={post.isSaved} />
+                                    </li>
+                                )}
+                            />
+                            <div className='posts-section__pagination'>
+                                 <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={handlePageChange}
+                                />
+                            </div>
+                           
+                        </>
                     )}
                 </div>
             </section>
