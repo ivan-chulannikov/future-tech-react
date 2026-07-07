@@ -1,12 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
+import type { BaseApiState } from './types/types';
 const API_URL = 'http://localhost:4000';
 
-type BaseApiState = {
-    auth: {
-        accessToken: string | null;
-    };
-};
 
 export const baseApi = createApi({
     reducerPath: 'api',
