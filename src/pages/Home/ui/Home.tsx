@@ -10,17 +10,15 @@ import { Pagination } from '@/shared/ui/Pagination';
 import { useGetPostsQuery, useGetSavedPostsQuery  } from '@/entities/post/api/postApi';
 import { useGetCategoriesQuery } from '@/entities/category/api/categoriesApi';
 import { SavePostButton } from '@/features/save-post';
-import { clampPage, getValidPage } from '@/shared/lib/pagination';
-import {useEffect} from 'react'
 import { useAppSelector } from '@/app/store/hooks';
 import { selectToken } from '@/features/auth/model/selectors';
+import { usePaginationParams } from '@/shared/lib/pagination/usePaginationParams';
 const POSTS_PER_PAGE = 3;
 const Home = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const accessToken = useAppSelector(selectToken);
     const activeCategoryId = searchParams.get('category') ?? 'all';
-    const pageParam = searchParams.get('page');
-    const currentPage = getValidPage(pageParam); 
+   const { currentPage, handlePageChange } = usePaginationParams();
     const {
         data: postsResponse,
         isLoading: isPostsLoadingQuery,
@@ -62,32 +60,8 @@ const Home = () => {
 
     const tabs = tabsResponse ?? [];
 
-    const handlePageChange = (page: number) => {
-        setSearchParams((prevParams) => {
-            const nextParams = new URLSearchParams(prevParams);
-
-            nextParams.set('page', String(page));
-
-            return nextParams;
-        });
-    };
-    useEffect(() => {
-        if (totalPagesFromResponse === undefined) {
-            return;
-        }
-
-        const validPage = clampPage(currentPage, totalPagesFromResponse);
-
-        if (validPage !== currentPage) {
-            setSearchParams((prevParams) => {
-                const nextParams = new URLSearchParams(prevParams);
-
-                nextParams.set('page', String(validPage));
-
-                return nextParams;
-            });
-        }
-    }, [currentPage, totalPagesFromResponse, setSearchParams]);
+    
+    
     return (
         <>
             <HeroSection />
