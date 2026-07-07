@@ -16,31 +16,32 @@ import { useNormalizePaginationPage } from '@/shared/lib/pagination/useNormalize
 import { usePostCategoryParams } from '@/features/filter-posts-by-category/lib/usePostCategoryParams';
 const POSTS_PER_PAGE = 3;
 const Home = () => {
-
+ 
     const accessToken = useAppSelector(selectToken);
     const { activeCategoryId, handleCategoryChange } = usePostCategoryParams()
+
     const { currentPage, handlePageChange } = usePaginationParams();
 
-    const {
-        data: postsResponse,
-        isLoading: isPostsLoadingQuery,
-        isFetching: isPostsFetching,
-        isError: isPostsErrorQuery,
-        refetch: refetchPosts,
-    } = useGetPostsQuery({
-        categoryId: activeCategoryId,
-        page: currentPage,
-        limit: POSTS_PER_PAGE,
-    });
+const {
+    data: postsResponse,
+    isLoading: isPostsLoadingQuery,
+    isFetching: isPostsFetching,
+    isError: isPostsErrorQuery,
+    refetch: refetchPosts,
+} = useGetPostsQuery({
+    categoryId: activeCategoryId,
+    page: currentPage,
+    limit: POSTS_PER_PAGE,
+});
 
-    useNormalizePaginationPage(currentPage, postsResponse?.pages);
+useNormalizePaginationPage(currentPage, postsResponse?.pages);
 
-    const { data: savedPosts = [] } = useGetSavedPostsQuery(undefined, {
-        skip: !accessToken,
-    });
+const { data: savedPosts = [] } = useGetSavedPostsQuery(undefined, {
+    skip: !accessToken,
+});
 
-    const totalPages = postsResponse?.pages ?? 1;
-    const posts = postsResponse?.data ?? [];
+const totalPages = postsResponse?.pages ?? 1;
+const posts = postsResponse?.data ?? [];
     
     const {
         data: tabsResponse,
