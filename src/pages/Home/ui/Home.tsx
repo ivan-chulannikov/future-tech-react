@@ -13,31 +13,34 @@ import { SavePostButton } from '@/features/save-post';
 import { useAppSelector } from '@/app/store/hooks';
 import { selectToken } from '@/features/auth/model/selectors';
 import { usePaginationParams } from '@/shared/lib/pagination/usePaginationParams';
+import { useNormalizePaginationPage } from '@/shared/lib/pagination/useNormalizePaginationPage';
 const POSTS_PER_PAGE = 3;
 const Home = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const accessToken = useAppSelector(selectToken);
     const activeCategoryId = searchParams.get('category') ?? 'all';
    const { currentPage, handlePageChange } = usePaginationParams();
-    const {
-        data: postsResponse,
-        isLoading: isPostsLoadingQuery,
-        isFetching: isPostsFetching,
-        isError: isPostsErrorQuery,
-        refetch: refetchPosts,
-    } = useGetPostsQuery({
-        categoryId: activeCategoryId,
-        page: currentPage,
-        limit: POSTS_PER_PAGE,
-    });
-    const { data: savedPosts = [] } = useGetSavedPostsQuery(undefined, {
+
+const {
+    data: postsResponse,
+    isLoading: isPostsLoadingQuery,
+    isFetching: isPostsFetching,
+    isError: isPostsErrorQuery,
+    refetch: refetchPosts,
+} = useGetPostsQuery({
+    categoryId: activeCategoryId,
+    page: currentPage,
+    limit: POSTS_PER_PAGE,
+});
+
+useNormalizePaginationPage(currentPage, postsResponse?.pages);
+
+const { data: savedPosts = [] } = useGetSavedPostsQuery(undefined, {
     skip: !accessToken,
 });
 
-  
-    const totalPagesFromResponse = postsResponse?.pages;
-    const totalPages = totalPagesFromResponse ?? 1;
-    const posts = postsResponse?.data ?? [];
+const totalPages = postsResponse?.pages ?? 1;
+const posts = postsResponse?.data ?? [];
     const handleCategoryChange = (categoryId: string) => {
         if (categoryId === 'all') {
             setSearchParams({
