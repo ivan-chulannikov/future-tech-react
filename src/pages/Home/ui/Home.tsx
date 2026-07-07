@@ -4,7 +4,6 @@ import { PostsSection } from '@/widgets/PostsSection';
 import { ResourcesSection } from '@/widgets/ResourcesSection';
 import { ReviewsSection } from '@/widgets/ReviewsSection';
 import { AboutSection } from '@/widgets/AboutSection';
-import { useSearchParams } from 'react-router-dom';
 import { homePostsSection } from '../model/postSection';
 import { Pagination } from '@/shared/ui/Pagination';
 import { useGetPostsQuery, useGetSavedPostsQuery  } from '@/entities/post/api/postApi';
@@ -14,46 +13,35 @@ import { useAppSelector } from '@/app/store/hooks';
 import { selectToken } from '@/features/auth/model/selectors';
 import { usePaginationParams } from '@/shared/lib/pagination/usePaginationParams';
 import { useNormalizePaginationPage } from '@/shared/lib/pagination/useNormalizePaginationPage';
+import { usePostCategoryParams } from '@/features/filter-posts-by-category/lib/usePostCategoryParams';
 const POSTS_PER_PAGE = 3;
 const Home = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
+
     const accessToken = useAppSelector(selectToken);
-    const activeCategoryId = searchParams.get('category') ?? 'all';
-   const { currentPage, handlePageChange } = usePaginationParams();
+    const { activeCategoryId, handleCategoryChange } = usePostCategoryParams()
+    const { currentPage, handlePageChange } = usePaginationParams();
 
-const {
-    data: postsResponse,
-    isLoading: isPostsLoadingQuery,
-    isFetching: isPostsFetching,
-    isError: isPostsErrorQuery,
-    refetch: refetchPosts,
-} = useGetPostsQuery({
-    categoryId: activeCategoryId,
-    page: currentPage,
-    limit: POSTS_PER_PAGE,
-});
+    const {
+        data: postsResponse,
+        isLoading: isPostsLoadingQuery,
+        isFetching: isPostsFetching,
+        isError: isPostsErrorQuery,
+        refetch: refetchPosts,
+    } = useGetPostsQuery({
+        categoryId: activeCategoryId,
+        page: currentPage,
+        limit: POSTS_PER_PAGE,
+    });
 
-useNormalizePaginationPage(currentPage, postsResponse?.pages);
+    useNormalizePaginationPage(currentPage, postsResponse?.pages);
 
-const { data: savedPosts = [] } = useGetSavedPostsQuery(undefined, {
-    skip: !accessToken,
-});
+    const { data: savedPosts = [] } = useGetSavedPostsQuery(undefined, {
+        skip: !accessToken,
+    });
 
-const totalPages = postsResponse?.pages ?? 1;
-const posts = postsResponse?.data ?? [];
-    const handleCategoryChange = (categoryId: string) => {
-        if (categoryId === 'all') {
-            setSearchParams({
-                page: '1',
-            });
-            return;
-        }
-        setSearchParams({
-            category: categoryId,
-            page: '1',
-        });
-    };
-
+    const totalPages = postsResponse?.pages ?? 1;
+    const posts = postsResponse?.data ?? [];
+    
     const {
         data: tabsResponse,
         isLoading: isTabsLoadingQuery,
@@ -63,8 +51,6 @@ const posts = postsResponse?.data ?? [];
 
     const tabs = tabsResponse ?? [];
 
-    
-    
     return (
         <>
             <HeroSection />
