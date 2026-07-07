@@ -10,7 +10,6 @@ export const SavePostButton = ({
     isSaved,
     className = '',
 }: SavePostButtonProps) => {
-    console.log(isSaved, postId)
     const [addSavedPost, { isLoading: isAddSavedPostLoading }] = useAddSavedPostMutation();
     const [deleteSavedPost, { isLoading: isDeleteSavedPostLoading }] =
         useDeleteSavedPostMutation();

@@ -35,6 +35,7 @@ const Home = () => {
     const { data: savedPosts = [] } = useGetSavedPostsQuery(undefined, {
     skip: !accessToken,
 });
+
   
     const totalPagesFromResponse = postsResponse?.pages;
     const totalPages = totalPagesFromResponse ?? 1;
