@@ -23,7 +23,7 @@ export const baseApi = createApi({
         },
     }),
 
-    tagTypes: ['SavedPosts'],
+    tagTypes: ['Posts', 'SavedPosts'],
 
     endpoints: () => ({}),
 });

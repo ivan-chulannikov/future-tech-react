@@ -32,6 +32,7 @@ export interface PostBase {
     date: string;
     readingTime: string;
     stats: Stats;
+    isSaved: boolean;
 };
 
 
