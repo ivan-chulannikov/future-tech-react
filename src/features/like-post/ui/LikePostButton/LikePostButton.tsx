@@ -2,7 +2,6 @@ import { useLikePostMutation, useUnlikePostMutation } from '../../api/likePostAp
 import type { LikePostButtonProps } from './types/types';
 
 const LikePostButton = ({ likes, postId, isLiked }: LikePostButtonProps) => {
-    console.log(isLiked)
     const [likePost, { isLoading: isLikeLoading }] = useLikePostMutation();
     const [unlikePost, { isLoading: isUnlikeLoading }] = useUnlikePostMutation();
 
