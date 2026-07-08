@@ -12,6 +12,7 @@ import { SavePostButton } from '@/features/save-post';
 import { usePaginationParams } from '@/shared/lib/pagination/usePaginationParams';
 import { useNormalizePaginationPage } from '@/shared/lib/pagination/useNormalizePaginationPage';
 import { usePostCategoryParams } from '@/features/filter-posts-by-category/lib/usePostCategoryParams';
+import LikePostButton from '@/features/like-post/ui/LikePostButton/LikePostButton';
 const POSTS_PER_PAGE = 3;
 const Home = () => {
  
@@ -74,9 +75,21 @@ const posts = postsResponse?.data ?? [];
                 }
                 renderPostActions={(post) => {
                       return (
-                        <li className="blog-actions__item">
-                            <SavePostButton postId={post.id} isSaved={post.isSaved} />
-                        </li>
+                        <>
+                            <li className="blog-actions__item">
+                                <SavePostButton postId={post.id} isSaved={post.isSaved} />
+                            </li>
+                             <li className="blog-actions__item">
+                                <LikePostButton 
+                                    likes = {post.stats.likes} 
+                                    postId={post.id}
+                                    isLiked={post.isLiked}
+                                />
+
+                             </li>
+                        </>
+
+                       
                         );
                 }
                 }

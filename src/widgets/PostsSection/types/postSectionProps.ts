@@ -1,10 +1,10 @@
 import type { Category } from '@/entities/category';
 
-import type { PostBase } from '@/entities/post/model/types';
+import type {PostPreview } from '@/entities/post/model/types';
 import type { SectionHeaderProps } from '@/shared/ui/SectionHeader';
 import type { ReactNode } from 'react';
 export interface PostSectionProps {
-    posts: PostBase[];
+    posts: PostPreview[];
     tabs: Category[];
     sectionHeader: SectionHeaderProps;
     activeCategoryId: string;
@@ -18,5 +18,5 @@ export interface PostSectionProps {
     onPostsRetry: () => void;
     onTabsRetry: () => void;
     paginationSlot?: ReactNode;
-    renderPostActions?: (post: PostBase) => ReactNode;
+    renderPostActions?: (post: PostPreview) => ReactNode;
 }

@@ -57,7 +57,11 @@ const isPostBase = (value: unknown): value is PostBase => {
 export const isPostPreview = (value: unknown): value is PostPreview => {
     if (!isObject(value)) return false;
 
-    return isPostBase(value) && typeof value.isSaved === 'boolean';
+    return (
+        isPostBase(value) &&
+        typeof value.isSaved === 'boolean' &&
+        typeof value.isLiked === 'boolean'
+    );
 };
 
 const isBannerImage = (value: unknown): value is PostDetails['bannerImage'] => {

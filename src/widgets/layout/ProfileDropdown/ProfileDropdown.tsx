@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-
+import { baseApi } from '@/shared/api/baseApi';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { selectIsAuthenticated } from '@/features/auth/model/selectors';
 import { useLogoutRequestMutation } from '@/features/auth/api/authApi';
@@ -56,13 +56,14 @@ export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
         }
     };
 
-   const handleLogOut = async () => {
+ const handleLogOut = async () => {
     try {
         await logoutRequest().unwrap();
-    } catch {
-        console.error('Failed to logout on server');
+    } catch (error) {
+        console.error('Failed to logout on server', error);
     } finally {
         dispatch(logout());
+        dispatch(baseApi.util.resetApiState());
         void navigate(AppRoutes.home);
     }
 };
