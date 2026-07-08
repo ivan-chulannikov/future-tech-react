@@ -10,6 +10,7 @@ import { setCredentials } from '../../model/authSlice';
 import { useAppDispatch } from '@/app/store/hooks';
 import { AppRoutes } from '@/shared/config/routes';
 import { getErrorMessage } from '@/shared/lib/errors';
+import { baseApi } from '@/shared/api/baseApi';
 const LoginForm = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -48,6 +49,7 @@ const LoginForm = () => {
             const { user, accessToken } = response;
 
             dispatch(setCredentials({ user, accessToken }));
+            dispatch(baseApi.util.invalidateTags(['Posts', 'SavedPosts']));
             void navigate(AppRoutes.home);
         } catch (error) {
             console.log('login error:', error);

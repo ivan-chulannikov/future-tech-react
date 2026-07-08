@@ -3,7 +3,7 @@ import { useEffect, useState, type PropsWithChildren } from 'react';
 import { useAppDispatch } from '@/app/store/hooks';
 import { useRefreshMutation } from '../../api/authApi';
 import { logout, setCredentials } from '../../model/authSlice';
-
+import { baseApi } from '@/shared/api/baseApi';
 export const AuthInitializer = ({ children }: PropsWithChildren) => {
     const dispatch = useAppDispatch();
     const [refresh] = useRefreshMutation();
@@ -23,6 +23,7 @@ export const AuthInitializer = ({ children }: PropsWithChildren) => {
             } catch {
                 if (isMounted) {
                     dispatch(logout());
+                    dispatch(baseApi.util.resetApiState());
                 }
             } finally {
                 if (isMounted) {

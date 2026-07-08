@@ -31,12 +31,14 @@ export interface PostBase {
     categoryId: string;
     date: string;
     readingTime: string;
-    stats: Stats;
-    isSaved: boolean;
+    stats: Stats; 
 };
 
 
-export type PostPreview = PostBase;
+export interface PostPreview extends PostBase {
+    isSaved: boolean;
+    isLiked: boolean;
+}
 
 export interface PostDetails extends PostBase  {
     bannerImage: ImageInfo;
