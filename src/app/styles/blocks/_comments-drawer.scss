@@ -2,38 +2,146 @@
 
 .comments-drawer {
     position: fixed;
-    top: 0;
+    inset-block: 0;
     right: 0;
     z-index: 100;
-    width: clamp(360px, 34vw, 520px);
+
+    display: flex;
+    flex-direction: column;
+
+    width: min(#{rem(420)}, 100%);
     height: 100svh;
+
+    color: var(--color-grey-60);
     background-color: var(--color-dark);
     border-left: var(--border);
-    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.45);
-    overflow-y: auto;
+    box-shadow: rem(-20) 0 rem(60) rgba(0, 0, 0, 0.45);
+
+    overflow: hidden;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        column-gap: rem(20);
+
+        padding: rem(24);
+        border-bottom: var(--border);
+    }
+
+    &__header-main {
+        display: grid;
+        row-gap: rem(7);
+        min-width: 0;
+    }
+
+    &__eyebrow {
+        margin: 0;
+
+        color: var(--color-light);
+        font-size: rem(12);
+        font-weight: 600;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    &__title {
+        margin: 0;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__meta {
+        margin: 0;
+
+        color: var(--color-grey-50);
+        font-size: rem(13);
+    }
+
+    &__close-button {
+        flex-shrink: 0;
+
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        width: rem(34);
+        height: rem(34);
+
+        padding: 0;
+        border: var(--border);
+        border-radius: rem(6);
+
+        color: var(--color-grey-60);
+        background-color: transparent;
+
+        font-size: rem(20);
+        line-height: 1;
+
+        @include hover {
+            color: var(--color-light);
+            border-color: var(--color-dark-40);
+            background-color: var(--color-dark-10);
+        }
+    }
+
+    &__summary {
+        display: flex;
+        align-items: center;
+        column-gap: rem(8);
+
+        padding: rem(14) rem(24);
+        border-bottom: var(--border);
+
+        color: var(--color-grey-60);
+        font-size: rem(12);
+        text-transform: uppercase;
+    }
+
+    &__summary-icon {
+        color: var(--color-accent);
+    }
+
+    &__form-section {
+        padding: rem(20) rem(24);
+        border-bottom: var(--border);
+    }
+
+    &__list-section {
+        flex-grow: 1;
+        min-height: 0;
+        overflow-y: auto;
+    }
 }
 
-.add-comment-form {
+.comments-form {
     display: grid;
     row-gap: rem(12);
 
     &__textarea {
         width: 100%;
-        min-height: rem(110);
+        min-height: rem(90);
+
         resize: vertical;
         padding: rem(14);
+
         border: var(--border);
-        border-radius: rem(10);
+        border-radius: rem(8);
+
         color: var(--color-light);
         background-color: var(--color-dark-10);
+
+        font: inherit;
+        line-height: 1.5;
 
         &::placeholder {
             color: var(--color-grey-50);
         }
 
-        &:focus-visible {
-            outline: rem(2) dashed var(--color-light);
-            outline-offset: rem(4);
+        @include hover {
+            border-color: var(--color-dark-40);
         }
     }
 
@@ -45,17 +153,21 @@
     }
 
     &__counter {
-        font-size: rem(13);
         color: var(--color-grey-50);
+        font-size: rem(12);
     }
 
     &__submit {
-        min-height: rem(38);
+        min-height: rem(36);
         padding-inline: rem(18);
+
         border: none;
-        border-radius: rem(8);
+        border-radius: rem(6);
+
         color: var(--color-dark);
         background-color: var(--color-accent);
+
+        font-size: rem(13);
         font-weight: 600;
 
         @include hover {
@@ -64,34 +176,38 @@
     }
 }
 
-.comment-list {
+.comments-list {
     display: grid;
-    row-gap: rem(16);
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
 
     &__item {
-        list-style: none;
+        border-bottom: var(--border);
     }
 }
 
 .comment-card {
     display: grid;
-    row-gap: rem(14);
-    padding: rem(18);
-    border: var(--border);
-    border-radius: rem(12);
-    background-color: var(--color-dark-10);
+    row-gap: rem(13);
+
+    padding: rem(20) rem(24);
+
+    background-color: transparent;
 
     &__header {
         display: flex;
         justify-content: space-between;
-        align-items: start;
+        align-items: flex-start;
         column-gap: rem(16);
     }
 
     &__author {
         display: flex;
         align-items: center;
-        column-gap: rem(12);
+        column-gap: rem(11);
         min-width: 0;
     }
 
@@ -100,65 +216,88 @@
         justify-content: center;
         align-items: center;
         flex-shrink: 0;
-        width: rem(40);
-        height: rem(40);
+
+        width: rem(36);
+        height: rem(36);
+
         border: var(--border);
         border-radius: 50%;
+
         color: var(--color-light);
         background-color: var(--color-dark-20);
-        font-size: rem(13);
+
+        font-size: rem(12);
         font-weight: 600;
     }
 
     &__author-info {
         display: grid;
-        row-gap: rem(4);
+        row-gap: rem(3);
         min-width: 0;
     }
 
     &__author-name {
         margin: 0;
+
         color: var(--color-light);
-        font-size: rem(14);
+        font-family: var(--font-family-base);
+        font-size: rem(13);
         font-weight: 600;
         line-height: 1.3;
     }
 
     &__date {
         color: var(--color-grey-50);
-        font-size: rem(13);
+        font-size: rem(11);
     }
 
-    &__more-button {
-        width: rem(32);
-        height: rem(32);
+    &__menu-button {
+        flex-shrink: 0;
+
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        width: rem(30);
+        height: rem(30);
+
+        padding: 0;
         border: none;
+        border-radius: rem(6);
+
         color: var(--color-grey-60);
         background-color: transparent;
 
+        font-size: rem(16);
+        letter-spacing: rem(1);
+
         @include hover {
             color: var(--color-light);
+            background-color: var(--color-dark-10);
         }
     }
 
     &__text {
         margin: 0;
+
         color: var(--color-grey-60);
-        font-size: rem(14);
-        line-height: 1.5;
+        font-size: rem(13);
+        line-height: 1.55;
     }
 
     &__footer {
         display: flex;
-        justify-content: end;
+        justify-content: flex-end;
     }
 
     &__delete-button {
-        border: none;
         padding: 0;
+        border: none;
+
         color: var(--color-red);
         background-color: transparent;
-        font-size: rem(13);
+
+        font-size: rem(12);
 
         @include hover {
             color: var(--color-accent);

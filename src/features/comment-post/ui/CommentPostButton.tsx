@@ -1,8 +1,11 @@
 import type{ CommentPostButtonProps } from "./types";
 
-const CommentPostButton = ({isActive, onClick}: CommentPostButtonProps) => {
+const CommentPostButton = ({isActive, onClick, comments}: CommentPostButtonProps) => {
     return (
-         <button type="button" className="blog-actions__button">
+         <button type="button" 
+         className= {`blog-actions__button ${isActive ? 'is-active' : ''} `}
+         onClick={onClick}
+         >
                         <span className="blog-actions__icon-wrapper">
                             <svg
                                 width="20"
@@ -20,7 +23,7 @@ const CommentPostButton = ({isActive, onClick}: CommentPostButtonProps) => {
                                 />
                             </svg>
                         </span>
-                        <span></span>
+                        {comments}
                     </button>
     )
 }

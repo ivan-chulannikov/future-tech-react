@@ -1,1 +1,1 @@
-export type {ArticleType, Author,Stats, PostPreview } from './types';
+export type {ArticleType, Author,Stats, PostPreview, PostBase } from './types';
