@@ -1,48 +1,27 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FormInput } from '@/shared/ui/FormInput';
 import Button from '@/shared/ui/Button';
 import { AppRoutes } from '@/shared/config/routes';
-import type {
-    RegisterFormErrors,
-    RegisterFormTouched,
-    RegisterFormValues,
-} from '../../model/types';
+
 import { useRegisterMutation } from '../../api/authApi';
 import { validateRegisterForm } from '../lib/validateRegisterForm';
 import { getErrorMessage } from '@/shared/lib/errors';
-import { validateRegisterField } from '../lib/validateFieldRegister';
-
+import { useForm } from '@/shared/lib/form';
+import type { RegisterFormValues } from '../../model';
+const registerInitialValues = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    agreement: false,
+    description: '',
+};
 const RegisterForm = () => {
     const navigate = useNavigate();
-    const [values, setValues] = useState<RegisterFormValues>({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        agreement: false,
-        description: '',
-    });
-
     const [register, { isLoading, isError, error }] = useRegisterMutation();
     const errorMessage = isError ? getErrorMessage(error) : '';
-    const [errors, setErrors] = useState<RegisterFormErrors>({});
-    const [touched, setTouched] = useState<RegisterFormTouched>({});
 
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const validationErrors = validateRegisterForm(values);
-        setErrors(validationErrors);
-        setTouched({
-            name: true,
-            email: true,
-            password: true,
-            confirmPassword: true,
-            agreement: true,
-        });
-        if (Object.keys(validationErrors).length > 0) {
-            return;
-        }
+    const submitRegister = async (values: RegisterFormValues) => {
         try {
             await register({
                 email: values.email,
@@ -52,70 +31,17 @@ const RegisterForm = () => {
             }).unwrap();
             void navigate(AppRoutes.login);
         } catch (error) {
-            console.log('register error:', error);
+            console.error('register error:', error);
         }
     };
-
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, type, value, checked } = event.target;
-
-        const fieldValue = type === 'checkbox' ? checked : value;
-
-        setValues((prev) => ({
-            ...prev,
-            [name]: fieldValue,
-        }));
-
-        if (touched[name as keyof RegisterFormTouched]) {
-            const nextValues = {
-                ...values,
-                [name]: fieldValue,
-            };
-
-            const error = validateRegisterField(
-                name as keyof RegisterFormValues,
-                fieldValue,
-                nextValues,
-            );
-
-            setErrors((prev) => ({
-                ...prev,
-                [name]: error,
-            }));
-
-            if ((name === 'password' || name === 'confirmPassword') && touched.confirmPassword) {
-                setErrors((prev) => ({
-                    ...prev,
-                    confirmPassword: validateRegisterField(
-                        'confirmPassword',
-                        nextValues.confirmPassword,
-                        nextValues,
-                    ),
-                }));
-            }
-        }
-    };
-
-    const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-        const { name, type, value, checked } = event.target;
-
-        const fieldValue = type === 'checkbox' ? checked : value;
-
-        setTouched((prev) => ({
-            ...prev,
-            [name]: true,
-        }));
-
-        const error = validateRegisterField(name as keyof RegisterFormValues, fieldValue, values);
-
-        setErrors((prev) => ({
-            ...prev,
-            [name]: error,
-        }));
-    };
+    const { values, errors, touched, onChange, onBlur, handleSubmit } = useForm(
+        registerInitialValues,
+        validateRegisterForm,
+        submitRegister,
+    );
 
     return (
-        <form className="auth__form" onSubmit={(event) => void onSubmit(event)}>
+        <form className="auth__form" onSubmit={(event) => void handleSubmit(event)}>
             <FormInput
                 id="name"
                 label="Name"
@@ -146,7 +72,7 @@ const RegisterForm = () => {
                 name="description"
                 type="text"
                 placeholder="Enter your description"
-                value={values?.description}
+                value={values.description}
                 onChange={onChange}
                 onBlur={onBlur}
                 error={touched.description ? errors.description : undefined}
@@ -191,7 +117,7 @@ const RegisterForm = () => {
                     <p className="field__error">{errors.agreement}</p>
                 )}
             </div>
-            <Button type="submit" className="button--accent auth__submit">
+            <Button type="submit" className="button--accent auth__submit" disabled={isLoading}>
                 {isLoading ? 'Loading...' : 'Sign up'}
             </Button>
             {errorMessage && (
