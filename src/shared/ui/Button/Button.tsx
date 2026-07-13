@@ -14,7 +14,7 @@ const Button = (props: ButtonProps) => {
         const { className = '', children, icon = '', to, ...rest } = props;
 
         return (
-            <Link to={to} className={`${className} button`} {...rest}>
+            <Link to={to} className={`button ${className}`.trim()} {...rest}>
                 {renderContent(children, icon)}
             </Link>
         );
@@ -24,7 +24,7 @@ const Button = (props: ButtonProps) => {
         const { className = '', children, href, icon = '', ...rest } = props;
 
         return (
-            <a href={href} className={`${className} button`} {...rest}>
+            <a href={href} className={`button ${className}`.trim()} {...rest}>
                 {renderContent(children, icon)}
             </a>
         );
@@ -33,7 +33,7 @@ const Button = (props: ButtonProps) => {
     const { className = '', children, icon = '', type = 'button', ...rest } = props;
 
     return (
-        <button type={type} className={`${className} button`} {...rest}>
+        <button type={type} className={`button ${className}`.trim()} {...rest}>
             {renderContent(children, icon)}
         </button>
     );
