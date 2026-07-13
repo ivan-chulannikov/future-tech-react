@@ -14,7 +14,6 @@ const FormField = ({
         <div className={`field ${error ? 'is-invalid' : ''} ${className}`.trim()}>
             <label className="field__label" htmlFor={id}>
                 {label}
-
                 {required && (
                     <>
                         {' '}
@@ -24,9 +23,7 @@ const FormField = ({
                     </>
                 )}
             </label>
-
             {children}
-
             <span id={errorId} className="feedback-form__error">
                 {error}
             </span>

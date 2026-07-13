@@ -1,6 +1,6 @@
 import { FormInput } from '@/shared/ui/FormInput';
 import Button from '@/shared/ui/Button';
-import { validateForm } from '../lib/validateForm';
+import { validateForm } from '../../lib/validateForm';
 import { useLoginMutation } from '../../api/authApi';
 import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '../../model/authSlice';

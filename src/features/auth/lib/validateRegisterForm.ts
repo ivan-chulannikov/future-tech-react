@@ -12,7 +12,6 @@ export const validateRegisterForm = (values: RegisterFormValues): RegisterFormEr
         'agreement',
         'description',
     ];
-
     fields.forEach((field) => {
         const error = validateRegisterField(field, values[field], values);
 

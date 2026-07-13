@@ -13,9 +13,14 @@ export const useForm = <TValues extends object>(
     const [values, setValues] = useState<TValues>(initialValues);
     const [errors, setErrors] = useState<FormErrors<TValues>>({});
     const [touched, setTouched] = useState<FormTouched<TValues>>({});
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, type, value, checked } = event.target;
-        const fieldValue = type === 'checkbox' ? checked : value;
+    const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const target = event.target;
+        const name = target.name;
+
+        const fieldValue =
+            target instanceof HTMLInputElement && target.type === 'checkbox'
+                ? target.checked
+                : target.value;
         const nextValues = {
             ...values,
             [name]: fieldValue,
@@ -24,7 +29,7 @@ export const useForm = <TValues extends object>(
         const validationErrors = validatorCallback(nextValues);
         setErrors(validationErrors);
     };
-    const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const onBlur = (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name } = event.target;
 
         setTouched((prevTouched) => ({
@@ -33,6 +38,11 @@ export const useForm = <TValues extends object>(
         }));
         const validationErrors = validatorCallback(values);
         setErrors(validationErrors);
+    };
+    const reset = () => {
+        setValues(initialValues);
+        setErrors({});
+        setTouched({});
     };
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -51,8 +61,10 @@ export const useForm = <TValues extends object>(
         if (Object.keys(validationErrors).length > 0) {
             return;
         }
-        await onSubmit(values);
+
+        await onSubmit(values, { reset });
     };
+
     return {
         values,
         errors,
@@ -60,5 +72,6 @@ export const useForm = <TValues extends object>(
         handleSubmit,
         onBlur,
         onChange,
+        reset,
     };
 };
