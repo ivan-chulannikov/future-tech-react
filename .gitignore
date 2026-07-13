@@ -26,3 +26,5 @@ scripts/git-review.txt
 *.sw?
 # Backend lives in a separate repository
 /backend/
+*storybook.log
+storybook-static
