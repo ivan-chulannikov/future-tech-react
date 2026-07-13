@@ -25,7 +25,7 @@ const PostsSection = ({
     renderPostActions,
 }: PostSectionProps) => {
     const isInitialLoading = isPostsLoading && posts.length === 0;
-   
+
     return (
         <section className="section">
             <SectionHeader {...sectionHeader} />
@@ -89,8 +89,6 @@ const PostsSection = ({
                     </TabPanel>
                 </div>
             </div>
-           
-
         </section>
     );
 };

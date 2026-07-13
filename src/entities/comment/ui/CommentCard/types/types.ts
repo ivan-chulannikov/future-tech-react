@@ -1,5 +1,5 @@
-import type { Comment } from "@/entities/comment/model/types"
+import type { Comment } from '@/entities/comment/model/types';
 
 export type CommentCardProps = {
-    comment: Comment
-}
+    comment: Comment;
+};

@@ -47,7 +47,7 @@ describe('validateRegisterField', () => {
             validateRegisterField('name', '', {
                 ...validRegisterValues,
                 name: '',
-            })
+            }),
         ).toBe('Enter name');
     });
 
@@ -56,7 +56,7 @@ describe('validateRegisterField', () => {
             validateRegisterField('email', 'test', {
                 ...validRegisterValues,
                 email: 'test',
-            })
+            }),
         ).toBe('Invalid email');
     });
 
@@ -65,7 +65,7 @@ describe('validateRegisterField', () => {
             validateRegisterField('email', '', {
                 ...validRegisterValues,
                 email: '',
-            })
+            }),
         ).toBe('Enter email');
     });
 
@@ -74,7 +74,7 @@ describe('validateRegisterField', () => {
             validateRegisterField('password', '123', {
                 ...validRegisterValues,
                 password: '123',
-            })
+            }),
         ).toBe('The password must be at least 6 characters long');
     });
 
@@ -83,7 +83,7 @@ describe('validateRegisterField', () => {
             validateRegisterField('password', '', {
                 ...validRegisterValues,
                 password: '',
-            })
+            }),
         ).toBe('Enter password');
     });
 
@@ -92,7 +92,7 @@ describe('validateRegisterField', () => {
             validateRegisterField('confirmPassword', '123', {
                 ...validRegisterValues,
                 confirmPassword: '123',
-            })
+            }),
         ).toBe('Passwords do not match');
     });
 
@@ -101,7 +101,7 @@ describe('validateRegisterField', () => {
             validateRegisterField('confirmPassword', '', {
                 ...validRegisterValues,
                 confirmPassword: '',
-            })
+            }),
         ).toBe('Confirm password');
     });
 
@@ -110,7 +110,7 @@ describe('validateRegisterField', () => {
             validateRegisterField('description', 'test', {
                 ...validRegisterValues,
                 description: 'test',
-            })
+            }),
         ).toBe('The description must be at least 6 characters long');
     });
 
@@ -119,7 +119,7 @@ describe('validateRegisterField', () => {
             validateRegisterField('agreement', false, {
                 ...validRegisterValues,
                 agreement: false,
-            })
+            }),
         ).toBe('You must accept the terms');
     });
 
@@ -127,6 +127,6 @@ describe('validateRegisterField', () => {
         'returns empty string when $fieldName is valid',
         ({ fieldName, value }) => {
             expect(validateRegisterField(fieldName, value, validRegisterValues)).toBe('');
-        }
+        },
     );
 });

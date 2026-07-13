@@ -1,5 +1,5 @@
 import type { PostActionsProps } from './types/PostActionsProps';
-const PostActions = ({shares, children }: PostActionsProps) => {
+const PostActions = ({ shares, children }: PostActionsProps) => {
     return (
         <div className="blog-details__actions actions">
             <ul className="blog-actions__list">

@@ -4,10 +4,8 @@ export interface Comment {
     createdAt: string;
     updatedAt: string;
     author: AuthorTest;
-
 }
-type AuthorTest  = {
+type AuthorTest = {
     id: string;
     username: string;
-
-}
+};

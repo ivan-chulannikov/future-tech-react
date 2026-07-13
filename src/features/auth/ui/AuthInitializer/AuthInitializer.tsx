@@ -10,7 +10,7 @@ export const AuthInitializer = ({ children }: PropsWithChildren) => {
 
     const [isAuthInitialized, setIsAuthInitialized] = useState(false);
 
-     useEffect(() => {
+    useEffect(() => {
         let isMounted = true;
 
         const initAuth = async () => {

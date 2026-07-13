@@ -1,1 +1,1 @@
-export { usePostCategoryParams } from './lib/usePostCategoryParams'
+export { usePostCategoryParams } from './lib/usePostCategoryParams';

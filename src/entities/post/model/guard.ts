@@ -2,7 +2,6 @@ import type { PostBase, PostPreview, PostDetails } from './types';
 import type { PaginatedResponse } from '@/shared/api/types/types';
 import { isObject, isStringArray } from '@/shared/guards/guards';
 
-
 type SavedPostsResponse = {
     data: PostPreview[];
 };
@@ -122,7 +121,6 @@ export const isPaginatedPostPreviewResponse = (
     );
 };
 
-
 export const isSavedPostsResponse = (value: unknown): value is SavedPostsResponse => {
     return (
         typeof value === 'object' &&
@@ -131,7 +129,5 @@ export const isSavedPostsResponse = (value: unknown): value is SavedPostsRespons
         isPostPreviewArray(value.data)
     );
 };
-
-
 
 // убрать AuthorTest и runtime guard на AuthorTest

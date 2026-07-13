@@ -1,18 +1,10 @@
-import {
-    useAddSavedPostMutation,
-    useDeleteSavedPostMutation,
-} from '@/entities/post/api/postApi';
+import { useAddSavedPostMutation, useDeleteSavedPostMutation } from '@/entities/post/api/postApi';
 
 import type { SavePostButtonProps } from './types/SavePostButtonProps';
 
-export const SavePostButton = ({
-    postId,
-    isSaved,
-    className = '',
-}: SavePostButtonProps) => {
+export const SavePostButton = ({ postId, isSaved, className = '' }: SavePostButtonProps) => {
     const [addSavedPost, { isLoading: isAddSavedPostLoading }] = useAddSavedPostMutation();
-    const [deleteSavedPost, { isLoading: isDeleteSavedPostLoading }] =
-        useDeleteSavedPostMutation();
+    const [deleteSavedPost, { isLoading: isDeleteSavedPostLoading }] = useDeleteSavedPostMutation();
 
     const isLoading = isAddSavedPostLoading || isDeleteSavedPostLoading;
 

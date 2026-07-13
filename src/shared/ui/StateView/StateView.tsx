@@ -10,7 +10,6 @@ const StateView = ({
     className = '',
     size,
     titleAs: TitleTag = 'h2',
-
 }: StateViewProps) => {
     const titleId = useId();
     const isLoading = variant === 'loading';

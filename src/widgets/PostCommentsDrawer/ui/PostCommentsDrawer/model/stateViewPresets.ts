@@ -18,7 +18,4 @@ export const commentsStateViewContent = {
         title: 'No comments yet',
         description: 'Be the first to leave a comment.',
     },
-} satisfies Record<
-    string,
-    Omit<StateViewProps, 'action' | 'className'>
->;
+} satisfies Record<string, Omit<StateViewProps, 'action' | 'className'>>;

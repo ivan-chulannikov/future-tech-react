@@ -1,3 +1,2 @@
-
 export { useNormalizePaginationPage } from './useNormalizePaginationPage';
-export  { usePaginationParams } from './usePaginationParams'
+export { usePaginationParams } from './usePaginationParams';

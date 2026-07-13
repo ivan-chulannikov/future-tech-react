@@ -1,5 +1,5 @@
-import type { PostBase } from "@/entities/post";
+import type { PostBase } from '@/entities/post';
 export type PostCommentsDrawerHeaderProps = {
     onClose: () => void;
-    post: PostBase
-}
+    post: PostBase;
+};

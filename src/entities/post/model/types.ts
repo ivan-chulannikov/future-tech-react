@@ -32,16 +32,15 @@ export interface PostBase {
     categoryId: string;
     date: string;
     readingTime: string;
-    stats: Stats; 
-};
-
+    stats: Stats;
+}
 
 export interface PostPreview extends PostBase {
     isSaved: boolean;
     isLiked: boolean;
 }
 
-export interface PostDetails extends PostBase  {
+export interface PostDetails extends PostBase {
     bannerImage: ImageInfo;
     content: {
         introduction: string;
@@ -50,4 +49,4 @@ export interface PostDetails extends PostBase  {
             paragraphs: string[];
         }[];
     };
-};
+}

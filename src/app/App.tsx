@@ -5,11 +5,9 @@ import { AuthInitializer } from '@/features/auth/ui/AuthInitializer';
 function App() {
     return (
         <AuthInitializer>
-             <AppRouter/>
+            <AppRouter />
         </AuthInitializer>
-       
-    )
-    
+    );
 }
 
 export default App;

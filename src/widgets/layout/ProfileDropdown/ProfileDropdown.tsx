@@ -11,7 +11,7 @@ import { logout } from '@/features/auth/model/authSlice';
 import type { ProfileDropdownProps } from '../ProfileDropdown/types/types';
 import ProfileDropdownMenu from '../ProfileDropdownMenu/ProfileDropdownMenu';
 export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
-    const [logoutRequest] = useLogoutRequestMutation()
+    const [logoutRequest] = useLogoutRequestMutation();
     const dropdownRef = useRef<HTMLDivElement>(null);
     const [isOpen, setIsOpen] = useState(false);
     const isAuthenticated = useAppSelector(selectIsAuthenticated);
@@ -45,7 +45,7 @@ export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
                         : `${className} profile-auth-button`
                 }
             >
-                <span className="profile-auth-button__icon" aria-hidden="true"/>
+                <span className="profile-auth-button__icon" aria-hidden="true" />
                 <span className="profile-auth-button__label">Sign in</span>
             </NavLink>
         );
@@ -56,17 +56,17 @@ export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
         }
     };
 
- const handleLogOut = async () => {
-    try {
-        await logoutRequest().unwrap();
-    } catch (error) {
-        console.error('Failed to logout on server', error);
-    } finally {
-        dispatch(logout());
-        dispatch(baseApi.util.resetApiState());
-        void navigate(AppRoutes.home);
-    }
-};
+    const handleLogOut = async () => {
+        try {
+            await logoutRequest().unwrap();
+        } catch (error) {
+            console.error('Failed to logout on server', error);
+        } finally {
+            dispatch(logout());
+            dispatch(baseApi.util.resetApiState());
+            void navigate(AppRoutes.home);
+        }
+    };
     return (
         <div className="profile-dropdown" ref={dropdownRef}>
             <Button
@@ -78,9 +78,9 @@ export const ProfileDropdown = ({ className }: ProfileDropdownProps) => {
                     handleClose(event.key);
                 }}
             >
-                <span className="profile-menu-button__icon" aria-hidden="true"/>
+                <span className="profile-menu-button__icon" aria-hidden="true" />
                 <span className="profile-menu-button__initials">IP</span>
-                <span className="profile-menu-button__arrow" aria-hidden="true"/>
+                <span className="profile-menu-button__arrow" aria-hidden="true" />
             </Button>
 
             {isOpen && (

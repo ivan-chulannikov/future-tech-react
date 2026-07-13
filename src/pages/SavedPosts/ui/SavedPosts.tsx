@@ -61,14 +61,13 @@ export const SavedPosts = () => {
                                     </li>
                                 )}
                             />
-                            <div className='posts-section__pagination'>
-                                 <Pagination
-                                currentPage={currentPage}
-                                totalPages={totalPages}
-                                onPageChange={handlePageChange}
+                            <div className="posts-section__pagination">
+                                <Pagination
+                                    currentPage={currentPage}
+                                    totalPages={totalPages}
+                                    onPageChange={handlePageChange}
                                 />
                             </div>
-                           
                         </>
                     )}
                 </div>

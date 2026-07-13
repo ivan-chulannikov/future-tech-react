@@ -5,8 +5,6 @@ import { getBlogDetailsRoute } from '@/shared/config/routes';
 const PostCard = ({ post, actionsSlot }: PostCardProps) => {
     const { id, author, date, title, description, stats } = post;
 
-
-   
     return (
         <li className="list__item">
             <article className="blog-card container">
@@ -38,7 +36,6 @@ const PostCard = ({ post, actionsSlot }: PostCardProps) => {
                         className="blog-card__actions"
                         views={stats.views}
                         shares={stats.shares}
-
                     >
                         {actionsSlot}
                     </PostActions>

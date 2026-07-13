@@ -1,4 +1,4 @@
-import type { RegisterFormValues } from "@/features/auth/model";
+import type { RegisterFormValues } from '@/features/auth/model';
 
 export const validateRegisterField = (
     name: keyof RegisterFormValues,

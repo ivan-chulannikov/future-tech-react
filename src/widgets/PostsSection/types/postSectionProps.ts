@@ -1,6 +1,6 @@
 import type { Category } from '@/entities/category';
 
-import type {PostPreview } from '@/entities/post/model/types';
+import type { PostPreview } from '@/entities/post/model/types';
 import type { SectionHeaderProps } from '@/shared/ui/SectionHeader';
 import type { ReactNode } from 'react';
 export interface PostSectionProps {

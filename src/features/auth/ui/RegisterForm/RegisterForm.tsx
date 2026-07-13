@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { FormInput } from '@/shared/ui/FormInput';
 import Button from '@/shared/ui/Button';
 import { AppRoutes } from '@/shared/config/routes';
-import type { RegisterFormErrors, RegisterFormTouched, RegisterFormValues } from '../../model/types';
+import type {
+    RegisterFormErrors,
+    RegisterFormTouched,
+    RegisterFormValues,
+} from '../../model/types';
 import { useRegisterMutation } from '../../api/authApi';
-import {validateRegisterForm } from '../lib/validateRegisterForm';
+import { validateRegisterForm } from '../lib/validateRegisterForm';
 import { getErrorMessage } from '@/shared/lib/errors';
 import { validateRegisterField } from '../lib/validateFieldRegister';
 

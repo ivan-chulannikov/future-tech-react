@@ -48,7 +48,6 @@ export default defineConfig([
                 },
             ],
 
-
             'react-hooks/exhaustive-deps': 'warn',
 
             'no-console': ['warn', { allow: ['warn', 'error'] }],
@@ -57,8 +56,6 @@ export default defineConfig([
             'react/button-has-type': 'warn',
             'react/no-array-index-key': 'warn',
             'react/self-closing-comp': 'warn',
-
-          
         },
     },
 ]);

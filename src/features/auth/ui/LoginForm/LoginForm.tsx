@@ -55,48 +55,48 @@ const LoginForm = () => {
             console.log('login error:', error);
         }
     };
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, type, value, checked } = event.target;
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, type, value, checked } = event.target;
 
-    const fieldValue = type === 'checkbox' ? checked : value;
+        const fieldValue = type === 'checkbox' ? checked : value;
 
-    setValues((prev) => ({
-        ...prev,
-        [name]: fieldValue,
-    }));
+        setValues((prev) => ({
+            ...prev,
+            [name]: fieldValue,
+        }));
 
-    if (name !== 'email' && name !== 'password') {
-        return;
-    }
+        if (name !== 'email' && name !== 'password') {
+            return;
+        }
 
-    if (touched[name]) {
+        if (touched[name]) {
+            const error = validateField(name, value);
+
+            setErrors((prev) => ({
+                ...prev,
+                [name]: error,
+            }));
+        }
+    };
+    const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+
+        setTouched((prev) => ({
+            ...prev,
+            [name]: true,
+        }));
+
+        if (name !== 'email' && name !== 'password') {
+            return;
+        }
+
         const error = validateField(name, value);
 
         setErrors((prev) => ({
             ...prev,
             [name]: error,
         }));
-    }
-};
-  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-
-    setTouched((prev) => ({
-        ...prev,
-        [name]: true,
-    }));
-
-    if (name !== 'email' && name !== 'password') {
-        return;
-    }
-
-    const error = validateField(name, value);
-
-    setErrors((prev) => ({
-        ...prev,
-        [name]: error,
-    }));
-};
+    };
 
     return (
         <form className="auth__form" onSubmit={(event) => void onSubmit(event)}>

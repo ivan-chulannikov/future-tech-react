@@ -6,7 +6,7 @@ import { AppRoutes } from '@/shared/config/routes';
 import { formatMemberSince } from '../lib/formatMemberSince';
 const Profile = () => {
     const user = useAppSelector(selectUser);
-   
+
     if (!user) {
         return <Navigate to={AppRoutes.login} replace />;
     }

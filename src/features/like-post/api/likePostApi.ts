@@ -1,4 +1,4 @@
-import { baseApi } from "@/shared/api/baseApi";
+import { baseApi } from '@/shared/api/baseApi';
 
 type LikePostResponse = {
     postId: string;
@@ -6,25 +6,23 @@ type LikePostResponse = {
     likes: number;
 };
 
-export const likePostApi  =  baseApi.injectEndpoints({
+export const likePostApi = baseApi.injectEndpoints({
     endpoints: (build) => ({
         likePost: build.mutation<LikePostResponse, string>({
             query: (postId) => ({
-                 url: `posts/${postId}/like`,
-                 method: 'POST',
+                url: `posts/${postId}/like`,
+                method: 'POST',
             }),
-            invalidatesTags: ['Posts']
+            invalidatesTags: ['Posts'],
         }),
         unlikePost: build.mutation<LikePostResponse, string>({
             query: (postId) => ({
-                 url: `posts/${postId}/like`,
-                 method: 'DELETE',
+                url: `posts/${postId}/like`,
+                method: 'DELETE',
             }),
-            invalidatesTags: ['Posts']
-        })
-    })
-
-   
-})
+            invalidatesTags: ['Posts'],
+        }),
+    }),
+});
 
 export const { useLikePostMutation, useUnlikePostMutation } = likePostApi;
