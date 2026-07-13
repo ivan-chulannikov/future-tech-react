@@ -20,6 +20,7 @@ export type Stats = {
     likes: number;
     views: number;
     shares: number;
+    comments: number;
 };
 
 export interface PostBase {

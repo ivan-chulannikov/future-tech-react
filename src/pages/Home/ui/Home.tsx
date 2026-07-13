@@ -7,15 +7,15 @@ import { ReviewsSection } from '@/widgets/ReviewsSection';
 import { AboutSection } from '@/widgets/AboutSection';
 import { homePostsSection } from '../model/postSection';
 import { Pagination } from '@/shared/ui/Pagination';
-import { useGetPostsQuery} from '@/entities/post/api/postApi';
-import { useGetCategoriesQuery } from '@/entities/category/api/categoriesApi';
+import { useGetPostsQuery} from '@/entities/post';
+import { useGetCategoriesQuery } from '@/entities/category';
 import { SavePostButton } from '@/features/save-post';
-import { usePaginationParams } from '@/shared/lib/pagination/usePaginationParams';
-import { useNormalizePaginationPage } from '@/shared/lib/pagination/useNormalizePaginationPage';
-import { usePostCategoryParams } from '@/features/filter-posts-by-category/lib/usePostCategoryParams';
-import LikePostButton from '@/features/like-post/ui/LikePostButton/LikePostButton';
+import { usePaginationParams } from '@/shared/lib/pagination';
+import { useNormalizePaginationPage } from '@/shared/lib/pagination';
+import { usePostCategoryParams } from '@/features/filter-posts-by-category';
+import {LikePostButton} from '@/features/like-post';
 import CommentPostButton from '@/features/comment-post/ui/CommentPostButton';
-import Drawer from '@/shared/ui/Drawer/Drawer';
+import { PostCommentsDrawer } from '@/widgets/PostCommentsDrawer';
 const POSTS_PER_PAGE = 3;
 const Home = () => {
     const { activeCategoryId, handleCategoryChange } = usePostCategoryParams()
@@ -50,8 +50,6 @@ const posts = postsResponse?.data ?? [];
 
     const tabs = tabsResponse ?? [];
     const selectedCommentsPost = posts.find((post) => post.id === openedCommentsPostId);
-    console.log(selectedCommentsPost)
-    console.log(openedCommentsPostId)
     return (
         <>
             <HeroSection />
@@ -94,6 +92,7 @@ const posts = postsResponse?.data ?? [];
             <li className="blog-actions__item">
                 <CommentPostButton
                     isActive={openedCommentsPostId === post.id}
+                    comments = {post.stats.comments}
                     onClick={() =>
                         setOpenedCommentsPostId((currentPostId) =>
                             currentPostId === post.id ? null : post.id,
@@ -105,7 +104,7 @@ const posts = postsResponse?.data ?? [];
     )}
 />
 
-{selectedCommentsPost && <Drawer post = {selectedCommentsPost} onClose={() => setOpenedCommentsPostId(null)}/>}
+{selectedCommentsPost && <PostCommentsDrawer post = {selectedCommentsPost} onClose={() => setOpenedCommentsPostId(null)}/>}
 
             <ResourcesSection />
             <ReviewsSection />

@@ -7,7 +7,6 @@ type GetPostsParams = {
     page: number;
     limit: number;
     savedOnly?:boolean;
-     
 };
 
 export const postApiRtk = baseApi.injectEndpoints({

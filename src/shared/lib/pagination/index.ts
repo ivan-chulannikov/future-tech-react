@@ -1,2 +1,3 @@
-export { clampPage } from './clampPage';
-export { getValidPage } from './getValidPage';
+
+export { useNormalizePaginationPage } from './useNormalizePaginationPage';
+export  { usePaginationParams } from './usePaginationParams'

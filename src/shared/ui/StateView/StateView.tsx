@@ -9,6 +9,8 @@ const StateView = ({
     action,
     className = '',
     size,
+    titleAs: TitleTag = 'h2',
+
 }: StateViewProps) => {
     const titleId = useId();
     const isLoading = variant === 'loading';
@@ -29,9 +31,9 @@ const StateView = ({
                         {variant === 'error' && 'Something went wrong'}
                         {variant === 'empty' && 'No data'}
                     </p>
-                    <h1 className="state-view__title" id={titleId}>
+                    <TitleTag className="state-view__title" id={titleId}>
                         {title}
-                    </h1>
+                    </TitleTag>
                     {description && <p className="state-view__description">{description}</p>}
                     {action && <div className="state-view__actions">{action}</div>}
                 </div>
