@@ -4,8 +4,9 @@ import Button from '@/shared/ui/Button';
 import { AppRoutes } from '@/shared/config/routes';
 
 import { useRegisterMutation } from '../../api/authApi';
-import { validateRegisterForm } from '../lib/validateRegisterForm';
+import { validateRegisterForm } from '../../lib/validateRegisterForm';
 import { getErrorMessage } from '@/shared/lib/errors';
+
 import { useForm } from '@/shared/lib/form';
 import type { RegisterFormValues } from '../../model';
 const registerInitialValues = {
@@ -16,6 +17,7 @@ const registerInitialValues = {
     agreement: false,
     description: '',
 };
+
 const RegisterForm = () => {
     const navigate = useNavigate();
     const [register, { isLoading, isError, error }] = useRegisterMutation();

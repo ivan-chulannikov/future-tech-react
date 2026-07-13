@@ -31,7 +31,7 @@ export const validateRegisterField = (
         }
     }
     if (name === 'description') {
-        if (typeof value === 'string' && value.length < 6) {
+        if (typeof value === 'string' && value.length < 6 && value.length > 0) {
             return 'The description must be at least 6 characters long';
         }
     }
