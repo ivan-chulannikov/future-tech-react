@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from 'eslint-plugin-storybook';
+
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import globals from 'globals';
@@ -8,8 +11,7 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import react from 'eslint-plugin-react';
 
 export default defineConfig([
-    globalIgnores(['dist', 'backend/**', 'eslint.config.js']),
-
+    globalIgnores(['dist', 'storybook-static', 'backend/**', 'eslint.config.js']),
     {
         files: ['src/**/*.{ts,tsx}'],
         extends: [
@@ -58,4 +60,5 @@ export default defineConfig([
             'react/self-closing-comp': 'warn',
         },
     },
+    ...storybook.configs['flat/recommended'],
 ]);
