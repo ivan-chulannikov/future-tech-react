@@ -1,8 +1,5 @@
 import { FormInput } from '@/shared/ui/FormInput';
 import Button from '@/shared/ui/Button';
-import type { LoginFormErrors, LoginFormTouched, LoginFormValues } from '../../model/types';
-import { useState } from 'react';
-import { validateField } from '../lib/validateField';
 import { validateForm } from '../lib/validateForm';
 import { useLoginMutation } from '../../api/authApi';
 import { useNavigate } from 'react-router-dom';
@@ -11,35 +8,20 @@ import { useAppDispatch } from '@/app/store/hooks';
 import { AppRoutes } from '@/shared/config/routes';
 import { getErrorMessage } from '@/shared/lib/errors';
 import { baseApi } from '@/shared/api/baseApi';
+import { useForm } from '@/shared/lib/form';
+import type { LoginFormValues } from '../../model';
+const loginInitialValues = {
+    email: '',
+    password: '',
+    rememberMe: false,
+};
 const LoginForm = () => {
     const navigate = useNavigate();
+
     const dispatch = useAppDispatch();
-    const [values, setValues] = useState<LoginFormValues>({
-        email: '',
-        password: '',
-        rememberMe: false,
-    });
+
     const [login, { isLoading, error, isError }] = useLoginMutation();
-    const [errors, setErrors] = useState<LoginFormErrors>({});
-    const [touched, setTouched] = useState<LoginFormTouched>({});
-
-    const errorMessage = isError ? getErrorMessage(error) : '';
-
-    const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        const validationErrors = validateForm(values);
-
-        setErrors(validationErrors);
-        setTouched({
-            email: true,
-            password: true,
-        });
-
-        if (Object.keys(validationErrors).length > 0) {
-            return;
-        }
-
+    const submitLogin = async (values: LoginFormValues) => {
         try {
             const response = await login({
                 email: values.email,
@@ -52,54 +34,18 @@ const LoginForm = () => {
             dispatch(baseApi.util.invalidateTags(['Posts', 'SavedPosts']));
             void navigate(AppRoutes.home);
         } catch (error) {
-            console.log('login error:', error);
+            console.error('login error:', error);
         }
     };
-    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, type, value, checked } = event.target;
-
-        const fieldValue = type === 'checkbox' ? checked : value;
-
-        setValues((prev) => ({
-            ...prev,
-            [name]: fieldValue,
-        }));
-
-        if (name !== 'email' && name !== 'password') {
-            return;
-        }
-
-        if (touched[name]) {
-            const error = validateField(name, value);
-
-            setErrors((prev) => ({
-                ...prev,
-                [name]: error,
-            }));
-        }
-    };
-    const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-
-        setTouched((prev) => ({
-            ...prev,
-            [name]: true,
-        }));
-
-        if (name !== 'email' && name !== 'password') {
-            return;
-        }
-
-        const error = validateField(name, value);
-
-        setErrors((prev) => ({
-            ...prev,
-            [name]: error,
-        }));
-    };
+    const errorMessage = isError ? getErrorMessage(error) : '';
+    const { values, errors, touched, handleSubmit, onBlur, onChange } = useForm(
+        loginInitialValues,
+        validateForm,
+        submitLogin,
+    );
 
     return (
-        <form className="auth__form" onSubmit={(event) => void onSubmit(event)}>
+        <form className="auth__form" onSubmit={(event) => void handleSubmit(event)}>
             <FormInput
                 id="email"
                 label="Email"
@@ -108,7 +54,7 @@ const LoginForm = () => {
                 placeholder="Enter your email"
                 autoComplete="email"
                 value={values.email}
-                onChange={(event) => onChange(event)}
+                onChange={onChange}
                 onBlur={onBlur}
                 error={touched.email ? errors.email : undefined}
             />
@@ -121,7 +67,7 @@ const LoginForm = () => {
                 placeholder="Enter your password"
                 autoComplete="current-password"
                 value={values.password}
-                onChange={(event) => onChange(event)}
+                onChange={onChange}
                 error={touched.password ? errors.password : undefined}
                 onBlur={onBlur}
             />
@@ -142,7 +88,7 @@ const LoginForm = () => {
                     Forgot password?
                 </a>
             </div>
-            <Button type="submit" className="button--accent auth__submit">
+            <Button type="submit" className="button--accent auth__submit" disabled={isLoading}>
                 {isLoading ? 'Loading...' : 'Sign in'}
             </Button>
             {errorMessage && (
