@@ -53,11 +53,11 @@ $mobile-s: 480.98;
 @mixin hover($hasActiveEffectOnMobile: true, $ignoreFocus: false) {
     @media (any-hover: hover) {
         @if ($ignoreFocus) {
-            &:hover:not(:focus-within) {
+            &:hover:not(:disabled):not(:focus-within) {
                 @content;
             }
         } @else {
-            &:hover {
+            &:hover:not(:disabled) {
                 @content;
             }
         }
@@ -66,11 +66,11 @@ $mobile-s: 480.98;
     @if ($hasActiveEffectOnMobile) {
         @media (any-hover: none) {
             @if ($ignoreFocus) {
-                &:active:not(:focus-within) {
+                &:active:not(:disabled):not(:focus-within) {
                     @content;
                 }
             } @else {
-                &:active {
+                &:active:not(:disabled) {
                     @content;
                 }
             }

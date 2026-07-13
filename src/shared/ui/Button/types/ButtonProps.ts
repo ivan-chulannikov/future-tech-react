@@ -4,7 +4,7 @@ import type { LinkProps } from 'react-router-dom';
 type CommonButtonProps = {
     className?: string;
     children: ReactNode;
-    icon?: string;
+    icon?: ButtonIcon;
 };
 
 type ButtonAsButtonProps = CommonButtonProps &
@@ -26,3 +26,4 @@ type ButtonAsRouterLinkProps = CommonButtonProps &
     };
 
 export type ButtonProps = ButtonAsButtonProps | ButtonAsExternalLinkProps | ButtonAsRouterLinkProps;
+export type ButtonIcon = 'arrow-yellow' | 'grey-arrow-down' | 'eye-yellow';
