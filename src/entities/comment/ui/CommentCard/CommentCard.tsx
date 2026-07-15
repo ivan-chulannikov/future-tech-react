@@ -1,7 +1,32 @@
 import type { CommentCardProps } from './types/types';
 import { formatDateTime } from '@/shared/lib/date';
-
+import { useLayoutEffect, useRef, useState } from 'react';
 const CommentsCard = ({ comment }: CommentCardProps) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [isOverflowing, setIsOverflowing] = useState(false);
+    const commentTextRef = useRef<HTMLParagraphElement>(null);
+    useLayoutEffect(() => {
+        const textElement = commentTextRef.current;
+
+        if (!textElement || isExpanded) {
+            return;
+        }
+
+        const checkOverflow = () => {
+            setIsOverflowing(textElement.scrollHeight > textElement.clientHeight);
+        };
+
+        checkOverflow();
+
+        const resizeObserver = new ResizeObserver(checkOverflow);
+
+        resizeObserver.observe(textElement);
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, [comment.content, isExpanded]);
+
     return (
         <article className="comment-card">
             <header className="comment-card__header">
@@ -26,8 +51,25 @@ const CommentsCard = ({ comment }: CommentCardProps) => {
                     ···
                 </button>
             </header>
-
-            <p className="comment-card__text">{comment.content}</p>
+            <div className="comment-card__content">
+                <p
+                    ref={commentTextRef}
+                    className={['comment-card__text', isExpanded && 'comment-card__text--expanded']
+                        .filter(Boolean)
+                        .join(' ')}
+                >
+                    {comment.content}
+                </p>
+                {(isOverflowing || isExpanded) && (
+                    <button
+                        type="button"
+                        className="button expandable-content__button"
+                        onClick={() => setIsExpanded((previous) => !previous)}
+                    >
+                        {isExpanded ? 'Cкрыть' : 'Показать'}
+                    </button>
+                )}
+            </div>
         </article>
     );
 };

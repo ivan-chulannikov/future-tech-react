@@ -1,6 +1,7 @@
 import type { CommentPostButtonProps } from './types';
 
 const CommentPostButton = ({ isActive, onClick, comments }: CommentPostButtonProps) => {
+    
     return (
         <button
             type="button"

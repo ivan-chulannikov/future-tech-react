@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { HeroSection } from '@/widgets/HeroSection';
 import { FeaturesSection } from '@/widgets/FeaturesSection';
 import { PostsSection } from '@/widgets/PostsSection';
@@ -16,11 +16,13 @@ import { usePostCategoryParams } from '@/features/filter-posts-by-category';
 import { LikePostButton } from '@/features/like-post';
 import CommentPostButton from '@/features/comment-post/ui/CommentPostButton';
 import { PostCommentsDrawer } from '@/widgets/PostCommentsDrawer';
+import type { PostPreview } from '@/entities/post';
 const POSTS_PER_PAGE = 3;
 const Home = () => {
     const { activeCategoryId, handleCategoryChange } = usePostCategoryParams();
     const { currentPage, handlePageChange } = usePaginationParams();
-    const [openedCommentsPostId, setOpenedCommentsPostId] = useState<string | null>(null);
+    const [selectedCommentsPost, setSelectedCommentsPost] = useState<PostPreview | null>(null);
+    const [isCommentsDrawerOpen, setIsCommentsDrawerOpen] = useState(false);
 
     const {
         data: postsResponse,
@@ -47,7 +49,20 @@ const Home = () => {
     } = useGetCategoriesQuery();
 
     const tabs = tabsResponse ?? [];
-    const selectedCommentsPost = posts.find((post) => post.id === openedCommentsPostId);
+
+    const handleCommentsClick = (post: PostPreview) => {
+
+        const isSamePost = selectedCommentsPost?.id === post.id;
+
+        if (isSamePost && isCommentsDrawerOpen) {
+            setIsCommentsDrawerOpen(false);
+            return;
+        }
+
+        setSelectedCommentsPost(post);
+        setIsCommentsDrawerOpen(true);
+    };
+
     return (
         <>
             <HeroSection />
@@ -89,25 +104,22 @@ const Home = () => {
 
                         <li className="blog-actions__item">
                             <CommentPostButton
-                                isActive={openedCommentsPostId === post.id}
-                                comments={post.stats.comments}
-                                onClick={() =>
-                                    setOpenedCommentsPostId((currentPostId) =>
-                                        currentPostId === post.id ? null : post.id,
-                                    )
+                                isActive={
+                                    isCommentsDrawerOpen && selectedCommentsPost?.id === post.id
                                 }
+                                comments={post.stats.comments}
+                                onClick={() => handleCommentsClick(post)}
                             />
                         </li>
                     </>
                 )}
             />
 
-            {selectedCommentsPost && (
-                <PostCommentsDrawer
-                    post={selectedCommentsPost}
-                    onClose={() => setOpenedCommentsPostId(null)}
-                />
-            )}
+            <PostCommentsDrawer
+                isOpen={isCommentsDrawerOpen}
+                post={selectedCommentsPost}
+                onClose={() => setIsCommentsDrawerOpen(false)}
+            />
 
             <ResourcesSection />
             <ReviewsSection />

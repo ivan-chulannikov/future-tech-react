@@ -49,7 +49,7 @@ const CommentForm = ({ postId }: CommentFormProps) => {
                 <div className="comments-form__footer">
                     <span className="comments-form__counter">{values.content.length}/500</span>
 
-                    <button disabled={isLoading} className="comments-form__submit" type="submit">
+                    <button disabled={isLoading} className="comments-form__submit button button--accent" type="submit">
                         {isLoading ? 'Sending...' : 'Send'}
                     </button>
                 </div>

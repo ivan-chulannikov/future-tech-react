@@ -3,6 +3,9 @@ html {
     &.is-lock {
         overflow: hidden;
     }
+    
+    scrollbar-gutter: stable;
+
 }
 body {
     @include fluid-text(14, 18);

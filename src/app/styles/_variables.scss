@@ -20,7 +20,9 @@
     --transition-duration: 0.2s;
     --shadow: 0 0 0 #{rem(3)} #191919;
     --banner-image: url('/images/blog-details/bg.jpg');
-
+    --color-overlay: rgb(20 20 20 / 65%);
+    --drawer-transition-duration: 0.3s;
+    --drawer-transition-timing-function: ease-out;
     @include laptop {
         --container-width: #{rem(1280)};
     }
