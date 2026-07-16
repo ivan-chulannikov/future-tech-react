@@ -1,17 +1,30 @@
 @use '../helpers' as *;
 .checkbox {
     display: inline-flex;
+    align-items: center;
     column-gap: rem(10);
     color: var(--color-light);
+    cursor: pointer;
+
     @include laptop {
         column-gap: rem(6);
     }
+
     @include hover {
-        color: var(--color-accent);
-        .checkbox__input {
-            border-color: var(--color-accent);
+        &:not(:has(.checkbox__input:disabled)) {
+            color: var(--color-accent);
+
+            .checkbox__input {
+                border-color: var(--color-accent);
+            }
         }
     }
+
+    &:has(.checkbox__input:disabled) {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
     &__input {
         --size: #{rem(28)};
         @include square(var(--size));
@@ -21,18 +34,31 @@
         border-radius: rem(4);
         appearance: none;
         margin: 0;
+        cursor: inherit;
+
         @include laptop {
             --size: #{rem(24)};
         }
+
+        &:focus-visible {
+            outline: rem(2) solid var(--color-accent);
+            outline-offset: rem(2);
+        }
+
         &:not(:checked) {
             &::after {
                 @include hide;
             }
         }
+
         &::after {
             content: '✔';
             color: var(--color-light);
             transition-duration: var(--transition-duration);
         }
     }
+}
+
+.field.is-invalid .checkbox__input {
+    border-color: var(--color-red);
 }
