@@ -1,8 +1,9 @@
 import Button from '@/shared/ui/Button';
-import { FormInput } from '@/shared/ui/FormInput';
 import PublicationSummary from '../PublicationSummary/PublicationSummary';
 import { TextArea } from '@/shared/ui/TextArea';
-import { FormSelect } from '@/shared/ui/FormSelect';
+import { FormField } from '@/shared/ui/FormField';
+import { Input } from '@/shared/ui/Input';
+import { Select } from '@/shared/ui/Select';
 
 const categoryOptions = [
     {
@@ -40,15 +41,20 @@ const CreatePostForm = () => {
 
                     <div className="create-post__panel-body">
                         <div className="create-post__fields">
-                            <FormInput
+                            <FormField
                                 id="post-title"
                                 label="Title"
-                                name="title"
-                                type="text"
-                                placeholder="Enter a compelling title for your publication"
                                 required
-                                fieldClassName="create-post__field create-post__field--wide"
-                            />
+                                className="create-post__field create-post__field--wide"
+                            >
+                                <Input
+                                    id="post-title"
+                                    name="title"
+                                    type="text"
+                                    placeholder="Enter a compelling title for your publication"
+                                    required
+                                />
+                            </FormField>
 
                             <div className="field create-post__field create-post__field--wide">
                                 <label className="field__label" htmlFor="post-description">
@@ -67,17 +73,22 @@ const CreatePostForm = () => {
                                 />
                             </div>
 
-                            <FormSelect
+                            <FormField
                                 id="post-category"
-                                name="categoryId"
                                 label="Category"
-                                options={categoryOptions}
-                                placeholder="Select a category"
-                                defaultValue=""
                                 required
-                                fieldClassName="create-post__field"
-                                selectClassName="create-post__select"
-                            />
+                                className="create-post__field"
+                            >
+                                <Select
+                                    id="post-category"
+                                    name="categoryId"
+                                    options={categoryOptions}
+                                    placeholder="Select a category"
+                                    defaultValue=""
+                                    required
+                                    className="create-post__select"
+                                />
+                            </FormField>
                         </div>
                     </div>
                 </details>
@@ -141,14 +152,13 @@ const CreatePostForm = () => {
                                     placeholder="Describe the image for accessibility"
                                     required
                                 />
-                                <TextArea 
-                                className='create-post__banner-alt'
-                                id='banner-alt'
-                                name="bannerAlt"
-                                placeholder="Describe the image for accessibility"
-                                required
+                                <TextArea
+                                    className="create-post__banner-alt"
+                                    id="banner-alt"
+                                    name="bannerAlt"
+                                    placeholder="Describe the image for accessibility"
+                                    required
                                 />
-
                             </div>
                         </div>
                     </div>

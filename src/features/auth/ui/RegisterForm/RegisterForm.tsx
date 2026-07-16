@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import { FormInput } from '@/shared/ui/FormInput';
 import Button from '@/shared/ui/Button';
 import { AppRoutes } from '@/shared/config/routes';
+import { FormField } from '@/shared/ui/FormField';
+import { Input } from '@/shared/ui/Input';
 
 import { useRegisterMutation } from '../../api/authApi';
 import { validateRegisterForm } from '../../lib/validateRegisterForm';
@@ -95,32 +96,51 @@ const RegisterForm = () => {
                         </header>
 
                         <form className="auth__form" onSubmit={(event) => void handleSubmit(event)}>
-                            <FormInput
+                            <FormField
                                 id="name"
                                 label="Name"
-                                required={true}
-                                name="name"
-                                type="text"
-                                placeholder="Enter your name"
-                                autoComplete="username"
-                                value={values.name}
-                                onChange={onChange}
-                                onBlur={onBlur}
+                                required
                                 error={touched.name ? errors.name : undefined}
-                            />
-                            <FormInput
+                            >
+                                <Input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    placeholder="Enter your name"
+                                    autoComplete="username"
+                                    value={values.name}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    required
+                                    aria-describedby={
+                                        touched.name && errors.name ? 'name-error' : undefined
+                                    }
+                                    aria-invalid={touched.name && errors.name ? true : undefined}
+                                />
+                            </FormField>
+
+                            <FormField
                                 id="email"
-                                required={true}
                                 label="Email"
-                                name="email"
-                                type="email"
-                                placeholder="Enter your email"
-                                autoComplete="email"
-                                value={values.email}
-                                onChange={onChange}
-                                onBlur={onBlur}
+                                required
                                 error={touched.email ? errors.email : undefined}
-                            />
+                            >
+                                <Input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    autoComplete="email"
+                                    value={values.email}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    required
+                                    aria-describedby={
+                                        touched.email && errors.email ? 'email-error' : undefined
+                                    }
+                                    aria-invalid={touched.email && errors.email ? true : undefined}
+                                />
+                            </FormField>
 
                             <div className="avatar-upload">
                                 <input
@@ -167,43 +187,85 @@ const RegisterForm = () => {
                                     <p className="field__error">{errors.userAvatar}</p>
                                 )}
                             </div>
-                            <FormInput
+                            <FormField
                                 id="description"
                                 label="Description"
-                                name="description"
-                                type="text"
-                                placeholder="Enter your description"
-                                value={values.description}
-                                onChange={onChange}
-                                onBlur={onBlur}
                                 error={touched.description ? errors.description : undefined}
-                            />
-                            <FormInput
+                            >
+                                <Input
+                                    id="description"
+                                    name="description"
+                                    type="text"
+                                    placeholder="Enter your description"
+                                    value={values.description}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    aria-describedby={
+                                        touched.description && errors.description
+                                            ? 'description-error'
+                                            : undefined
+                                    }
+                                    aria-invalid={
+                                        touched.description && errors.description ? true : undefined
+                                    }
+                                />
+                            </FormField>
+
+                            <FormField
                                 id="password"
-                                required={true}
                                 label="Password"
-                                name="password"
-                                type="password"
-                                placeholder="Enter your password"
-                                autoComplete="new-password"
-                                value={values.password}
-                                onChange={onChange}
-                                onBlur={onBlur}
+                                required
                                 error={touched.password ? errors.password : undefined}
-                            />
-                            <FormInput
+                            >
+                                <Input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    placeholder="Enter your password"
+                                    autoComplete="new-password"
+                                    value={values.password}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    required
+                                    aria-describedby={
+                                        touched.password && errors.password
+                                            ? 'password-error'
+                                            : undefined
+                                    }
+                                    aria-invalid={
+                                        touched.password && errors.password ? true : undefined
+                                    }
+                                />
+                            </FormField>
+
+                            <FormField
                                 id="confirmPassword"
                                 label="Confirm password"
-                                required={true}
-                                name="confirmPassword"
-                                type="password"
-                                placeholder="Confirm your password"
-                                autoComplete="new-password"
-                                value={values.confirmPassword}
-                                onChange={onChange}
-                                onBlur={onBlur}
+                                required
                                 error={touched.confirmPassword ? errors.confirmPassword : undefined}
-                            />
+                            >
+                                <Input
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    type="password"
+                                    placeholder="Confirm your password"
+                                    autoComplete="new-password"
+                                    value={values.confirmPassword}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    required
+                                    aria-describedby={
+                                        touched.confirmPassword && errors.confirmPassword
+                                            ? 'confirmPassword-error'
+                                            : undefined
+                                    }
+                                    aria-invalid={
+                                        touched.confirmPassword && errors.confirmPassword
+                                            ? true
+                                            : undefined
+                                    }
+                                />
+                            </FormField>
                             <div className={errors.agreement ? 'field is-invalid' : 'field'}>
                                 <label className="checkbox">
                                     <input
