@@ -2,6 +2,27 @@ import Button from '@/shared/ui/Button';
 import { FormInput } from '@/shared/ui/FormInput';
 import PublicationSummary from '../PublicationSummary/PublicationSummary';
 import { TextArea } from '@/shared/ui/TextArea';
+import { FormSelect } from '@/shared/ui/FormSelect';
+
+const categoryOptions = [
+    {
+        value: 'artificial-intelligence',
+        label: 'Artificial Intelligence',
+    },
+    {
+        value: 'robotics',
+        label: 'Robotics',
+    },
+    {
+        value: 'technology',
+        label: 'Technology',
+    },
+    {
+        value: 'space',
+        label: 'Space',
+    },
+] as const;
+
 const CreatePostForm = () => {
     return (
         <form className="create-post__layout">
@@ -46,32 +67,17 @@ const CreatePostForm = () => {
                                 />
                             </div>
 
-                            <div className="field create-post__field">
-                                <label className="field__label" htmlFor="post-category">
-                                    Category{' '}
-                                    <span className="field__required-star" aria-hidden="true">
-                                        *
-                                    </span>
-                                </label>
-
-                                <select
-                                    className="field__control create-post__select"
-                                    id="post-category"
-                                    name="categoryId"
-                                    defaultValue=""
-                                    required
-                                >
-                                    <option value="" disabled>
-                                        Select a category
-                                    </option>
-                                    <option value="artificial-intelligence">
-                                        Artificial Intelligence
-                                    </option>
-                                    <option value="robotics">Robotics</option>
-                                    <option value="technology">Technology</option>
-                                    <option value="space">Space</option>
-                                </select>
-                            </div>
+                            <FormSelect
+                                id="post-category"
+                                name="categoryId"
+                                label="Category"
+                                options={categoryOptions}
+                                placeholder="Select a category"
+                                defaultValue=""
+                                required
+                                fieldClassName="create-post__field"
+                                selectClassName="create-post__select"
+                            />
                         </div>
                     </div>
                 </details>
