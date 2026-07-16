@@ -5,20 +5,47 @@ import {
     type FormValidator,
     type FormSubmitHandler,
     type NestedObject,
+    type FormFieldPath,
 } from './types';
+
+const isNestedObject = (value: unknown): value is NestedObject =>
+    typeof value === 'object' && value !== null;
+
+const getFieldPaths = (values: NestedObject, parentPath = ''): string[] =>
+    Object.entries(values).flatMap(([key, value]) => {
+        const path = parentPath ? `${parentPath}.${key}` : key;
+
+        if (!isNestedObject(value) || Object.keys(value).length === 0) {
+            return [path];
+        }
+
+        return getFieldPaths(value, path);
+    });
+
 export const useForm = <TValues extends object>(
     initialValues: TValues,
     validatorCallback: FormValidator<TValues>,
-    onSubmit: FormSubmitHandler<TValues>,
+    onSubmit?: FormSubmitHandler<TValues>,
 ) => {
     const [values, setValues] = useState<TValues>(initialValues);
     const [errors, setErrors] = useState<FormErrors<TValues>>({});
     const [touched, setTouched] = useState<FormTouched<TValues>>({});
+    const setFieldTouched = (fieldPath: FormFieldPath<TValues>) => {
+        setTouched((prevTouched) => ({
+            ...prevTouched,
+            [fieldPath]: true,
+        }));
+    };
     const onChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
     ) => {
         const target = event.target;
         const name = target.name;
+
+        if (!name) {
+            return;
+        }
+
         let fieldValue: string | boolean | File | null;
 
         if (target instanceof HTMLInputElement && target.type === 'file') {
@@ -32,13 +59,22 @@ export const useForm = <TValues extends object>(
         const parentPath = path.slice(0, path.length - 1);
         const lastKey = path[path.length - 1];
         const nextValues = { ...values };
+
         if (path.length === 1) {
+            const valuesObject = values as NestedObject;
+
+            if (!(name in valuesObject)) {
+                return;
+            }
+
             const nextValuesObject = nextValues as NestedObject;
             nextValuesObject[name] = fieldValue;
         }
+
         if (path.length > 1) {
             let currentValues = values as NestedObject;
             let currentNextValues = nextValues as NestedObject;
+
             for (const key of parentPath) {
                 const childValue = currentValues[key];
 
@@ -55,6 +91,10 @@ export const useForm = <TValues extends object>(
                 currentNextValues = childObjectCopy;
             }
 
+            if (!(lastKey in currentValues)) {
+                return;
+            }
+
             currentNextValues[lastKey] = fieldValue;
         }
 
@@ -67,10 +107,7 @@ export const useForm = <TValues extends object>(
     ) => {
         const { name } = event.target;
 
-        setTouched((prevTouched) => ({
-            ...prevTouched,
-            [name]: true,
-        }));
+        setFieldTouched(name as FormFieldPath<TValues>);
         const validationErrors = validatorCallback(values);
         setErrors(validationErrors);
     };
@@ -83,11 +120,12 @@ export const useForm = <TValues extends object>(
         event.preventDefault();
         const validationErrors = validatorCallback(values);
         setErrors(validationErrors);
-        const keys = Object.keys(values) as Array<keyof TValues>;
-        const allTouched = keys.reduce<FormTouched<TValues>>(
-            (result, key) => ({
+        const allTouched = getFieldPaths(initialValues as NestedObject).reduce<
+            FormTouched<TValues>
+        >(
+            (result, fieldPath) => ({
                 ...result,
-                [key]: true,
+                [fieldPath as FormFieldPath<TValues>]: true,
             }),
             {},
         );
@@ -97,7 +135,7 @@ export const useForm = <TValues extends object>(
             return;
         }
 
-        await onSubmit(values, { reset });
+        await onSubmit?.(values, { reset });
     };
 
     return {
@@ -107,6 +145,7 @@ export const useForm = <TValues extends object>(
         handleSubmit,
         onBlur,
         onChange,
+        setFieldTouched,
         reset,
     };
 };
