@@ -1,4 +1,5 @@
 import Button from '@/shared/ui/Button';
+import { Checkbox } from '@/shared/ui/Checkbox';
 import { FormField } from '@/shared/ui/FormField';
 import { Input } from '@/shared/ui/Input';
 import { validateForm } from '../../lib/validateForm';
@@ -84,17 +85,16 @@ const LoginForm = () => {
             </FormField>
 
             <div className="auth__form-extra">
-                <label className="checkbox">
-                    <input
-                        className="checkbox__input"
-                        type="checkbox"
+                <FormField id="rememberMe">
+                    <Checkbox
+                        id="rememberMe"
                         name="rememberMe"
+                        label="Remember me"
                         onChange={onChange}
                         onBlur={onBlur}
                         checked={values.rememberMe}
                     />
-                    <span>Remember me</span>
-                </label>
+                </FormField>
                 <a className="auth__link" href="/">
                     Forgot password?
                 </a>

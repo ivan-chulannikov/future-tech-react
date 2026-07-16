@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '@/shared/ui/Button';
 import { AppRoutes } from '@/shared/config/routes';
+import { Checkbox } from '@/shared/ui/Checkbox';
 import { FormField } from '@/shared/ui/FormField';
 import { Input } from '@/shared/ui/Input';
 
@@ -266,26 +267,28 @@ const RegisterForm = () => {
                                     }
                                 />
                             </FormField>
-                            <div className={errors.agreement ? 'field is-invalid' : 'field'}>
-                                <label className="checkbox">
-                                    <input
-                                        className="checkbox__input"
-                                        type="checkbox"
-                                        name="agreement"
-                                        onChange={onChange}
-                                        onBlur={onBlur}
-                                        checked={values.agreement}
-                                        required={true}
-                                    />
-                                    <span>Agreement with terms</span>{' '}
-                                    <span className="field__required-star" aria-hidden="true">
-                                        *
-                                    </span>
-                                </label>
-                                {touched.agreement && errors.agreement && (
-                                    <p className="feedback-form__error">{errors.agreement}</p>
-                                )}
-                            </div>
+                            <FormField
+                                id="agreement"
+                                error={touched.agreement ? errors.agreement : undefined}
+                            >
+                                <Checkbox
+                                    id="agreement"
+                                    label="Agreement with terms"
+                                    name="agreement"
+                                    onChange={onChange}
+                                    onBlur={onBlur}
+                                    checked={values.agreement}
+                                    required
+                                    aria-describedby={
+                                        touched.agreement && errors.agreement
+                                            ? 'agreement-error'
+                                            : undefined
+                                    }
+                                    aria-invalid={
+                                        touched.agreement && errors.agreement ? true : undefined
+                                    }
+                                />
+                            </FormField>
                             <Button
                                 type="submit"
                                 className="button--accent auth__submit"
