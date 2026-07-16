@@ -5,6 +5,7 @@ export const AppRoutes = {
     login: '/login',
     register: '/register',
     profile: '/profile',
+    createPost: '/create-post',
 } as const;
 
 export const getBlogDetailsRoute = (postId: string) => {
