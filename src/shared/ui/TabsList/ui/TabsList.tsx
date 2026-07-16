@@ -1,51 +1,47 @@
 import { TabButton } from '../../TabButton';
 import { getNextTabIndex, getPrevTabIndex } from '../model/getTabIndex';
 import type { TabListProps } from './types/TabList';
-const TabsList = ({ activeTab, onTabChangeHandler, tabs }: TabListProps) => {
+const TabsList = ({ activeTab, onTabChange, tabs, labelledBy }: TabListProps) => {
     const onKeyDownHandler = (event: React.KeyboardEvent): void => {
-        const currentIndex = tabs.findIndex((tab) => tab.id === activeTab);
+        if (tabs.length === 0) {
+            return;
+        }
+        const currentIndex = tabs.findIndex((tab) => tab.value === activeTab);
         if (event.key === 'ArrowRight') {
             event.preventDefault();
             const nextIndex = getNextTabIndex(currentIndex, tabs.length);
-            onTabChangeHandler(tabs[nextIndex].id);
+            onTabChange(tabs[nextIndex].value);
         }
         if (event.key === 'ArrowLeft') {
             event.preventDefault();
 
             const prevIndex = getPrevTabIndex(currentIndex, tabs.length);
-            onTabChangeHandler(tabs[prevIndex].id);
+            onTabChange(tabs[prevIndex].value);
         }
         if (event.key === 'End') {
             event.preventDefault();
             const lastIndex = tabs.length - 1;
-            onTabChangeHandler(tabs[lastIndex].id);
+            onTabChange(tabs[lastIndex].value);
         }
         if (event.key === 'Home') {
             event.preventDefault();
             const firstIndex = 0;
-            onTabChangeHandler(tabs[firstIndex].id);
+            onTabChange(tabs[firstIndex].value);
         }
     };
     return (
         <header className="tabs__header">
-            <div
-                className="tabs__buttons container"
-                role="tablist"
-                aria-labelledby="blog-category-title"
-            >
+            <div className="tabs__buttons container" role="tablist" aria-labelledby={labelledBy}>
                 {tabs.map((tab) => {
-                    const isActive = activeTab === tab.id;
                     return (
                         <TabButton
                             onKeyDown={onKeyDownHandler}
                             className="tabs__button"
-                            key={tab.id}
-                            tabId={`tab-${tab.id}`}
-                            panelId={`tabpanel-${tab.id}`}
-                            isActive={isActive}
-                            onClick={() => {
-                                onTabChangeHandler(tab.id);
-                            }}
+                            key={tab.value}
+                            tabId={`tab-${tab.value}`}
+                            panelId={`tabpanel-${tab.value}`}
+                            isActive={activeTab === tab.value}
+                            onClick={() => onTabChange(tab.value)}
                         >
                             {tab.label}
                         </TabButton>

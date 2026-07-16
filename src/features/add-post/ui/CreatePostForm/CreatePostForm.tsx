@@ -8,7 +8,30 @@ import { TextArea } from '@/shared/ui/TextArea';
 import { initialContentSections } from '../../model/initialContentSections';
 import CreatePostContentSection from '../CreatePostContentSection/CreatePostContentSection';
 import PublicationSummary from '../PublicationSummary/PublicationSummary';
-
+import { useForm } from '@/shared/lib/form';
+const createPostInitialValues = {
+    title: '',
+    description: '',
+    categoryId: '',
+    bannerImage: null as File | null,
+    bannerAlt: '',
+    introduction: '',
+    sections: {
+        overview: {
+            title: '',
+            paragraphs: {
+                context: '',
+                details: '',
+            },
+        },
+        applications: {
+            title: '',
+            paragraphs: {
+                examples: '',
+            },
+        },
+    },
+};
 const CreatePostForm = () => {
     const {
         data: categories = [],
@@ -21,7 +44,7 @@ const CreatePostForm = () => {
         value: category.id,
         label: category.label,
     }));
-
+    const {onBlur, onChange, handleSubmit} = useForm(createPostInitialValues, )
     const categoryError = isCategoriesError ? 'Failed to load categories' : undefined;
     const categoryPlaceholder = isCategoriesLoading ? 'Loading categories...' : 'Select a category';
 

@@ -9,3 +9,4 @@ export type FormSubmitHandler<TValues> = (
     values: TValues,
     actions: FormActions,
 ) => void | Promise<void>;
+export type NestedObject = Record<string, unknown>;
