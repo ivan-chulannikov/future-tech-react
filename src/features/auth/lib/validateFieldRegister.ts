@@ -1,8 +1,9 @@
 import type { RegisterFormValues } from '@/features/auth/model';
-
+const allowedAvatarTypes = ['image/jpeg', 'image/png', 'image/webp'];
+const MAX_AVATAR_SIZE = 5 * 1024 * 1024;
 export const validateRegisterField = (
     name: keyof RegisterFormValues,
-    value: string | boolean,
+    value: string | boolean | File | null,
     values: RegisterFormValues,
 ): string => {
     if (name === 'name') {
@@ -48,6 +49,19 @@ export const validateRegisterField = (
 
     if (name === 'agreement' && value !== true) {
         return 'You must accept the terms';
+    }
+    if (name === 'userAvatar') {
+        if (!(value instanceof File)) {
+            return 'Choose your avatar';
+        }
+
+        if (!allowedAvatarTypes.includes(value.type)) {
+            return 'Choose a JPEG, PNG, or WebP image';
+        }
+
+        if (value.size > MAX_AVATAR_SIZE) {
+            return 'The image must not exceed 5 MB';
+        }
     }
 
     return '';
