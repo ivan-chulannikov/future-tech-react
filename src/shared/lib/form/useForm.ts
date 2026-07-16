@@ -16,11 +16,16 @@ export const useForm = <TValues extends object>(
     const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const target = event.target;
         const name = target.name;
+        let fieldValue: string | boolean | File | null;
 
-        const fieldValue =
-            target instanceof HTMLInputElement && target.type === 'checkbox'
-                ? target.checked
-                : target.value;
+        if (target instanceof HTMLInputElement && target.type === 'file') {
+            fieldValue = target.files?.[0] ?? null;
+        } else if (target instanceof HTMLInputElement && target.type === 'checkbox') {
+            fieldValue = target.checked;
+        } else {
+            fieldValue = target.value;
+        }
+
         const nextValues = {
             ...values,
             [name]: fieldValue,

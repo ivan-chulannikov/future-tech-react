@@ -7,12 +7,6 @@ type LoginRequest = {
 };
 
 type LoginResponse = AuthResponse;
-type RegisterRequest = {
-    email: string;
-    username: string;
-    password: string;
-    description?: string;
-};
 
 type RegisterResponse = AuthResponse;
 export const authApiRtk = baseApi.injectEndpoints({
@@ -24,11 +18,11 @@ export const authApiRtk = baseApi.injectEndpoints({
                 body,
             }),
         }),
-        register: builder.mutation<RegisterResponse, RegisterRequest>({
-            query: (body) => ({
+        register: builder.mutation<RegisterResponse, FormData>({
+            query: (formData) => ({
                 url: '/register',
                 method: 'POST',
-                body,
+                body: formData,
             }),
         }),
         refresh: builder.mutation<AuthResponse, void>({

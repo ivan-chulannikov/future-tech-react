@@ -16,7 +16,7 @@
         grid-template-columns: minmax(0, 1fr) rem(560);
         gap: rem(40);
         padding-block: clamp(3.75rem, 2.794rem + 3.922vw, 7.5rem);
-
+        align-items: start;
         @include laptop {
             grid-template-columns: minmax(0, 1fr) rem(480);
             gap: rem(30);
@@ -30,7 +30,7 @@
     &__preview {
         position: relative;
         overflow: hidden;
-        min-height: rem(560);
+        min-height: auto;
         padding: clamp(1.875rem, 1.397rem + 1.961vw, 3.75rem);
         border: var(--border);
         border-radius: rem(16);
@@ -39,8 +39,8 @@
             linear-gradient(180deg, var(--color-dark-10), var(--color-dark));
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-
+        justify-content: flex-start;
+        row-gap: rem(48);
         @include laptop {
             min-height: rem(480);
             border-radius: rem(12);
@@ -102,7 +102,7 @@
         z-index: 1;
         display: grid;
         gap: rem(12);
-
+        margin-top: rem(16);
         @include mobile {
             gap: rem(10);
         }
