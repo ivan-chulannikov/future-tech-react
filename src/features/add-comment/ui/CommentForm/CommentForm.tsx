@@ -4,7 +4,8 @@ import { useForm } from '@/shared/lib/form';
 import type { FormActions } from '@/shared/lib/form';
 import { validateCommentForm } from '../../lib/validateCommentForm';
 import type { CommentFormValues } from '../../model/types';
-import { FormTextArea } from '@/shared/ui/FormTextArea';
+import { FormField } from '@/shared/ui/FormField';
+import { TextArea } from '@/shared/ui/TextArea';
 const commentInitialValue = {
     content: '',
 };
@@ -34,18 +35,27 @@ const CommentForm = ({ postId }: CommentFormProps) => {
                 onSubmit={(event) => void handleSubmit(event)}
                 noValidate
             >
-                <FormTextArea
+                <FormField
                     id="content"
-                    name="content"
                     label="Write a comment"
-                    value={values.content}
-                    maxLength={500}
                     error={touched.content ? errors.content : undefined}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    textAreaClassName="comments-form__textarea"
-                    required={true}
-                />
+                    required
+                >
+                    <TextArea
+                        id="content"
+                        name="content"
+                        value={values.content}
+                        maxLength={500}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        className="comments-form__textarea"
+                        required
+                        aria-describedby={
+                            touched.content && errors.content ? 'content-error' : undefined
+                        }
+                        aria-invalid={touched.content && errors.content ? true : undefined}
+                    />
+                </FormField>
                 <div className="comments-form__footer">
                     <span className="comments-form__counter">{values.content.length}/500</span>
 

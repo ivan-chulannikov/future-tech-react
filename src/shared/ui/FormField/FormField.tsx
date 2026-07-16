@@ -24,9 +24,11 @@ const FormField = ({
                 )}
             </label>
             {children}
-            <span id={errorId} className="feedback-form__error">
-                {error}
-            </span>
+            {error && (
+                <span id={errorId} className="feedback-form__error">
+                    {error}
+                </span>
+            )}
         </div>
     );
 };

@@ -1,5 +1,6 @@
-import { FormInput } from '@/shared/ui/FormInput';
 import Button from '@/shared/ui/Button';
+import { FormField } from '@/shared/ui/FormField';
+import { Input } from '@/shared/ui/Input';
 import { validateForm } from '../../lib/validateForm';
 import { useLoginMutation } from '../../api/authApi';
 import { useNavigate } from 'react-router-dom';
@@ -46,31 +47,41 @@ const LoginForm = () => {
 
     return (
         <form className="auth__form" onSubmit={(event) => void handleSubmit(event)}>
-            <FormInput
-                id="email"
-                label="Email"
-                name="email"
-                type="email"
-                placeholder="Enter your email"
-                autoComplete="email"
-                value={values.email}
-                onChange={onChange}
-                onBlur={onBlur}
-                error={touched.email ? errors.email : undefined}
-            />
+            <FormField id="email" label="Email" error={touched.email ? errors.email : undefined}>
+                <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    autoComplete="email"
+                    value={values.email}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    aria-describedby={touched.email && errors.email ? 'email-error' : undefined}
+                    aria-invalid={touched.email && errors.email ? true : undefined}
+                />
+            </FormField>
 
-            <FormInput
+            <FormField
                 id="password"
                 label="Password"
-                name="password"
-                type="password"
-                placeholder="Enter your password"
-                autoComplete="current-password"
-                value={values.password}
-                onChange={onChange}
                 error={touched.password ? errors.password : undefined}
-                onBlur={onBlur}
-            />
+            >
+                <Input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    autoComplete="current-password"
+                    value={values.password}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    aria-describedby={
+                        touched.password && errors.password ? 'password-error' : undefined
+                    }
+                    aria-invalid={touched.password && errors.password ? true : undefined}
+                />
+            </FormField>
 
             <div className="auth__form-extra">
                 <label className="checkbox">
