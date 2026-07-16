@@ -5,9 +5,19 @@ import { TextArea } from '@/shared/ui/TextArea';
 
 import type { CreatePostContentSectionProps } from './types';
 
-const CreatePostContentSection = ({ section, position }: CreatePostContentSectionProps) => {
+const CreatePostContentSection = ({
+    section,
+    position,
+    values,
+    errors,
+    touched,
+    onChange,
+    onBlur,
+}: CreatePostContentSectionProps) => {
     const sectionTitleId = `post-section-${section.id}-title`;
-    const sectionTitleName = `sections.${section.id}.title`;
+    const sectionTitleName = `sections.${section.id}.title` as const;
+    const sectionValues = values.sections[section.id];
+    const sectionTitleError = touched[sectionTitleName] ? errors[sectionTitleName] : undefined;
 
     return (
         <article className="create-post__content-section">
@@ -22,6 +32,7 @@ const CreatePostContentSection = ({ section, position }: CreatePostContentSectio
                     id={sectionTitleId}
                     label="Section title"
                     required
+                    error={sectionTitleError}
                     className="create-post__section-title-field"
                 >
                     <Input
@@ -30,7 +41,12 @@ const CreatePostContentSection = ({ section, position }: CreatePostContentSectio
                         name={sectionTitleName}
                         type="text"
                         placeholder="Enter section title"
+                        value={sectionValues.title}
+                        onChange={onChange}
+                        onBlur={onBlur}
                         required
+                        aria-describedby={sectionTitleError ? `${sectionTitleId}-error` : undefined}
+                        aria-invalid={sectionTitleError ? true : undefined}
                     />
                 </FormField>
 
@@ -56,7 +72,11 @@ const CreatePostContentSection = ({ section, position }: CreatePostContentSectio
             <div className="create-post__paragraphs">
                 {section.paragraphs.map((paragraph, paragraphIndex) => {
                     const paragraphId = `post-section-${section.id}-paragraph-${paragraph.id}`;
-                    const paragraphName = `sections.${section.id}.paragraphs.${paragraph.id}`;
+                    const paragraphName =
+                        `sections.${section.id}.paragraphs.${paragraph.id}` as const;
+                    const paragraphError = touched[paragraphName]
+                        ? errors[paragraphName]
+                        : undefined;
 
                     return (
                         <FormField
@@ -64,6 +84,7 @@ const CreatePostContentSection = ({ section, position }: CreatePostContentSectio
                             id={paragraphId}
                             label={`Paragraph ${paragraphIndex + 1}`}
                             required={paragraph.required}
+                            error={paragraphError}
                             className="create-post__paragraph-field"
                         >
                             <TextArea
@@ -71,7 +92,14 @@ const CreatePostContentSection = ({ section, position }: CreatePostContentSectio
                                 id={paragraphId}
                                 name={paragraphName}
                                 placeholder={paragraph.placeholder}
+                                value={sectionValues.paragraphs[paragraph.id]}
+                                onChange={onChange}
+                                onBlur={onBlur}
                                 required={paragraph.required}
+                                aria-describedby={
+                                    paragraphError ? `${paragraphId}-error` : undefined
+                                }
+                                aria-invalid={paragraphError ? true : undefined}
                             />
                         </FormField>
                     );

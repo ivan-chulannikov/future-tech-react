@@ -36,6 +36,7 @@ export interface AuthUser {
     username: string;
     createdAt: string;
     description?: string;
+    avatarSrc?: string;
 }
 export type AuthState = {
     user: AuthUser | null;

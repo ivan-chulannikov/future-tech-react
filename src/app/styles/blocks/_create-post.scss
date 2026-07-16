@@ -7,11 +7,7 @@
     border-block: var(--border);
 
     background:
-        radial-gradient(
-            circle at 58% 6%,
-            rgba(255, 209, 26, 0.12),
-            transparent 22%
-        ),
+        radial-gradient(circle at 58% 6%, rgba(255, 209, 26, 0.12), transparent 22%),
         var(--color-dark);
 
     &__inner {
@@ -314,7 +310,7 @@
     &__content-section-header {
         display: grid;
         grid-template-columns: auto auto minmax(0, 1fr) auto;
-        align-items: end;
+        align-items: start;
         gap: rem(12);
 
         margin-bottom: rem(18);
@@ -567,6 +563,7 @@
         color: var(--color-dark);
         background-color: var(--color-accent);
         border-radius: 50%;
+        object-fit: cover;
 
         font-weight: 700;
     }

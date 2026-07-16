@@ -5,4 +5,5 @@ export type {
     FormTouched,
     FormValidator,
     FormActions,
+    FormFieldPath,
 } from './types';

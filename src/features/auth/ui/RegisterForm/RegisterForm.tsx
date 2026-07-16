@@ -11,7 +11,8 @@ import { getErrorMessage } from '@/shared/lib/errors';
 
 import { useForm } from '@/shared/lib/form';
 import type { RegisterFormValues } from '../../model';
-import { useEffect, useState } from 'react';
+import { useObjectUrl } from '@/shared/lib/file';
+
 const registerInitialValues = {
     name: '',
     email: '',
@@ -25,7 +26,6 @@ const registerInitialValues = {
 const RegisterForm = () => {
     const navigate = useNavigate();
     const [register, { isLoading, isError, error }] = useRegisterMutation();
-    const [preview, setPreview] = useState<string | null>(null);
     const errorMessage = isError ? getErrorMessage(error) : '';
 
     const submitRegister = async (values: RegisterFormValues) => {
@@ -45,26 +45,17 @@ const RegisterForm = () => {
             console.error('register error:', error);
         }
     };
-    const { values, errors, touched, onChange, onBlur, handleSubmit } = useForm(
+    const { values, errors, touched, onChange, onBlur, setFieldTouched, handleSubmit } = useForm(
         registerInitialValues,
         validateRegisterForm,
         submitRegister,
     );
-
+    const preview = useObjectUrl(values.userAvatar);
     const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         onChange(event);
-
-        const avatar = event.target.files?.[0];
-        setPreview(avatar ? URL.createObjectURL(avatar) : null);
+        setFieldTouched('userAvatar');
     };
 
-    useEffect(() => {
-        return () => {
-            if (preview) {
-                URL.revokeObjectURL(preview);
-            }
-        };
-    }, [preview]);
     return (
         <section className="auth">
             <div className="container">
@@ -151,8 +142,7 @@ const RegisterForm = () => {
                                     id="userAvatar"
                                     accept="image/jpeg,image/png,image/webp"
                                     onChange={handleAvatarChange}
-                                    onBlur={onBlur}
-                                    required={true}
+                                    required
                                 />
 
                                 <label className="avatar-upload__label" htmlFor="userAvatar">

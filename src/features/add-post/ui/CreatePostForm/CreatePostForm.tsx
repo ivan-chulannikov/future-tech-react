@@ -4,12 +4,15 @@ import { FormField } from '@/shared/ui/FormField';
 import { Input } from '@/shared/ui/Input';
 import { Select } from '@/shared/ui/Select';
 import { TextArea } from '@/shared/ui/TextArea';
+import { useForm } from '@/shared/lib/form';
 
+import { validateCreatePostForm } from '../../lib/validateCreatePostForm';
 import { initialContentSections } from '../../model/initialContentSections';
+import type { CreatePostFormValues } from '../../model/types';
 import CreatePostContentSection from '../CreatePostContentSection/CreatePostContentSection';
 import PublicationSummary from '../PublicationSummary/PublicationSummary';
-import { useForm } from '@/shared/lib/form';
-const createPostInitialValues = {
+
+const createPostInitialValues: CreatePostFormValues = {
     title: '',
     description: '',
     categoryId: '',
@@ -32,6 +35,7 @@ const createPostInitialValues = {
         },
     },
 };
+
 const CreatePostForm = () => {
     const {
         data: categories = [],
@@ -44,12 +48,27 @@ const CreatePostForm = () => {
         value: category.id,
         label: category.label,
     }));
-    const {onBlur, onChange, handleSubmit} = useForm(createPostInitialValues, )
+    const { values, errors, touched, onBlur, onChange, setFieldTouched, handleSubmit } = useForm(
+        createPostInitialValues,
+        validateCreatePostForm,
+    );
+
     const categoryError = isCategoriesError ? 'Failed to load categories' : undefined;
     const categoryPlaceholder = isCategoriesLoading ? 'Loading categories...' : 'Select a category';
+    const categoryFieldError =
+        categoryError ?? (touched.categoryId ? errors.categoryId : undefined);
+    const handleBannerImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        onChange(event);
+        setFieldTouched('bannerImage');
+    };
+    const selectedCategory = categories.find((category) => category.id === values.categoryId);
 
     return (
-        <form className="create-post__layout">
+        <form
+            className="create-post__layout"
+            onSubmit={(event) => void handleSubmit(event)}
+            noValidate
+        >
             <div className="create-post__editor">
                 <details className="create-post__panel" open>
                     <summary className="create-post__panel-header">
@@ -66,6 +85,7 @@ const CreatePostForm = () => {
                                 id="post-title"
                                 label="Title"
                                 required
+                                error={touched.title ? errors.title : undefined}
                                 className="create-post__field create-post__field--wide"
                             >
                                 <Input
@@ -73,7 +93,16 @@ const CreatePostForm = () => {
                                     name="title"
                                     type="text"
                                     placeholder="Enter a compelling title for your publication"
+                                    value={values.title}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
                                     required
+                                    aria-describedby={
+                                        touched.title && errors.title
+                                            ? 'post-title-error'
+                                            : undefined
+                                    }
+                                    aria-invalid={touched.title && errors.title ? true : undefined}
                                 />
                             </FormField>
 
@@ -81,6 +110,7 @@ const CreatePostForm = () => {
                                 id="post-description"
                                 label="Short description"
                                 required
+                                error={touched.description ? errors.description : undefined}
                                 className="create-post__field create-post__field--wide"
                             >
                                 <TextArea
@@ -88,7 +118,18 @@ const CreatePostForm = () => {
                                     id="post-description"
                                     name="description"
                                     placeholder="Write a short summary that describes your publication"
+                                    value={values.description}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
                                     required
+                                    aria-describedby={
+                                        touched.description && errors.description
+                                            ? 'post-description-error'
+                                            : undefined
+                                    }
+                                    aria-invalid={
+                                        touched.description && errors.description ? true : undefined
+                                    }
                                 />
                             </FormField>
 
@@ -96,7 +137,7 @@ const CreatePostForm = () => {
                                 id="post-category"
                                 label="Category"
                                 required
-                                error={categoryError}
+                                error={categoryFieldError}
                                 className="create-post__field"
                             >
                                 <Select
@@ -104,14 +145,16 @@ const CreatePostForm = () => {
                                     name="categoryId"
                                     options={categoryOptions}
                                     placeholder={categoryPlaceholder}
-                                    defaultValue=""
+                                    value={values.categoryId}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
                                     required
                                     disabled={isCategoriesLoading || isCategoriesError}
                                     className="create-post__select"
                                     aria-describedby={
-                                        isCategoriesError ? 'post-category-error' : undefined
+                                        categoryFieldError ? 'post-category-error' : undefined
                                     }
-                                    aria-invalid={isCategoriesError ? true : undefined}
+                                    aria-invalid={categoryFieldError ? true : undefined}
                                 />
                                 {isCategoriesError && (
                                     <Button
@@ -142,6 +185,7 @@ const CreatePostForm = () => {
                                 id="banner-image"
                                 label="Banner image"
                                 required
+                                error={touched.bannerImage ? errors.bannerImage : undefined}
                                 className="create-post__field"
                             >
                                 <Input
@@ -150,7 +194,16 @@ const CreatePostForm = () => {
                                     name="bannerImage"
                                     type="file"
                                     accept="image/jpeg,image/png,image/webp"
+                                    onChange={handleBannerImageChange}
                                     required
+                                    aria-describedby={
+                                        touched.bannerImage && errors.bannerImage
+                                            ? 'banner-image-error'
+                                            : undefined
+                                    }
+                                    aria-invalid={
+                                        touched.bannerImage && errors.bannerImage ? true : undefined
+                                    }
                                 />
 
                                 <label className="create-post__upload" htmlFor="banner-image">
@@ -158,7 +211,9 @@ const CreatePostForm = () => {
                                         ↑
                                     </span>
                                     <span className="create-post__upload-title">
-                                        Upload banner image
+                                        {values.bannerImage
+                                            ? values.bannerImage.name
+                                            : 'Upload banner image'}
                                     </span>
                                     <span className="create-post__upload-description">
                                         JPEG, PNG or WebP. Maximum 5 MB
@@ -170,6 +225,7 @@ const CreatePostForm = () => {
                                 id="banner-alt"
                                 label="Alternative text"
                                 required
+                                error={touched.bannerAlt ? errors.bannerAlt : undefined}
                                 className="create-post__field"
                             >
                                 <TextArea
@@ -177,7 +233,18 @@ const CreatePostForm = () => {
                                     id="banner-alt"
                                     name="bannerAlt"
                                     placeholder="Describe the image for accessibility"
+                                    value={values.bannerAlt}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
                                     required
+                                    aria-describedby={
+                                        touched.bannerAlt && errors.bannerAlt
+                                            ? 'banner-alt-error'
+                                            : undefined
+                                    }
+                                    aria-invalid={
+                                        touched.bannerAlt && errors.bannerAlt ? true : undefined
+                                    }
                                 />
                             </FormField>
                         </div>
@@ -198,6 +265,7 @@ const CreatePostForm = () => {
                             id="post-introduction"
                             label="Introduction"
                             required
+                            error={touched.introduction ? errors.introduction : undefined}
                             className="create-post__field"
                         >
                             <TextArea
@@ -205,7 +273,18 @@ const CreatePostForm = () => {
                                 id="post-introduction"
                                 name="introduction"
                                 placeholder="Write an introduction that sets the context for your readers"
+                                value={values.introduction}
+                                onChange={onChange}
+                                onBlur={onBlur}
                                 required
+                                aria-describedby={
+                                    touched.introduction && errors.introduction
+                                        ? 'post-introduction-error'
+                                        : undefined
+                                }
+                                aria-invalid={
+                                    touched.introduction && errors.introduction ? true : undefined
+                                }
                             />
                         </FormField>
                     </div>
@@ -227,6 +306,11 @@ const CreatePostForm = () => {
                                     key={section.id}
                                     section={section}
                                     position={sectionIndex + 1}
+                                    values={values}
+                                    errors={errors}
+                                    touched={touched}
+                                    onChange={onChange}
+                                    onBlur={onBlur}
                                 />
                             ))}
 
@@ -239,7 +323,7 @@ const CreatePostForm = () => {
                 </details>
             </div>
 
-            <PublicationSummary />
+            <PublicationSummary values={values} categoryLabel={selectedCategory?.label} />
         </form>
     );
 };
