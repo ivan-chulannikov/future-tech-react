@@ -1,9 +1,12 @@
 import Button from '@/shared/ui/Button';
-import PublicationSummary from '../PublicationSummary/PublicationSummary';
-import { TextArea } from '@/shared/ui/TextArea';
 import { FormField } from '@/shared/ui/FormField';
 import { Input } from '@/shared/ui/Input';
 import { Select } from '@/shared/ui/Select';
+import { TextArea } from '@/shared/ui/TextArea';
+
+import { initialContentSections } from '../../model/initialContentSections';
+import CreatePostContentSection from '../CreatePostContentSection/CreatePostContentSection';
+import PublicationSummary from '../PublicationSummary/PublicationSummary';
 
 const categoryOptions = [
     {
@@ -31,9 +34,7 @@ const CreatePostForm = () => {
                 <details className="create-post__panel" open>
                     <summary className="create-post__panel-header">
                         <span className="create-post__step">1</span>
-
                         <span className="create-post__panel-title">Basic information</span>
-
                         <span className="create-post__panel-description">
                             Add the essential details for your publication.
                         </span>
@@ -56,22 +57,20 @@ const CreatePostForm = () => {
                                 />
                             </FormField>
 
-                            <div className="field create-post__field create-post__field--wide">
-                                <label className="field__label" htmlFor="post-description">
-                                    Short description{' '}
-                                    <span className="field__required-star" aria-hidden="true">
-                                        *
-                                    </span>
-                                </label>
-
-                                <textarea
-                                    className="field__control create-post__short-description"
+                            <FormField
+                                id="post-description"
+                                label="Short description"
+                                required
+                                className="create-post__field create-post__field--wide"
+                            >
+                                <TextArea
+                                    className="create-post__short-description"
                                     id="post-description"
                                     name="description"
                                     placeholder="Write a short summary that describes your publication"
                                     required
                                 />
-                            </div>
+                            </FormField>
 
                             <FormField
                                 id="post-category"
@@ -96,9 +95,7 @@ const CreatePostForm = () => {
                 <details className="create-post__panel" open>
                     <summary className="create-post__panel-header">
                         <span className="create-post__step">2</span>
-
                         <span className="create-post__panel-title">Cover</span>
-
                         <span className="create-post__panel-description">
                             Add a banner image and accessibility description.
                         </span>
@@ -106,15 +103,13 @@ const CreatePostForm = () => {
 
                     <div className="create-post__panel-body">
                         <div className="create-post__cover-grid">
-                            <div className="field create-post__field">
-                                <span className="field__label">
-                                    Banner image{' '}
-                                    <span className="field__required-star" aria-hidden="true">
-                                        *
-                                    </span>
-                                </span>
-
-                                <input
+                            <FormField
+                                id="banner-image"
+                                label="Banner image"
+                                required
+                                className="create-post__field"
+                            >
+                                <Input
                                     className="create-post__file-input"
                                     id="banner-image"
                                     name="bannerImage"
@@ -127,31 +122,21 @@ const CreatePostForm = () => {
                                     <span className="create-post__upload-icon" aria-hidden="true">
                                         ↑
                                     </span>
-
                                     <span className="create-post__upload-title">
                                         Upload banner image
                                     </span>
-
                                     <span className="create-post__upload-description">
                                         JPEG, PNG or WebP. Maximum 5 MB
                                     </span>
                                 </label>
-                            </div>
+                            </FormField>
 
-                            <div className="field create-post__field">
-                                <label className="field__label" htmlFor="banner-alt">
-                                    Alternative text{' '}
-                                    <span className="field__required-star" aria-hidden="true">
-                                        *
-                                    </span>
-                                </label>
-                                <textarea
-                                    className="field__control create-post__banner-alt"
-                                    id="banner-alt"
-                                    name="bannerAlt"
-                                    placeholder="Describe the image for accessibility"
-                                    required
-                                />
+                            <FormField
+                                id="banner-alt"
+                                label="Alternative text"
+                                required
+                                className="create-post__field"
+                            >
                                 <TextArea
                                     className="create-post__banner-alt"
                                     id="banner-alt"
@@ -159,7 +144,7 @@ const CreatePostForm = () => {
                                     placeholder="Describe the image for accessibility"
                                     required
                                 />
-                            </div>
+                            </FormField>
                         </div>
                     </div>
                 </details>
@@ -167,40 +152,34 @@ const CreatePostForm = () => {
                 <details className="create-post__panel" open>
                     <summary className="create-post__panel-header">
                         <span className="create-post__step">3</span>
-
                         <span className="create-post__panel-title">Introduction</span>
-
                         <span className="create-post__panel-description">
                             Write an engaging introduction for your publication.
                         </span>
                     </summary>
 
                     <div className="create-post__panel-body">
-                        <div className="field create-post__field">
-                            <label className="field__label" htmlFor="post-introduction">
-                                Introduction{' '}
-                                <span className="field__required-star" aria-hidden="true">
-                                    *
-                                </span>
-                            </label>
-
-                            <textarea
-                                className="field__control create-post__introduction"
+                        <FormField
+                            id="post-introduction"
+                            label="Introduction"
+                            required
+                            className="create-post__field"
+                        >
+                            <TextArea
+                                className="create-post__introduction"
                                 id="post-introduction"
                                 name="introduction"
                                 placeholder="Write an introduction that sets the context for your readers"
                                 required
                             />
-                        </div>
+                        </FormField>
                     </div>
                 </details>
 
                 <details className="create-post__panel" open>
                     <summary className="create-post__panel-header">
                         <span className="create-post__step">4</span>
-
                         <span className="create-post__panel-title">Content sections</span>
-
                         <span className="create-post__panel-description">
                             Build the main content of your publication.
                         </span>
@@ -208,190 +187,26 @@ const CreatePostForm = () => {
 
                     <div className="create-post__panel-body">
                         <div className="create-post__content-sections">
-                            <article className="create-post__content-section">
-                                <div className="create-post__content-section-header">
-                                    <span className="create-post__drag-handle" aria-hidden="true">
-                                        ⋮⋮
-                                    </span>
+                            {initialContentSections.map((section, sectionIndex) => (
+                                <CreatePostContentSection
+                                    key={section.id}
+                                    section={section}
+                                    position={sectionIndex + 1}
+                                />
+                            ))}
 
-                                    <span className="create-post__section-number">1</span>
-
-                                    <div className="field create-post__section-title-field">
-                                        <label className="field__label" htmlFor="section-1-title">
-                                            Section title{' '}
-                                            <span
-                                                className="field__required-star"
-                                                aria-hidden="true"
-                                            >
-                                                *
-                                            </span>
-                                        </label>
-
-                                        <input
-                                            className="field__control create-post__section-title-control"
-                                            id="section-1-title"
-                                            name="section-1-title"
-                                            type="text"
-                                            placeholder="Enter section title"
-                                            required
-                                        />
-                                    </div>
-
-                                    <div className="create-post__section-actions">
-                                        <button
-                                            className="create-post__icon-button"
-                                            type="button"
-                                            aria-label="Collapse section"
-                                        >
-                                            ↑
-                                        </button>
-
-                                        <Button
-                                            className="create-post__icon-button"
-                                            type="button"
-                                            aria-label="Delete section"
-                                        >
-                                            ×
-                                        </Button>
-                                    </div>
-                                </div>
-
-                                <div className="create-post__paragraphs">
-                                    <div className="field create-post__paragraph-field">
-                                        <label
-                                            className="field__label"
-                                            htmlFor="section-1-paragraph-1"
-                                        >
-                                            Paragraph 1{' '}
-                                            <span
-                                                className="field__required-star"
-                                                aria-hidden="true"
-                                            >
-                                                *
-                                            </span>
-                                        </label>
-
-                                        <textarea
-                                            className="field__control create-post__paragraph"
-                                            id="section-1-paragraph-1"
-                                            name="section-1-paragraph-1"
-                                            placeholder="Write the first paragraph of this section"
-                                            required
-                                        />
-                                    </div>
-
-                                    <div className="field create-post__paragraph-field">
-                                        <label
-                                            className="field__label"
-                                            htmlFor="section-1-paragraph-2"
-                                        >
-                                            Paragraph 2
-                                        </label>
-
-                                        <textarea
-                                            className="field__control create-post__paragraph"
-                                            id="section-1-paragraph-2"
-                                            name="section-1-paragraph-2"
-                                            placeholder="Write another paragraph"
-                                        />
-                                    </div>
-                                </div>
-
-                                <button className="create-post__text-button" type="button">
-                                    <span aria-hidden="true">+</span>
-                                    Add paragraph
-                                </button>
-                            </article>
-
-                            <article className="create-post__content-section">
-                                <div className="create-post__content-section-header">
-                                    <span className="create-post__drag-handle" aria-hidden="true">
-                                        ⋮⋮
-                                    </span>
-
-                                    <span className="create-post__section-number">2</span>
-
-                                    <div className="field create-post__section-title-field">
-                                        <label className="field__label" htmlFor="section-2-title">
-                                            Section title{' '}
-                                            <span
-                                                className="field__required-star"
-                                                aria-hidden="true"
-                                            >
-                                                *
-                                            </span>
-                                        </label>
-
-                                        <input
-                                            className="field__control create-post__section-title-control"
-                                            id="section-2-title"
-                                            name="section-2-title"
-                                            type="text"
-                                            placeholder="Enter section title"
-                                            required
-                                        />
-                                    </div>
-
-                                    <div className="create-post__section-actions">
-                                        <button
-                                            className="create-post__icon-button"
-                                            type="button"
-                                            aria-label="Collapse section"
-                                        >
-                                            ↑
-                                        </button>
-
-                                        <button
-                                            className="create-post__icon-button"
-                                            type="button"
-                                            aria-label="Delete section"
-                                        >
-                                            ×
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <div className="create-post__paragraphs">
-                                    <div className="field create-post__paragraph-field">
-                                        <label
-                                            className="field__label"
-                                            htmlFor="section-2-paragraph-1"
-                                        >
-                                            Paragraph 1{' '}
-                                            <span
-                                                className="field__required-star"
-                                                aria-hidden="true"
-                                            >
-                                                *
-                                            </span>
-                                        </label>
-
-                                        <textarea
-                                            className="field__control create-post__paragraph"
-                                            id="section-2-paragraph-1"
-                                            name="section-2-paragraph-1"
-                                            placeholder="Write the first paragraph of this section"
-                                            required
-                                        />
-                                    </div>
-                                </div>
-
-                                <button className="create-post__text-button" type="button">
-                                    <span aria-hidden="true">+</span>
-                                    Add paragraph
-                                </button>
-                            </article>
-
-                            <button className="create-post__add-section" type="button">
+                            <Button className="create-post__add-section" type="button">
                                 <span aria-hidden="true">+</span>
                                 Add section
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </details>
             </div>
+
             <PublicationSummary />
         </form>
     );
 };
+
 export default CreatePostForm;
