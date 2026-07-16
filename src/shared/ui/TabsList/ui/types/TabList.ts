@@ -1,7 +1,10 @@
-import type { Category } from '@/entities/category';
-
+export type TabItem = {
+    value: string;
+    label: string;
+};
 export type TabListProps = {
     activeTab: string;
-    onTabChangeHandler: (activeTabId: string) => void;
-    tabs: Category[];
+    onTabChange: (value: string) => void;
+    tabs: readonly TabItem[];
+    labelledBy: string;
 };

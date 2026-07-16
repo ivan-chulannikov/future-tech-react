@@ -4,6 +4,7 @@ import {
     type FormErrors,
     type FormValidator,
     type FormSubmitHandler,
+    type NestedObject,
 } from './types';
 export const useForm = <TValues extends object>(
     initialValues: TValues,
@@ -13,7 +14,9 @@ export const useForm = <TValues extends object>(
     const [values, setValues] = useState<TValues>(initialValues);
     const [errors, setErrors] = useState<FormErrors<TValues>>({});
     const [touched, setTouched] = useState<FormTouched<TValues>>({});
-    const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const onChange = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    ) => {
         const target = event.target;
         const name = target.name;
         let fieldValue: string | boolean | File | null;
@@ -25,16 +28,43 @@ export const useForm = <TValues extends object>(
         } else {
             fieldValue = target.value;
         }
+        const path = name.split('.');
+        const parentPath = path.slice(0, path.length - 1);
+        const lastKey = path[path.length - 1];
+        const nextValues = { ...values };
+        if (path.length === 1) {
+            const nextValuesObject = nextValues as NestedObject;
+            nextValuesObject[name] = fieldValue;
+        }
+        if (path.length > 1) {
+            let currentValues = values as NestedObject;
+            let currentNextValues = nextValues as NestedObject;
+            for (const key of parentPath) {
+                const childValue = currentValues[key];
 
-        const nextValues = {
-            ...values,
-            [name]: fieldValue,
-        };
+                if (typeof childValue !== 'object' || childValue === null) {
+                    return;
+                }
+
+                const childObject = childValue as NestedObject;
+                const childObjectCopy = { ...childObject };
+
+                currentNextValues[key] = childObjectCopy;
+
+                currentValues = childObject;
+                currentNextValues = childObjectCopy;
+            }
+
+            currentNextValues[lastKey] = fieldValue;
+        }
+
         setValues(nextValues);
         const validationErrors = validatorCallback(nextValues);
         setErrors(validationErrors);
     };
-    const onBlur = (event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const onBlur = (
+        event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    ) => {
         const { name } = event.target;
 
         setTouched((prevTouched) => ({

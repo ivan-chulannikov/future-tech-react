@@ -25,7 +25,10 @@ const PostsSection = ({
     renderPostActions,
 }: PostSectionProps) => {
     const isInitialLoading = isPostsLoading && posts.length === 0;
-
+    const categoryTabs = tabs.map((category) => ({
+        value: category.id,
+        label: category.label,
+    }));
     return (
         <section className="section">
             <SectionHeader {...sectionHeader} />
@@ -44,9 +47,10 @@ const PostsSection = ({
                 )}
                 {!isTabsLoading && !isTabsError && (
                     <TabsList
-                        tabs={tabs}
+                        tabs={categoryTabs}
                         activeTab={activeCategoryId}
-                        onTabChangeHandler={handleCategoryChange}
+                        onTabChange={handleCategoryChange}
+                        labelledBy="blog-category-title"
                     />
                 )}
                 <div className="tabs__body">
