@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/app/store/hooks';
 import { selectUser } from '@/features/auth';
 import Button from '@/shared/ui/Button';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import { AppRoutes } from '@/shared/config/routes';
 import { formatMemberSince } from '../lib/formatMemberSince';
 const Profile = () => {
@@ -41,10 +41,12 @@ const Profile = () => {
                             </div>
 
                             <div className="profile__actions">
-                                <Button type="button" className="button--accent profile__action">
+                                <Link
+                                    to={AppRoutes.createPost}
+                                    className="button button--accent profile__action"
+                                >
                                     Create Post
-                                </Button>
-
+                                </Link>
                                 <Button type="button" className="profile__action">
                                     Edit Profile
                                 </Button>

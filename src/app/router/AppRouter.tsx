@@ -9,6 +9,7 @@ import { SavedPosts } from '@/pages/SavedPosts';
 import { Login } from '@/pages/Login';
 import { Profile } from '@/pages/Profile';
 import RegisterForm from '@/features/auth/ui/RegisterForm/RegisterForm';
+import CreatePost from '@/pages/CreatePost/CreatePost';
 export const AppRouter = () => {
     return (
         <BrowserRouter>
@@ -22,6 +23,7 @@ export const AppRouter = () => {
                     <Route path={AppRoutes.login} element={<Login />} />
                     <Route path={AppRoutes.register} element={<RegisterForm />} />
                     <Route path={AppRoutes.profile} element={<Profile />} />
+                    <Route path={AppRoutes.createPost} element={<CreatePost />} />
                 </Route>
             </Routes>
         </BrowserRouter>
