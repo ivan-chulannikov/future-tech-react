@@ -1,3 +1,4 @@
+import { useGetCategoriesQuery } from '@/entities/category';
 import Button from '@/shared/ui/Button';
 import { FormField } from '@/shared/ui/FormField';
 import { Input } from '@/shared/ui/Input';
@@ -8,26 +9,22 @@ import { initialContentSections } from '../../model/initialContentSections';
 import CreatePostContentSection from '../CreatePostContentSection/CreatePostContentSection';
 import PublicationSummary from '../PublicationSummary/PublicationSummary';
 
-const categoryOptions = [
-    {
-        value: 'artificial-intelligence',
-        label: 'Artificial Intelligence',
-    },
-    {
-        value: 'robotics',
-        label: 'Robotics',
-    },
-    {
-        value: 'technology',
-        label: 'Technology',
-    },
-    {
-        value: 'space',
-        label: 'Space',
-    },
-] as const;
-
 const CreatePostForm = () => {
+    const {
+        data: categories = [],
+        isLoading: isCategoriesLoading,
+        isError: isCategoriesError,
+        refetch: refetchCategories,
+    } = useGetCategoriesQuery();
+
+    const categoryOptions = categories.map((category) => ({
+        value: category.id,
+        label: category.label,
+    }));
+
+    const categoryError = isCategoriesError ? 'Failed to load categories' : undefined;
+    const categoryPlaceholder = isCategoriesLoading ? 'Loading categories...' : 'Select a category';
+
     return (
         <form className="create-post__layout">
             <div className="create-post__editor">
@@ -76,17 +73,32 @@ const CreatePostForm = () => {
                                 id="post-category"
                                 label="Category"
                                 required
+                                error={categoryError}
                                 className="create-post__field"
                             >
                                 <Select
                                     id="post-category"
                                     name="categoryId"
                                     options={categoryOptions}
-                                    placeholder="Select a category"
+                                    placeholder={categoryPlaceholder}
                                     defaultValue=""
                                     required
+                                    disabled={isCategoriesLoading || isCategoriesError}
                                     className="create-post__select"
+                                    aria-describedby={
+                                        isCategoriesError ? 'post-category-error' : undefined
+                                    }
+                                    aria-invalid={isCategoriesError ? true : undefined}
                                 />
+                                {isCategoriesError && (
+                                    <Button
+                                        className="create-post__text-button"
+                                        type="button"
+                                        onClick={() => void refetchCategories()}
+                                    >
+                                        Try again
+                                    </Button>
+                                )}
                             </FormField>
                         </div>
                     </div>
