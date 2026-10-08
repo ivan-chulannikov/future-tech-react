@@ -1,0 +1,12 @@
+-- CreateTable
+CREATE TABLE "Post" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "likes" INTEGER NOT NULL DEFAULT 0,
+    "views" INTEGER NOT NULL DEFAULT 0,
+    "comments" INTEGER NOT NULL DEFAULT 0,
+    "shares" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
+);
